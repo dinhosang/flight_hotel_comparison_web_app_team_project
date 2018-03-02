@@ -7,6 +7,27 @@
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
+    <header id="banner">
+      <h1 id="banner-title"></h1>
+    </header>
+    <main>
+      <form id="random-destination-search" action="index.html" method="post">
+        <h2 id="random-destination-form-title">Find flights from London</h2>
+        <label for="depart-date-input-for-random-search">Depart Date:</label>
+        <input type="date" id="depart-date-input-for-random-search">
+        <label for="return-date-input-for-random-search">Return Date:</label>
+        <input type="date" id="return-date-input-for-random-search">
+        <button type="button" id="submit-random-search">Search</button>
+      </form>
+      <ul id="destination-list">
+
+      </ul>
+    </main>
+    <footer>
+      <a href="https://sandbox.amadeus.com">
+        <p>Powered by Amadeus</p>
+      </a>
+    </footer>
 
   </body>
 </html>
