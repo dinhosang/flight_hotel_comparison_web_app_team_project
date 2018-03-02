@@ -2,7 +2,7 @@ const Ul = function(details) {
   this.depart   = details.depart;
   this.return   = details.return;
   this.flights  = details.flights;
-  this.searchResultView = document.getElementsById('destination-list');
+  this.searchResultView = document.getElementById('destination-list');
 
   this.addTitle();
   this.populateView();
@@ -31,3 +31,5 @@ Ul.prototype.addDestination = function(destination) {
   destinationUl.appendChild(priceLi);
   this.searchResultView.appendChild(destinationUl);
 }
+
+module.exports = Ul;
