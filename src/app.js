@@ -8,6 +8,7 @@ const main = function() {
 
 const listFlights = function() {
   const Ul = require('./viewModels/Ul');
+  const flights = require('./dataModels/flights.js')
 
   console.log('button clicked');
 
@@ -17,11 +18,7 @@ const listFlights = function() {
   const departDate = departDateInput.value;
   const returnDate = returnDateInput.value;
 
-  const fakeFlightData = [{destination: 'EDI', price: 200},
-                          {destination: 'PAR', price: 100}];
-
-  const dataToPassToUL = {depart: departDate, return: returnDate,
-                          flights: fakeFlightData};
+  const dataToPassToUL = flights.results;
 
   new Ul(dataToPassToUL);
 }
