@@ -12,11 +12,13 @@ const prepareFormView = function() {
 
 const listFlights = function() {
   const Ul = require('./viewModels/ul');
-  const flights = require('./dataModels/flights');
+  const Flights = require('./dataModels/flights');
 
   console.log('button clicked');
 
-  const dataToPassToUL = flights.results;
+  const flights = new Flights();
+
+  dataToPassToUL = flights.allFlights;
 
   new Ul(dataToPassToUL);
 }

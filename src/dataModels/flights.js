@@ -1,4 +1,4 @@
-const flights = function () {
+const Flights = function () {
   this.allFlights = [
     {
       "destination": "MIL",
@@ -2061,4 +2061,4 @@ const flights = function () {
   ]
 }
 
-module.exports = flights;
+module.exports = Flights;
