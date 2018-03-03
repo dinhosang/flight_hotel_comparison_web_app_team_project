@@ -7,8 +7,8 @@ const main = function() {
 }
 
 const listFlights = function() {
-  const Ul = require('./viewModels/Ul');
-  const flights = require('./dataModels/flights.js')
+  const Ul = require('./viewModels/ul');
+  const flights = require('./dataModels/flights')
 
   console.log('button clicked');
 

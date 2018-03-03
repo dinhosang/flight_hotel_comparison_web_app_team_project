@@ -1,12 +1,17 @@
-const Ul = function(details) {
-  this.depart   = details.depart;
-  this.return   = details.return;
-  this.flights  = details.flights;
+const Ul = function(flights) {
+  this.depart   = flights[0].departure_date;
+  this.return   = flights[0].return_date;
+  this.flights  = flights;
   this.searchResultView = document.getElementById('destination-list');
 
+  this.clearSearchResultView()
   this.addTitle();
   this.populateView();
 }
+
+Ul.prototype.clearSearchResultView = function () {
+  this.searchResultView.innerHTML = "";
+};
 
 Ul.prototype.addTitle = function() {
   const title = document.createElement('h2');
@@ -17,16 +22,16 @@ Ul.prototype.addTitle = function() {
 };
 
 Ul.prototype.populateView = function() {
-  this.flights.forEach(destination => this.addDestination(destination));
+  this.flights.forEach(flightDetails => this.addDestination(flightDetails));
 };
 
-Ul.prototype.addDestination = function(destination) {
+Ul.prototype.addDestination = function(flightDetails) {
   const destinationUl = document.createElement('ul');
   destinationUl.classList.add('random-destination-item');
   const destinationLi = document.createElement('li');
   const priceLi = document.createElement('li');
-  destinationLi.innerText = destination.destination;
-  priceLi.innerText = destination.price;
+  destinationLi.innerText = flightDetails.destination;
+  priceLi.innerText = flightDetails.price;
   destinationUl.appendChild(destinationLi);
   destinationUl.appendChild(priceLi);
   this.searchResultView.appendChild(destinationUl);
