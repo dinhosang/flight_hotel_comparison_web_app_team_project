@@ -1,17 +1,20 @@
 const RandomDestinationsList = function(options) {
-  this.depart   = options.flights[0].departure_date;
-  this.return   = options.flights[0].return_date;
-  this.flights  = options.flights;
-  this.searchResultView = document.getElementById('destination-list');
-  this.onFlightClick    = options.callback;
+  this.depart   = options.flights.allFlights[0].departure_date;
+  this.return   = options.flights.allFlights[0].return_date;
+  this.flights  = options.flights.allFlights;
+  this.onFlightClick = options.callback;
+  this.parent = options.parent;
 
-  this.clearSearchResultView()
+  this.createSearchResultView();
   this.addTitle();
   this.populateView();
 }
 
-RandomDestinationsList.prototype.clearSearchResultView = function () {
-  this.searchResultView.innerHTML = '';
+RandomDestinationsList.prototype.createSearchResultView = function(){
+  this.searchResultView = document.createElement('ul');
+  this.searchResultView.id = "destination-list";
+  this.parent.appendChild(this.searchResultView);
+
 }
 
 RandomDestinationsList.prototype.addTitle = function() {
@@ -23,23 +26,24 @@ RandomDestinationsList.prototype.addTitle = function() {
 }
 
 RandomDestinationsList.prototype.populateView = function() {
-  this.flights.forEach(flightDetails, index => this.addDestination(flightDetails, index));
+  console.log(this.flights);
+  this.flights.forEach(flightDetails => this.addDestination(flightDetails));
 }
 
-RandomDestinationsList.prototype.addDestination = function(flightDetails, index) {
+RandomDestinationsList.prototype.addDestination = function(flightDetails) {
   const destinationUl = document.createElement('ul');
   destinationUl.classList.add('random-destination-item');
-  
+
   const radioButton = document.createElement('input');
   radioButton.type  = 'radio';
-  radioButton.id    = `destination-radio-${index}`;
+  // radioButton.id    = `destination-radio-${index}`;
 
   const radioButtonLabel = document.createElement('label');
-  radioButtonLabel.for   = radioButton.id;
+  // radioButtonLabel.for   = radioButton.id;
   radioButtonLabel.innerText = flightDetails.destination;
 
-  this.destinationUl.appendChild(radioButton);
-  this.destinationUl.appendChild(radioButtonLabel);
+  destinationUl.appendChild(radioButton);
+  destinationUl.appendChild(radioButtonLabel);
 
   this.searchResultView.appendChild(destinationUl);
 }
