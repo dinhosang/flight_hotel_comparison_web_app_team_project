@@ -8,9 +8,9 @@ ResultsView.prototype.clearSearchResultView = function(){
   this.searchResultView.innerHTML = '';
 }
 
-ResultsView.prototype.createDestinationsListView = function (details, callbackFunction) {
+ResultsView.prototype.createDestinationsListView = function (destinationsData, callbackFunction) {
   const options = {
-    flights: details,
+    destinations: destinationsData,
     parent: this.searchResultView,
     callback: function(){
       callbackFunction(this)
@@ -21,7 +21,7 @@ ResultsView.prototype.createDestinationsListView = function (details, callbackFu
   new RandomDestinationsList(options);
 };
 
-ResultsView.prototype.createHotelsListView = function(hotels){
+ResultsView.prototype.createHotelsListView = function(hotelsData){
   console.log("Hotels View invoked");
 
 }

@@ -1,7 +1,7 @@
 const RandomDestinationsList = function(options) {
-  this.depart   = options.flights.allFlights[0].departure_date;
-  this.return   = options.flights.allFlights[0].return_date;
-  this.flights  = options.flights.allFlights;
+  this.depart   = options.destinations.allFlights[0].departure_date;
+  this.return   = options.destinations.allFlights[0].return_date;
+  this.flights  = options.destinations.allFlights;
   this.onFlightClick = options.callback;
   this.parent = options.parent;
 
@@ -46,7 +46,21 @@ RandomDestinationsList.prototype.addDestination = function(flightDetails) {
   destinationUl.appendChild(radioButton);
   destinationUl.appendChild(radioButtonLabel);
 
+  const options = {
+    parentTile: destinationUl,
+    callback:   this.onFlightClick
+  }
+
+  radioButton.addEventListener('click', this.populateFlights.bind(radioButton, options));
+
   this.searchResultView.appendChild(destinationUl);
+}
+
+RandomDestinationsList.prototype.populateFlights = function (options) {
+  // logic for displaying flights and add event listener for below
+  console.log(this);
+  console.log(options.parentTile);
+  options.callback();
 }
 
 module.exports = RandomDestinationsList;
