@@ -36,6 +36,7 @@ RandomDestinationsList.prototype.addDestination = function(flightDetails) {
 
   const radioButton = document.createElement('input');
   radioButton.type  = 'radio';
+  radioButton.name = 'random-destination'
   // radioButton.id    = `destination-radio-${index}`;
 
   const radioButtonLabel = document.createElement('label');
