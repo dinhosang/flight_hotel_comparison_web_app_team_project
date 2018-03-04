@@ -1,3 +1,4 @@
+
 const main = function() {
 
   console.log('page loaded');
@@ -7,20 +8,30 @@ const main = function() {
 
 const prepareFormView = function() {
   const Form = require('./viewModels/form');
-  new Form(listFlights);
+  new Form(prepareResultsView);
 }
 
-const listFlights = function() {
-  const Ul = require('./viewModels/ul');
+const prepareResultsView = function(){
+  const ResultsView = require('./viewModels/resultsView');
+
+  const resultsView = new ResultsView();
+
+  listFlights(resultsView);
+}
+
+const listFlights = function(resultsView) {
   const Flights = require('./dataModels/flights');
-
   console.log('button clicked');
-
   const flights = new Flights();
+  resultsView.createDestinationsListView(flights, listHotels)
 
-  dataToPassToUL = flights.allFlights;
+}
 
-  new Ul(dataToPassToUL);
+const listHotels = function(resultsView){
+  const Hotels = require('./dataModels/Hotels');
+  const hotels = new Hotels();
+
+  resultsView.createHotelsListView(hotels);
 }
 
 
