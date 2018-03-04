@@ -12,9 +12,7 @@ ResultsView.prototype.createDestinationsListView = function (destinationsData, c
   const options = {
     destinations: destinationsData,
     parent: this.searchResultView,
-    callback: function(){
-      callbackFunction(this)
-    }.bind(this)
+    callback: callbackFunction
   }
 
   const RandomDestinationsList = require('./randomDestinationsList.js');

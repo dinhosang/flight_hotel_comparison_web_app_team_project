@@ -16,15 +16,27 @@ const prepareResultsView = function(){
 
   const resultsView = new ResultsView();
 
-  listFlights(resultsView);
+  listDestinations(resultsView);
 }
 
-const listFlights = function(resultsView) {
+const listDestinations = function(resultsView) {
   const Flights = require('./dataModels/flights');
-  console.log('button clicked');
-  const flights = new Flights();
-  resultsView.createDestinationsListView(flights, listHotels)
+  const destination = new Flights();
 
+  resultsView.createDestinationsListView(destination.allFlights, listFlights)
+}
+
+const listFlights = function(randomDestinationview) {
+  const Flights = require('./dataModels/flights');
+  const flights = new Flights()
+  console.log('button clicked');
+
+  const options = {
+    flights: flights.allFlightsToDestination,
+    callback: listHotels
+  }
+
+  randomDestinationview.populateFlights(options)
 }
 
 const listHotels = function(resultsView){
