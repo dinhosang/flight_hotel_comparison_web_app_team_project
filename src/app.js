@@ -24,6 +24,9 @@ const listDestinations = function(resultsView) {
   const destination = new Flights();
 
   resultsView.createDestinationsListView(destination.allFlights, listFlights)
+
+  // remember to remove!
+  listHotels({view: resultsView})
 }
 
 const listFlights = function(randomDestinationview) {
@@ -47,7 +50,7 @@ const listHotels = function(options){
   const flightDetails = options.details
   const resultsView   = options.view
 
-  resultsView.createHotelsListView(hotels)
+  resultsView.createHotelsListView(hotels.allHotels)
 }
 
 
