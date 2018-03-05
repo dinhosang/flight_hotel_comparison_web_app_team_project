@@ -40,11 +40,10 @@ const listFlights = function(randomDestinationview) {
 }
 
 const listHotels = function(resultsView){
-  console.log(resultsView);
-  // const Hotels = require('./dataModels/Hotels');
-  // const hotels = new Hotels();
-  //
-  // resultsView.createHotelsListView(hotels);
+  const Hotels = require('./dataModels/Hotels');
+  const hotels = new Hotels();
+
+  resultsView.createHotelsListView(hotels);
 }
 
 
