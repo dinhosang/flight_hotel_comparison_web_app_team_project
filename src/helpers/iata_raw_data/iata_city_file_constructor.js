@@ -1,18 +1,18 @@
-const path = require('path')
-const fs = require('fs')
+const path = require('path');
+const fs = require('fs');
 
-const iataCityRawData = require('./iata_city_raw_data.js')
-const iataCityConstantFile = path.join(__dirname, '../serverSide/iataCitiesEnum.js')
+const iataCityRawData = require('./iata_city_raw_data.js');
+const iataCityConstantFile = path.join(__dirname, '../iataCitiesEnum.js');
 
-const allCityNames = []
-const byCityName = {}
-const byIataCity = {}
+const allCityNames = [];
+const byCityName = {};
+const byIataCity = {};
 const enumOptions = {
   arrayName: allCityNames,
   nameHash: byCityName,
   iataHash: byIataCity,
   rawData: iataCityRawData
-}
+};
 
 
 const fillInValuesForKeysInEnum = function(options) {
@@ -32,7 +32,7 @@ const fillInValuesForKeysInEnum = function(options) {
     arrayName: allCityNames,
     nameHash: byCityName,
     iataHash: byIataCity
-  }
+  };
 
   return results;
 }
@@ -78,7 +78,7 @@ const startPreparationOfEnumForWriting = function(startOptions) {
     arrayName: allCityNames,
     nameHash: byCityName,
     iataHash: byIataCity
-  }
+  };
 
   return prepareJsonOfProtoIataCitiesEnum(finalOptions);
 }
@@ -95,7 +95,7 @@ const IATACITIESENUM = {
   ALLCITYNAMES: protoIATACITIESENUM.ALLCITYNAMES,
   BYCITYNAME:   protoIATACITIESENUM.BYCITYNAME,
   BYIATACITY:   protoIATACITIESENUM.BYIATACITY
-}
+};
 
 
 Object.freeze(IATACITIESENUM);
