@@ -7,7 +7,7 @@ const RandomHotelsList = function(options) {
 
 RandomHotelsList.prototype.checkIfHotelListsExist = function () {
 
-  const existingHotelLists = document.getElementsByClassName('hotel-list');
+  const existingHotelLists = document.getElementsByClassName('hotels-list');
   const existingHotelListsAsArray = Array.from(existingHotelLists);
 
   if (existingHotelListsAsArray.length === 0) {
@@ -47,7 +47,7 @@ RandomHotelsList.prototype.createSearchResultView = function () {
 RandomHotelsList.prototype.addTitle = function () {
   const title = document.createElement('h2');
 
-  title.id //make class    = 'hotels-list-title';
+  title.classList.add('hotels-list-title');
   title.innerText = 'Available Hotels';
 
   this.searchResultView.appendChild(title);
