@@ -1,0 +1,125 @@
+{
+  "origin": "LON",
+  "currency": "GBP",
+  "results": [
+    {
+      "destination": "MIL",
+      "departure_date": "2018-05-22",
+      "return_date": "2018-05-27",
+      "price": "70.90",
+      "airline": "AZ"
+    },
+    {
+      "destination": "PAR",
+      "departure_date": "2018-05-22",
+      "return_date": "2018-05-27",
+      "price": "72.50",
+      "airline": "VY"
+    },
+    {
+      "destination": "BCN",
+      "departure_date": "2018-05-22",
+      "return_date": "2018-05-27",
+      "price": "72.50",
+      "airline": "VY"
+    },
+    {
+      "destination": "BRU",
+      "departure_date": "2018-05-22",
+      "return_date": "2018-05-27",
+      "price": "73.00",
+      "airline": "9F"
+    },
+    {
+      "destination": "ROM",
+      "departure_date": "2018-05-22",
+      "return_date": "2018-05-27",
+      "price": "79.10",
+      "airline": "AZ"
+    },
+    {
+      "destination": "AMS",
+      "departure_date": "2018-05-22",
+      "return_date": "2018-05-27",
+      "price": "82.00",
+      "airline": "KL"
+    },
+    {
+      "destination": "GOT",
+      "departure_date": "2018-05-22",
+      "return_date": "2018-05-27",
+      "price": "82.70",
+      "airline": "DY"
+    },
+    {
+      "destination": "CLJ",
+      "departure_date": "2018-05-22",
+      "return_date": "2018-05-27",
+      "price": "83.26",
+      "airline": "0B"
+    },
+    {
+      "destination": "CPH",
+      "departure_date": "2018-05-22",
+      "return_date": "2018-05-27",
+      "price": "85.90",
+      "airline": "D8"
+    },
+    {
+      "destination": "TRN",
+      "departure_date": "2018-05-22",
+      "return_date": "2018-05-27",
+      "price": "87.36",
+      "airline": "0B"
+    },
+    {
+      "destination": "STO",
+      "departure_date": "2018-05-22",
+      "return_date": "2018-05-27",
+      "price": "87.50",
+      "airline": "SK"
+    },
+    {
+      "destination": "DUB",
+      "departure_date": "2018-05-22",
+      "return_date": "2018-05-27",
+      "price": "88.40",
+      "airline": "BE"
+    },
+    {
+      "destination": "MAD",
+      "departure_date": "2018-05-22",
+      "return_date": "2018-05-27",
+      "price": "90.80",
+      "airline": "UX"
+    },
+    {
+      "destination": "GVA",
+      "departure_date": "2018-05-22",
+      "return_date": "2018-05-27",
+      "price": "91.90",
+      "airline": "LX"
+    },
+    {
+      "destination": "RIX",
+      "departure_date": "2018-05-22",
+      "return_date": "2018-05-27",
+      "price": "92.70",
+      "airline": "BT"
+    },
+    {
+      "destination": "OSL",
+      "departure_date": "2018-05-22",
+      "return_date": "2018-05-27",
+      "price": "92.90",
+      "airline": "SK"
+    },
+    {
+      "destination": "LUX",
+      "departure_date": "2018-05-22",
+      "return_date": "2018-05-27",
+      "price": "94.70",
+      "airline": "BA"
+    }
+  ]
+}
