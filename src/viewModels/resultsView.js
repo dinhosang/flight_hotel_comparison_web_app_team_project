@@ -8,22 +8,26 @@ ResultsView.prototype.clearSearchResultView = function(){
   this.searchResultView.innerHTML = '';
 }
 
-ResultsView.prototype.createDestinationsListView = function (details, callbackFunction) {
+ResultsView.prototype.createDestinationsListView = function (destinationsData, callbackFunction) {
   const options = {
-    flights: {allFlights: details.results},
-    parent: document.getElementById('results-view-section'),
-    callback: function(){
-      callbackFunction(this)
-    }.bind(this)
+    destinations: destinationsData.results,
+    parent: this,
+    callback: callbackFunction
   }
 
   const RandomDestinationsList = require('./randomDestinationsList.js');
   new RandomDestinationsList(options);
 };
 
-ResultsView.prototype.createHotelsListView = function(hotels){
+ResultsView.prototype.createHotelsListView = function(hotelsData){
   console.log("Hotels View invoked");
+  const options = {
+    hotels: hotelsData,
+    parent: this.searchResultView
+  }
 
+  const RandomHotelsList = require('./randomHotelsList.js');
+  new RandomHotelsList(options);
 }
 
 
