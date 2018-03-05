@@ -1,5 +1,7 @@
-
-[
+{
+  "origin": "LON",
+  "currency": "GBP",
+  "results": [
     {
       "destination": "MIL",
       "departure_date": "2018-05-22",
@@ -120,3 +122,4 @@
       "airline": "BA"
     }
   ]
+}

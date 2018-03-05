@@ -12,7 +12,7 @@ Request.prototype.get = function(callback) {
 
     const responseBody = JSON.parse(this.responseText);
 
-    callback({allFlights: responseBody});
+    callback(responseBody);
   });
   request.send();
 }

@@ -22,7 +22,7 @@ const prepareResultsView = function(){
 const listFlights = function(resultsView) {
   console.log('button clicked');
   const Request = require('./helpers/request.js');
-  const request = new Request('/api/random_search');
+  const request = new Request('/api/random_search_destinations');
   // const Flights = require('./dataModels/flights');
   // const flights = new Flights();
   const flights = request.get(resultsView.createDestinationsListView);
