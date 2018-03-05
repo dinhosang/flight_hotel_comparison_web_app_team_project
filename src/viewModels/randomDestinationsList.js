@@ -86,7 +86,7 @@ RandomDestinationsList.prototype.populateFlights = function (options) {
     const destinationUl = document.querySelector('.random-destination-item')
     destinationUl.appendChild(flightUl)
     const options2 = {
-      view: this,
+      view: this.parent,
       details: flight,
     }
     radioButton.addEventListener('click', listHotels = function(){
