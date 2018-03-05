@@ -44,46 +44,42 @@ const Flights = function () {
           "outbound": {
             "flights": [
               {
-                "departs_at": "2018-06-25T17:40",
-                "arrives_at": "2018-06-25T21:15",
+                "departs_at": "2018-06-25T21:30",
+                "arrives_at": "2018-06-26T06:30",
                 "origin": {
-                  "airport": "LTN"
+                  "airport": "BOS",
+                  "terminal": "E"
                 },
                 "destination": {
-                  "airport": "FCO",
-                  "terminal": "3"
+                  "airport": "KEF"
                 },
-                "marketing_airline": "U2",
-                "operating_airline": "U2",
-                "flight_number": "2211",
-                "aircraft": "319",
+                "marketing_airline": "FI",
+                "operating_airline": "FI",
+                "flight_number": "630",
+                "aircraft": "75W",
                 "booking_info": {
                   "travel_class": "ECONOMY",
-                  "booking_code": "Y",
+                  "booking_code": "S",
                   "seats_remaining": 9
                 }
-              }
-            ]
-          },
-          "inbound": {
-            "flights": [
+              },
               {
-                "departs_at": "2018-06-30T22:20",
-                "arrives_at": "2018-07-01T00:05",
+                "departs_at": "2018-06-26T07:40",
+                "arrives_at": "2018-06-26T11:45",
                 "origin": {
-                  "airport": "FCO",
-                  "terminal": "3"
+                  "airport": "KEF"
                 },
                 "destination": {
-                  "airport": "LTN"
+                  "airport": "LHR",
+                  "terminal": "2"
                 },
-                "marketing_airline": "U2",
-                "operating_airline": "U2",
-                "flight_number": "2214",
-                "aircraft": "320",
+                "marketing_airline": "FI",
+                "operating_airline": "FI",
+                "flight_number": "450",
+                "aircraft": "76W",
                 "booking_info": {
                   "travel_class": "ECONOMY",
-                  "booking_code": "Y",
+                  "booking_code": "S",
                   "seats_remaining": 9
                 }
               }
@@ -92,10 +88,52 @@ const Flights = function () {
         }
       ],
       "fare": {
-        "total_price": "130.30",
+        "total_price": "298.04",
         "price_per_adult": {
-          "total_fare": "130.30",
-          "tax": "0.00"
+          "total_fare": "298.04",
+          "tax": "106.04"
+        },
+        "restrictions": {
+          "refundable": false,
+          "change_penalties": true
+        }
+      }
+    },
+    {
+      "itineraries": [
+        {
+          "outbound": {
+            "flights": [
+              {
+                "departs_at": "2018-06-25T20:35",
+                "arrives_at": "2018-06-26T07:55",
+                "origin": {
+                  "airport": "BOS",
+                  "terminal": "E"
+                },
+                "destination": {
+                  "airport": "LGW",
+                  "terminal": "S"
+                },
+                "marketing_airline": "DI",
+                "operating_airline": "DI",
+                "flight_number": "7148",
+                "aircraft": "789",
+                "booking_info": {
+                  "travel_class": "ECONOMY",
+                  "booking_code": "V",
+                  "seats_remaining": 9
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "fare": {
+        "total_price": "302.40",
+        "price_per_adult": {
+          "total_fare": "302.40",
+          "tax": "28.40"
         },
         "restrictions": {
           "refundable": false,
