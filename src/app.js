@@ -23,15 +23,12 @@ const listDestinations = function(resultsView) {
   const Flights = require('./dataModels/flights');
   const destination = new Flights();
 
-  resultsView.createDestinationsListView(destination.allFlights, listFlights)
-
-  // remember to remove!
-  listHotels({view: resultsView})
+  resultsView.createDestinationsListView(destination.allFlights, listFlights);
 }
 
 const listFlights = function(randomDestinationview) {
   const Flights = require('./dataModels/flights');
-  const flights = new Flights()
+  const flights = new Flights();
   console.log('button clicked');
 
   const options = {
@@ -50,7 +47,7 @@ const listHotels = function(options){
   const flightDetails = options.details
   const resultsView   = options.view
 
-  resultsView.createHotelsListView(hotels.allHotels)
+  resultsView.createHotelsListView(hotels.allHotels);
 }
 
 

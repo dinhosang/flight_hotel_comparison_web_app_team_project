@@ -53,7 +53,7 @@ RandomHotelsList.prototype.addHotelTile = function (hotel) {
   hotelUl.appendChild(nameLi);
   hotelUl.appendChild(priceLi);
   hotelUl.appendChild(addressUl);
-  // hotelUl.appendChild(contactsLi);
+  hotelUl.appendChild(contactsLi);
 
   this.searchResultView.appendChild(hotelUl);
 }
@@ -80,7 +80,7 @@ RandomHotelsList.prototype.createAddressUl = function (addressHash) {
   const countryLi     = document.createElement('li');
   countryLi.innerText = address.country;
 
-  addressUl.appendChild(addressUlTitle)
+  addressUl.appendChild(addressUlTitle);
   addressUl.appendChild(line1Li);
   addressUl.appendChild(cityLi);
   addressUl.appendChild(postalCodeLi);
@@ -98,15 +98,32 @@ RandomHotelsList.prototype.createContactsUl = function (contactsArray) {
   contactsUlTitle.classList.add('hotel-contacts-title');
   contactsUlTitle.innerText = 'Contact Details:';
 
+  contactsUl.appendChild(contactsUlTitle);
+
   contactsArray.forEach(contact => {
-    const options = {details: contact, list: contactsUl}
-    this.populateContactTile(options)
-  })
+    const options = {contact: contact, parent: contactsUl}
+    this.populateContactTile(options);
+  });
+
+  return contactsUl;
 }
 
 RandomHotelsList.prototype.populateContactTile = function (options) {
-  // const contactTile =
-  console.log(options.details);
+  const contactTile = document.createElement('ul');
+  contactTile.classList.add('hotel-contacts-tile')
+  const parentView  = options.parent;
+  const contact     = options.contact;
+
+  const contactTypeLi     = document.createElement('li');
+  contactTypeLi.innerText = `Type: ${contact.type}`;
+
+  const contactDetailLi     = document.createElement('li');
+  contactDetailLi.innerText = `Detail: ${contact.detail}`;
+
+  contactTile.appendChild(contactTypeLi);
+  contactTile.appendChild(contactDetailLi);
+
+  parentView.appendChild(contactTile);
 }
 
 
