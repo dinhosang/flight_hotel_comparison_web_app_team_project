@@ -3,7 +3,8 @@ const RandomDestinationsList = function(options) {
   this.return   = options.destinations[0].return_date;
   this.flights  = options.destinations;
   this.onDestinationClick = options.callback;
-  this.parent = options.parent;
+  this.parent = options.parent.searchResultView;
+  this.parentObjectInstance = options.parent;
 
   this.createSearchResultView();
   this.addTitle();
@@ -86,7 +87,7 @@ RandomDestinationsList.prototype.populateFlights = function (options) {
     const destinationUl = document.querySelector('.random-destination-item')
     destinationUl.appendChild(flightUl)
     const options2 = {
-      view: this.parent,
+      view: this.parentObjectInstance,
       details: flight,
     }
     radioButton.addEventListener('click', listHotels = function(){
