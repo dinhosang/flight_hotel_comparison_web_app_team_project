@@ -1,8 +1,5 @@
-
 const main = function() {
-
   console.log('page loaded');
-
   prepareFormView();
 }
 
@@ -22,8 +19,8 @@ const prepareResultsView = function(){
 const listDestinations = function(resultsView) {
   const Request = require('./helpers/request.js');
   const request = new Request('/api/random_search/destinations');
-  const callback = function(results) {
-    resultsView.createDestinationsListView(results, listFlights)
+  const callback = function(data) {
+    resultsView.createDestinationsListView(data, listFlights);
   }
   request.get(callback);
 }
@@ -32,12 +29,12 @@ const listFlights = function(randomDestinationview) {
   const Request = require('./helpers/request.js');
   const request = new Request('/api/random_search/flights');
 
-  const callback = function(results) {
+  const callback = function(data) {
     const options = {
-      flights: results.results,
+      flights: data.results,
       callback: listHotels
     }
-    randomDestinationview.populateFlights(options)
+    randomDestinationview.populateFlights(options);
   }
   request.get(callback);
 }
@@ -47,8 +44,8 @@ const listHotels = function(options){
   const request = new Request('/api/random_search/hotels');
   const resultsView = options.view
 
-  const callback = function(results) {
-    resultsView.createHotelsListView(results.results);
+  const callback = function(data) {
+    resultsView.createHotelsListView(data.results);
   }
   request.get(callback);
 }
