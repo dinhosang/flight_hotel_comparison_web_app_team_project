@@ -39,7 +39,7 @@ RandomHotelsList.prototype.setupView = function () {
 RandomHotelsList.prototype.createSearchResultView = function () {
 
     this.searchResultView = document.createElement('ul');
-    this.searchResultView.classList.add('hotel-list');
+    this.searchResultView.classList.add('hotels-list');
 
     this.parent.appendChild(this.searchResultView);
 }
