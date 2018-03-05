@@ -4,11 +4,13 @@ const fs = require('fs');
 const iataCityRawData = require('./iata_city_raw_data.js');
 const iataCityConstantFile = path.join(__dirname, '../iataCitiesEnum.js');
 
-const allCityNames = [];
-const byCityName = {};
-const byIataCity = {};
+const allCityNames  = [];
+const allCityIata   = [];
+const byCityName  = {};
+const byIataCity  = {};
 const enumOptions = {
   arrayName: allCityNames,
+  arrayCityIata: allCityIata,
   nameHash: byCityName,
   iataHash: byIataCity,
   rawData: iataCityRawData
@@ -18,18 +20,21 @@ const enumOptions = {
 const fillInValuesForKeysInEnum = function(options) {
 
   const allCityNames  = options.arrayName;
+  const allCityIata   = options.arrayCityIata;
   const byCityName    = options.nameHash;
   const byIataCity    = options.iataHash;
   const iataCityRawData = options.rawData;
 
   iataCityRawData.forEach(city => {
     allCityNames.push(city.nameCity);
+    allCityIata.push(city.codeIataCity);
     byCityName[`${city.nameCity}`] = city;
     byIataCity[`${city.codeIataCity}`] = city;
   });
 
   const results = {
     arrayName: allCityNames,
+    arrayCityIata: allCityIata,
     nameHash: byCityName,
     iataHash: byIataCity
   };
@@ -51,11 +56,14 @@ const sortCityNamesArrayInAlphabeticalOrder = function(array) {
 const prepareJsonOfProtoIataCitiesEnum = function(options) {
 
   const allCityNames  = options.arrayName;
+  const allCityIata   = options.arrayCityIata;
+
   const byCityName    = options.nameHash;
   const byIataCity    = options.iataHash;
 
   const protoEnum = JSON.stringify({
     ALLCITYNAMES: allCityNames,
+    ALLCITYIATAS: allCityIata,
     BYCITYNAME: byCityName,
     BYIATACITY: byIataCity,
   });
@@ -69,6 +77,8 @@ const startPreparationOfEnumForWriting = function(startOptions) {
   const emptyValues = fillInValuesForKeysInEnum(startOptions);
 
   let allCityNames  = startOptions.arrayName;
+  const allCityIata = startOptions.arrayCityIata;
+
   const byCityName  = startOptions.nameHash;
   const byIataCity  = startOptions.iataHash;
 
@@ -76,6 +86,7 @@ const startPreparationOfEnumForWriting = function(startOptions) {
 
   const finalOptions = {
     arrayName: allCityNames,
+    arrayCityIata: allCityIata,
     nameHash: byCityName,
     iataHash: byIataCity
   };
@@ -93,6 +104,7 @@ const textToWriteToFile = `const protoIATACITIESENUM = ${protoCitiesEnum}
 const IATACITIESENUM = {
 
   ALLCITYNAMES: protoIATACITIESENUM.ALLCITYNAMES,
+  ALLCITYIATAS: protoIATACITIESENUM.ALLCITYIATAS,
   BYCITYNAME:   protoIATACITIESENUM.BYCITYNAME,
   BYIATACITY:   protoIATACITIESENUM.BYIATACITY
 };
@@ -102,8 +114,7 @@ Object.freeze(IATACITIESENUM);
 Object.preventExtensions(IATACITIESENUM);
 
 
-module.exports = IATACITIESENUM;
-`
+module.exports = IATACITIESENUM;`
 
 fs.writeFile(iataCityConstantFile, textToWriteToFile, (err) => {
     // throws an error, you could also catch it here

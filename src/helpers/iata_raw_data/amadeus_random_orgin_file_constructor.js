@@ -45,8 +45,7 @@ Object.freeze(AMADEUSINSPIRATIONORIGINCODES);
 Object.preventExtensions(AMADEUSINSPIRATIONORIGINCODES);
 
 
-module.exports = AMADEUSINSPIRATIONORIGINCODES;
-`
+module.exports = AMADEUSINSPIRATIONORIGINCODES;`
 
 fs.writeFile(enumFile, textToWriteToFile, (err) => {
     // throws an error, you could also catch it here

@@ -5,31 +5,38 @@ const iataAirportRawData = require('./iata_airport_raw_data.js');
 const iataAirportConstantFile = path.join(__dirname, '../iataAirportsEnum.js');
 
 const allAirportNames = [];
+const allAirportIata  = [];
+
 const byAirportName = {};
 const byIataAirport = {};
 const enumOptions = {
   arrayName: allAirportNames,
+  arrayAirportIata: allAirportIata,
   nameHash: byAirportName,
   iataHash: byIataAirport,
-  rawData: iataAirportRawData
+  rawData:  iataAirportRawData
 };
 
 
 const fillInValuesForKeysInEnum = function(options) {
 
-  const allAirportNames  = options.arrayName;
-  const byAirportName    = options.nameHash;
-  const byIataAirport    = options.iataHash;
+  const allAirportNames = options.arrayName;
+  const allAirportIata  = options.arrayAirportIata;
+
+  const byAirportName   = options.nameHash;
+  const byIataAirport   = options.iataHash;
   const iataAirportRawData = options.rawData;
 
   iataAirportRawData.forEach(airport => {
     allAirportNames.push(airport.nameAirport);
+    allAirportIata.push(airport.codeIataAirport);
     byAirportName[`${airport.nameAirport}`] = airport;
     byIataAirport[`${airport.codeIataAirport}`] = airport;
   });
 
   const results = {
     arrayName: allAirportNames,
+    arrayAirportIata: allAirportIata,
     nameHash: byAirportName,
     iataHash: byIataAirport
   };
@@ -50,12 +57,15 @@ const sortAiportNamesArrayInAlphabeticalOrder = function(array) {
 
 const prepareJsonOfProtoIataAirportsEnum = function(options) {
 
-  const allAirportNames  = options.arrayName;
-  const byAirportName    = options.nameHash;
-  const byIataAirport    = options.iataHash;
+  const allAirportNames = options.arrayName;
+  const allAirportIata  = options.arrayAirportIata;
+
+  const byAirportName   = options.nameHash;
+  const byIataAirport   = options.iataHash;
 
   const protoEnum = JSON.stringify({
     ALLAIRPORTNAMES: allAirportNames,
+    ALLAIRPORTIATAS: allAirportIata,
     BYAIRPORTNAME: byAirportName,
     BYIATAAIRPORT: byIataAirport,
   });
@@ -69,6 +79,7 @@ const startPreparationOfEnumForWriting = function(startOptions) {
   const emptyValues = fillInValuesForKeysInEnum(startOptions);
 
   let allAirportNames  = startOptions.arrayName;
+  const allAirportIata = startOptions.arrayAirportIata;
   const byAirportName  = startOptions.nameHash;
   const byIataAirport  = startOptions.iataHash;
 
@@ -76,6 +87,7 @@ const startPreparationOfEnumForWriting = function(startOptions) {
 
   const finalOptions = {
     arrayName: allAirportNames,
+    arrayAirportIata: allAirportIata,
     nameHash: byAirportName,
     iataHash: byIataAirport
   };
@@ -93,6 +105,7 @@ const textToWriteToFile = `const protoIATAAIRPORTSENUM = ${protoAirportsEnum}
 const IATAAIRPORTSENUM = {
 
   ALLAIRPORTNAMES: protoIATAAIRPORTSENUM.ALLAIRPORTNAMES,
+  ALLAIRPORTIATAS: protoIATAAIRPORTSENUM.ALLAIRPORTIATAS,
   BYAIRPORTNAME:   protoIATAAIRPORTSENUM.BYAIRPORTNAME,
   BYIATAAIRPORT:   protoIATAAIRPORTSENUM.BYIATAAIRPORT
 };
