@@ -11,7 +11,7 @@ ResultsView.prototype.clearSearchResultView = function(){
 ResultsView.prototype.createDestinationsListView = function (details, callbackFunction) {
   const options = {
     flights: details,
-    parent: this.searchResultView,
+    parent: document.getElementById('results-view-section'),
     callback: function(){
       callbackFunction(this)
     }.bind(this)

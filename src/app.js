@@ -20,11 +20,13 @@ const prepareResultsView = function(){
 }
 
 const listFlights = function(resultsView) {
-  const Flights = require('./dataModels/flights');
   console.log('button clicked');
-  const flights = new Flights();
-  resultsView.createDestinationsListView(flights, listHotels)
-
+  const Request = require('./helpers/request.js');
+  const request = new Request('/api/random_search');
+  // const Flights = require('./dataModels/flights');
+  // const flights = new Flights();
+  const flights = request.get(resultsView.createDestinationsListView);
+  // resultsView.createDestinationsListView(flights, listHotels)
 }
 
 const listHotels = function(resultsView){

@@ -3,7 +3,7 @@ const RandomDestinationsList = function(options) {
   this.return   = options.flights.allFlights[0].return_date;
   this.flights  = options.flights.allFlights;
   this.onFlightClick = options.callback;
-  this.parent = options.parent;
+  this.parent   = options.parent;
 
   this.createSearchResultView();
   this.addTitle();
@@ -11,10 +11,9 @@ const RandomDestinationsList = function(options) {
 }
 
 RandomDestinationsList.prototype.createSearchResultView = function(){
-  this.searchResultView = document.createElement('ul');
+  this.searchResultView    = document.createElement('ul');
   this.searchResultView.id = "destination-list";
   this.parent.appendChild(this.searchResultView);
-
 }
 
 RandomDestinationsList.prototype.addTitle = function() {
