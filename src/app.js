@@ -26,20 +26,28 @@ const listDestinations = function(resultsView) {
     resultsView.createDestinationsListView(results, listFlights)
   }
   const destination = request.get(callback);
-  // resultsView.createDestinationsListView(destination.allFlights, listFlights);
 }
 
 const listFlights = function(randomDestinationview) {
-  const Flights = require('./dataModels/flights');
-  const flights = new Flights();
-  console.log('button clicked');
+  const Request = require('./helpers/request.js');
+  const request = new Request('/api/random_search/flights');
 
-  const options = {
-    flights: flights.allFlightsToDestination,
-    callback: listHotels
+  const callback = function(results) {
+    const options = {
+      flights: results.results,
+      callback: listHotels
+    }
+    randomDestinationview.populateFlights(options)
   }
-
-  randomDestinationview.populateFlights(options)
+  request.get(callback);
+  // const Flights = require('./dataModels/flights');
+  // const flights = new Flights();
+  // console.log('button clicked');
+  // const options = {
+  //   flights: flights.allFlightsToDestination,
+  //   callback: listHotels
+  // }
+  // randomDestinationview.populateFlights(options)
 }
 
 const listHotels = function(options){
