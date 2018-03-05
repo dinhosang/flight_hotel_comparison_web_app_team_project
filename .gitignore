@@ -1,2 +1,4 @@
 node_modules
 /build/bundle.*
+/src/keys/aviation-edge-iata-api.js
+/src/keys/amadeus-comparison-api.js
