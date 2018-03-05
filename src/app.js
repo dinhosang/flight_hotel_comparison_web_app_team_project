@@ -39,11 +39,15 @@ const listFlights = function(randomDestinationview) {
   randomDestinationview.populateFlights(options)
 }
 
-const listHotels = function(resultsView){
+const listHotels = function(options){
   const Hotels = require('./dataModels/Hotels');
   const hotels = new Hotels();
 
-  resultsView.createHotelsListView(hotels);
+  console.log(options);
+  const flightDetails = options.details
+  const resultsView   = options.view
+
+  resultsView.createHotelsListView(hotels)
 }
 
 

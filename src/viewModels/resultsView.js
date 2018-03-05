@@ -21,7 +21,13 @@ ResultsView.prototype.createDestinationsListView = function (destinationsData, c
 
 ResultsView.prototype.createHotelsListView = function(hotelsData){
   console.log("Hotels View invoked");
+  const options = {
+    hotels: hotelsData,
+    parent: this.searchResultView
+  }
 
+  const RandomHotelsList = require('./randomHotelsList.js');
+  new RandomHotelsList(options);
 }
 
 
