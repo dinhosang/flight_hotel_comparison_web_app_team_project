@@ -26,7 +26,6 @@ RandomDestinationsList.prototype.addTitle = function() {
 }
 
 RandomDestinationsList.prototype.populateView = function() {
-  console.log(this.flights);
   this.flights.forEach(flightDetails => this.addDestination(flightDetails));
 }
 
@@ -51,21 +50,54 @@ RandomDestinationsList.prototype.addDestination = function(flightDetails) {
     callback:   this.onDestinationClick,
     randomDestinationList: this
   }
-
   radioButton.addEventListener('click', this.prepareFlightsView.bind(radioButton, options));
 
   this.searchResultView.appendChild(destinationUl);
 }
 
 RandomDestinationsList.prototype.prepareFlightsView = function (options) {
-  console.log(this);
-  console.log(options.parentTile);
+  const flightsListUl = document.createElement('ul')
+  flightsListUl.id = 'flights-list'
+  options.parentTile.appendChild(flightsListUl)
   options.callback(options.randomDestinationList);
 };
 
 RandomDestinationsList.prototype.populateFlights = function (options) {
-  // logic for displaying flights and add event listener for below
-  console.log(options);
+
+  options.flights.forEach(flight => {
+    const flightUl = document.createElement('ul')
+    flightUl.classList.add('flight-details-selection-item')
+    const radioButton = document.createElement('input')
+    radioButton.type = 'radio'
+    radioButton.name = 'list-hotels'
+    const flightDetailsUl  = document.createElement('ul')
+    const nameLi = document.createElement('li')
+    nameLi.innerText = flight.itineraries[0].outbound.flights[0].destination.airport
+    const priceLi = document.createElement('li')
+    priceLi.innerText = flight.fare.total_price
+    const nameLabel = document.createElement('label')
+    nameLabel.for = 'list-hotels'
+    const priceLabel = document.createElement('label')
+    priceLabel.for = 'list-hotels'
+    flightDetailsUl.appendChild(nameLi)
+    flightDetailsUl.appendChild(priceLi)
+    flightUl.appendChild(radioButton)
+    flightUl.appendChild(flightDetailsUl)
+    const destinationUl = document.querySelector('.random-destination-item')
+    destinationUl.appendChild(flightUl)
+    const options2 = {
+      view: this,
+      details: flight,
+    }
+    radioButton.addEventListener('click', listHotels = function(){
+      options.callback(options2)
+    })
+  })
+
+
+
+
 }
+
 
 module.exports = RandomDestinationsList;
