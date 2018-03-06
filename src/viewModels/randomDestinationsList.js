@@ -26,19 +26,21 @@ RandomDestinationsList.prototype.addTitle = function() {
 }
 
 RandomDestinationsList.prototype.populateView = function() {
-  this.flights.forEach(flightDetails => this.addDestination(flightDetails));
+  this.flights.forEach((flightDetails, index) => this.addDestination(flightDetails, index));
 }
 
-RandomDestinationsList.prototype.addDestination = function(flightDetails) {
+RandomDestinationsList.prototype.addDestination = function(flightDetails, index) {
   const destinationUl = document.createElement('ul');
   destinationUl.classList.add('random-destination-item');
 
   const radioButton = document.createElement('input');
   radioButton.type  = 'radio';
   radioButton.name = 'random-destination'
+  radioButton.id = `random-destination-${index}`
 
   const radioButtonLabel = document.createElement('label');
   radioButtonLabel.innerText = flightDetails.destination;
+  radioButtonLabel.setAttribute('for', radioButton.id);
 
   destinationUl.appendChild(radioButton);
   destinationUl.appendChild(radioButtonLabel);
