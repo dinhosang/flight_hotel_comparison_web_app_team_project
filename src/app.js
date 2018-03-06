@@ -60,7 +60,7 @@ const listHotels = function(options){
 
     const dataForHotelView = {
       hotels: data.results,
-      parent: resultsView,
+      parent: resultsView.searchResultView,
       callback: onHotelClick
     }
 

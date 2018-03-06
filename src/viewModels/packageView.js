@@ -95,12 +95,12 @@ PackageView.prototype.populateHotelView = function(packageDetails){
     hotels: [this.hotel],
     parent:packageDetails
   }
-
+console.log(options);
   const RandomHotelsList = require('./randomHotelsList.js');
   new RandomHotelsList(options);
 
-  const title = document.querySelector('#package-details h2');
-  title.innerText = "Selected hotel"
+  // const title = document.querySelector('#package-details h2');
+  // title.innerText = "Selected hotel"
 }
 
 PackageView.prototype.calculateTotalPrice = function(packageDetails){

@@ -1,7 +1,6 @@
 const RandomHotelsList = function(options) {
   this.hotels = options.hotels;
-  this.parent = options.parent.searchResultView;
-  this.parentObject = options.parent;
+  this.parent = options.parent;
 
   if(options.callback !== undefined) {
     this.onHotelClick = options.callback;
@@ -43,6 +42,7 @@ RandomHotelsList.prototype.createSearchResultView = function () {
 
     this.searchResultView = document.createElement('ul');
     this.searchResultView.classList.add('hotels-list');
+    console.log(this.parent);
     this.parent.appendChild(this.searchResultView);
 }
 

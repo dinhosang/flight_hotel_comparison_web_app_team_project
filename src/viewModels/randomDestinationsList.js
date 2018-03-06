@@ -3,8 +3,8 @@ const RandomDestinationsList = function(options) {
   this.return   = options.destinations[0].return_date;
   this.flights  = options.destinations;
   this.onDestinationClick = options.callback;
-  this.parent = options.parent.searchResultView;
-  this.parentObjectInstance = options.parent;
+  this.parent = options.parent;
+  this.parentObjectInstance = options.parentObject;
   console.log(this);
   this.createSearchResultView();
   this.addTitle();
