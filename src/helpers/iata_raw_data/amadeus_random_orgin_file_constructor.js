@@ -33,8 +33,8 @@ fullArrayOfCommaSeparatedCodes.forEach((code, index) => {
   }
 });
 
-console.log(finalArrayOfCodes);
-console.log(finalArrayOfCodes.length);
+// console.log(finalArrayOfCodes);
+// console.log(finalArrayOfCodes.length);
 
 const protoEnum = JSON.stringify(finalArrayOfCodes)
 

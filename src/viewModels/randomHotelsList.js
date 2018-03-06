@@ -91,6 +91,7 @@ RandomHotelsList.prototype.addHotelTile = function (hotel) {
   }
 
   if(this.onHotelClick !== undefined) {
+    hotelUl.tabindex="0";
     hotelUl.addEventListener('click', callback.bind(this))
   }
 
