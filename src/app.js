@@ -60,7 +60,7 @@ const listHotels = function(options){
 
     const dataForHotelView = {
       hotels: data.results,
-      parent: resultsView,
+      parent: resultsView.searchResultView,
       callback: onHotelClick
     }
 
@@ -72,9 +72,8 @@ const listHotels = function(options){
 }
 
 const showPackageDetails = function(data) {
-  console.log('package:', data);
-  // const PackageView = require('./viewModels/packageView.js');
-  // new PackageView(data)
+  const PackageView = require('./viewModels/packageView.js');
+  new PackageView(data)
 }
 
 
