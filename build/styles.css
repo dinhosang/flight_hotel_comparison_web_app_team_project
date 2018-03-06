@@ -40,7 +40,7 @@ h2 {
   display: flex;
   justify-content: center;
   padding-top: 3.5%;
-  border: salmon solid 1px;
+  /* border: salmon solid 1px; */
   height: 50%;
 }
 
@@ -58,10 +58,10 @@ h2 {
 }
 
 #results-view-section {
-  border: solid blue 1px;
+  /* border: solid blue 1px; */
   padding: 1%;
   width: 99%;
-  max-height: 85%;
+  max-height: 75%;
   min-height: 70%;
   display: flex;
 }
@@ -72,13 +72,15 @@ h2 {
 }
 
 #destination-list {
-  border: solid 1px black;
+  /* border: solid 1px black; */
   width: 50%;
+  max-height: 100%;
+  overflow: scroll;
   padding: 1%;
 }
 
 #results-view-section .hotels-list {
   width: 50%;
-  border: solid 1px wheat;
+  /* border: solid 1px wheat; */
   padding: 1%;
 }
