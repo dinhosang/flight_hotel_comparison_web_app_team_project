@@ -138,13 +138,16 @@ PackageView.prototype.createPackageForm = function(packageForm){
 }
 
 PackageView.prototype.createCancelButton = function(parent, packageView){
+  const ScrollTo = require('../helpers/scrollTo');
+  const scroll = new ScrollTo('banner-title');
   const cancelButton = document.createElement('button')
   cancelButton.innerText = 'Cancel'
   cancelButton.type = 'radio'
   cancelButton.name = 'package-cancel-submit'
   packageView.appendChild(cancelButton)
   cancelButton.addEventListener('click', function(){
-    parent.removeChild(packageView)
+    parent.removeChild(packageView);
+    scroll.scrollTo();
   })
 }
 
