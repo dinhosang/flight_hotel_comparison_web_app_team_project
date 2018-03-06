@@ -50,7 +50,7 @@ const listHotels = function(options){
     const informationHash = {
         flight: flightDetails,
         hotel: hotel,
-        parent: document.getElementsByTagName('main')
+        parent: document.getElementsByTagName('main')[0]
     }
 
     showPackageDetails(informationHash)
