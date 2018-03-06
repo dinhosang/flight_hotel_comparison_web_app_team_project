@@ -103,7 +103,7 @@ PackageView.prototype.populateHotelView = function(packageDetails){
     hotels: [this.hotel],
     parent:packageDetails
   }
-console.log(options);
+
   const RandomHotelsList = require('./randomHotelsList.js');
   new RandomHotelsList(options);
 

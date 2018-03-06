@@ -1,5 +1,4 @@
 const main = function() {
-  console.log('page loaded');
   prepareFormView();
 }
 
