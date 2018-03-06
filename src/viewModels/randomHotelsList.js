@@ -1,7 +1,11 @@
 const RandomHotelsList = function(options) {
   this.hotels = options.hotels;
-  this.parent = options.parent;
-  if (options.callback !== undefined) this.callback = options.callback
+  this.parent = options.parent.searchResultView;
+  this.parentObject = options.parent;
+
+  if(options.callback !== undefined) {
+    this.onHotelClick = options.callback;
+  }
 
   this.checkIfHotelListsExist()
 }
@@ -26,12 +30,10 @@ RandomHotelsList.prototype.findIfParentContainsAnExistingHotelList = function (a
       this.parent.removeChild(hotelList)
     }
   })
-
   this.setupView()
 }
 
 RandomHotelsList.prototype.setupView = function () {
-
   this.createSearchResultView();
   this.addTitle();
   this.populateView();
@@ -41,7 +43,6 @@ RandomHotelsList.prototype.createSearchResultView = function () {
 
     this.searchResultView = document.createElement('ul');
     this.searchResultView.classList.add('hotels-list');
-
     this.parent.appendChild(this.searchResultView);
 }
 
@@ -85,11 +86,13 @@ RandomHotelsList.prototype.addHotelTile = function (hotel) {
   hotelUl.appendChild(addressUl);
   hotelUl.appendChild(contactsLi);
 
-  const data = {
-
+  const callback = function() {
+    this.onHotelClick(hotel)
   }
 
-  hotelUl.addEventListener('click', callback)
+  if(this.onHotelClick !== undefined) {
+    hotelUl.addEventListener('click', callback.bind(this))
+  }
 
   this.searchResultView.appendChild(hotelUl);
 }
