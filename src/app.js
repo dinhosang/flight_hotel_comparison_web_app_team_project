@@ -45,9 +45,19 @@ const listHotels = function(options){
   const resultsView = options.view
 
   const callback = function(data) {
+    const informationHash = {
+      results: data.results,
+      callback: showPackageDetails
+    };
+
     resultsView.createHotelsListView(data.results);
   }
   request.get(callback);
+}
+
+const showPackageDetails = function(data) {
+  const PackageView = require('./viewModels/packageView.js');
+  new PackageView(data)
 }
 
 

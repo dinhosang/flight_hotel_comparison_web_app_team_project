@@ -1,6 +1,7 @@
 const RandomHotelsList = function(options) {
   this.hotels = options.hotels;
   this.parent = options.parent;
+  if (options.callback !== undefined) this.callback = options.callback
 
   this.checkIfHotelListsExist()
 }
@@ -83,6 +84,12 @@ RandomHotelsList.prototype.addHotelTile = function (hotel) {
   hotelUl.appendChild(priceLi);
   hotelUl.appendChild(addressUl);
   hotelUl.appendChild(contactsLi);
+
+  const data = {
+
+  }
+
+  hotelUl.addEventListener('click', callback)
 
   this.searchResultView.appendChild(hotelUl);
 }

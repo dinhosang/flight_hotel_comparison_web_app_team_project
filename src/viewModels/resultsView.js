@@ -16,19 +16,35 @@ ResultsView.prototype.createDestinationsListView = function (destinationsData, c
   }
 
   const RandomDestinationsList = require('./randomDestinationsList.js');
-  new RandomDestinationsList(options);
+  this.randomDestinationsList = RandomDestinationsList(options);
 };
 
-ResultsView.prototype.createHotelsListView = function(hotelsData){
+ResultsView.prototype.createHotelsListView = function(data){
   console.log("Hotels View invoked");
+
+  const onHotelClick = function(hotelData) {
+    const packageViewData = {
+      callback: data.callback,
+      hotel: hotelData
+    }
+
+    this.readyPackageView(packageViewData)
+  }
+
   const options = {
-    hotels: hotelsData,
-    parent: this.searchResultView
+    hotels: data.results,
+    parent: this.searchResultView,
+    callback: onHotelClick
   }
 
   const RandomHotelsList = require('./randomHotelsList.js');
-  new RandomHotelsList(options);
+  this.hotelsList = new RandomHotelsList(options);
 }
+
+ResultsView.prototype.readyPackageView = function (data) {
+  const hotel = data.hotel
+
+};
 
 
 module.exports = ResultsView;

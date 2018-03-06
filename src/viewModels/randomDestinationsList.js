@@ -63,7 +63,7 @@ RandomDestinationsList.prototype.prepareFlightsView = function (options) {
 };
 
 RandomDestinationsList.prototype.populateFlights = function (options) {
-  
+
   options.flights.forEach(flight => {
     const destinationUl = document.querySelector('.random-destination-item');
     const flightDetailsUl  = document.createElement('ul');
