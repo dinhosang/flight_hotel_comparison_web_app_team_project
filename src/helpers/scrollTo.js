@@ -3,8 +3,9 @@ const ScrollTo = function(targetId){
 }
 
 ScrollTo.prototype.scrollTo = function(){
-    const top = document.getElementById(this.targetId).offsetTop;
-    window.scrollTo(0, top);
+    document.getElementById(this.targetId).scrollIntoView({
+      behavior: 'smooth'
+    });
 }
 
 // ScrollTo.prototype.scrollTo = function(){
