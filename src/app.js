@@ -1,8 +1,5 @@
-
 const main = function() {
-
   console.log('page loaded');
-
   prepareFormView();
 }
 
@@ -20,34 +17,37 @@ const prepareResultsView = function(){
 }
 
 const listDestinations = function(resultsView) {
-  const Flights = require('./dataModels/flights');
-  const destination = new Flights();
-
-  resultsView.createDestinationsListView(destination.allFlights, listFlights);
+  const Request = require('./helpers/request.js');
+  const request = new Request('/api/random_search/destinations');
+  const callback = function(data) {
+    resultsView.createDestinationsListView(data, listFlights);
+  }
+  request.get(callback);
 }
 
 const listFlights = function(randomDestinationview) {
-  const Flights = require('./dataModels/flights');
-  const flights = new Flights();
-  console.log('button clicked');
+  const Request = require('./helpers/request.js');
+  const request = new Request('/api/random_search/flights');
 
-  const options = {
-    flights: flights.allFlightsToDestination,
-    callback: listHotels
+  const callback = function(data) {
+    const options = {
+      flights: data.results,
+      callback: listHotels
+    }
+    randomDestinationview.populateFlights(options);
   }
-
-  randomDestinationview.populateFlights(options)
+  request.get(callback);
 }
 
 const listHotels = function(options){
-  const Hotels = require('./dataModels/Hotels');
-  const hotels = new Hotels();
+  const Request = require('./helpers/request.js');
+  const request = new Request('/api/random_search/hotels');
+  const resultsView = options.view
 
-  console.log(options);
-  const flightDetails = options.details
-  const resultsView   = options.view
-
-  resultsView.createHotelsListView(hotels.allHotels);
+  const callback = function(data) {
+    resultsView.createHotelsListView(data.results);
+  }
+  request.get(callback);
 }
 
 

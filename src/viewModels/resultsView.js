@@ -10,7 +10,7 @@ ResultsView.prototype.clearSearchResultView = function(){
 
 ResultsView.prototype.createDestinationsListView = function (destinationsData, callbackFunction) {
   const options = {
-    destinations: destinationsData,
+    destinations: destinationsData.results,
     parent: this,
     callback: callbackFunction
   }

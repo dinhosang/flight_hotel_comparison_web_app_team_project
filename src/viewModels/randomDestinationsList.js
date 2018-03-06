@@ -12,10 +12,9 @@ const RandomDestinationsList = function(options) {
 }
 
 RandomDestinationsList.prototype.createSearchResultView = function(){
-  this.searchResultView = document.createElement('ul');
+  this.searchResultView    = document.createElement('ul');
   this.searchResultView.id = "destination-list";
   this.parent.appendChild(this.searchResultView);
-
 }
 
 RandomDestinationsList.prototype.addTitle = function() {
@@ -64,7 +63,7 @@ RandomDestinationsList.prototype.prepareFlightsView = function (options) {
 };
 
 RandomDestinationsList.prototype.populateFlights = function (options) {
-
+  
   options.flights.forEach(flight => {
     const destinationUl = document.querySelector('.random-destination-item');
     const flightDetailsUl  = document.createElement('ul');
