@@ -3,6 +3,14 @@ const PackageView = function(options){
   this.hotel = options.hotel;
   this.parent = options.parent;
 
+  this.checkIfPackageViewExists();
+}
+
+PackageView.prototype.checkIfPackageViewExists = function () {
+  const existingPackageView = document.getElementById('package-view');
+  if (existingPackageView !== null) {
+    this.parent.removeChild(existingPackageView);
+  }
   this.createPackageView();
 }
 
