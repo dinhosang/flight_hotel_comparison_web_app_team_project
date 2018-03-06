@@ -73,6 +73,11 @@ const listHotels = function(options){
 const showPackageDetails = function(data) {
   const PackageView = require('./viewModels/packageView.js');
   new PackageView(data)
+
+  const ScrollTo = require('./helpers/scrollTo.js')
+  const scroll = new ScrollTo('package-view')
+
+  scroll.scrollTo();
 }
 
 
