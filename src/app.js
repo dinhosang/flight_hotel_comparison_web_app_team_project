@@ -171,7 +171,6 @@ const prepareResultsView = function(){
   const ResultsView = require('./viewModels/resultsView');
 
   const resultsView = new ResultsView();
-
   listDestinations(resultsView);
 }
 
@@ -201,12 +200,40 @@ const listFlights = function(randomDestinationview) {
 const listHotels = function(options){
   const Request = require('./helpers/request.js');
   const request = new Request('/api/random_search/hotels');
+
   const resultsView = options.view
+  const flightDetails = options.details
+
+  const onHotelClick = function(hotel) {
+
+    const informationHash = {
+        flight: flightDetails,
+        hotel: hotel,
+        parent: document.getElementsByTagName('main')
+    }
+
+    showPackageDetails(informationHash)
+  }
 
   const callback = function(data) {
-    resultsView.createHotelsListView(data.results);
+
+    const dataForHotelView = {
+      hotels: data.results,
+      parent: resultsView,
+      callback: onHotelClick
+    }
+
+    resultsView.createHotelsListView(dataForHotelView);
+
   }
+
   request.get(callback);
+}
+
+const showPackageDetails = function(data) {
+  console.log('package:', data);
+  // const PackageView = require('./viewModels/packageView.js');
+  // new PackageView(data)
 }
 
 

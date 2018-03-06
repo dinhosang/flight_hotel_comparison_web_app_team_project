@@ -5,7 +5,7 @@ const RandomDestinationsList = function(options) {
   this.onDestinationClick = options.callback;
   this.parent = options.parent.searchResultView;
   this.parentObjectInstance = options.parent;
-
+  console.log(this);
   this.createSearchResultView();
   this.addTitle();
   this.populateView();
@@ -32,6 +32,7 @@ RandomDestinationsList.prototype.populateView = function() {
 RandomDestinationsList.prototype.addDestination = function(flightDetails, index) {
   const destinationUl = document.createElement('ul');
   destinationUl.classList.add('random-destination-item');
+  destinationUl.id = `random-destination-ul-${index}`
 
   const radioButton = document.createElement('input');
   radioButton.type  = 'radio';
@@ -48,30 +49,54 @@ RandomDestinationsList.prototype.addDestination = function(flightDetails, index)
   const options = {
     parentTile: destinationUl,
     callback:   this.onDestinationClick,
-    randomDestinationList: this
+    radio: radioButton
   }
-  radioButton.addEventListener('click', this.prepareFlightsView.bind(radioButton, options));
+  radioButton.addEventListener('click', this.prepareFlightsView.bind(this, options));
 
   this.searchResultView.appendChild(destinationUl);
 }
 
 RandomDestinationsList.prototype.prepareFlightsView = function (options) {
+
+  const alreadyClicked = this.checkIfActiveDestination(options.parentTile);
+  if(alreadyClicked){
+    return;
+  }
+
+  if(this.activeDestination !== undefined){
+    const flightsUl = document.getElementById('flights-list');
+    this.activeDestination.removeChild(flightsUl);
+  }
+
+  this.activeDestination = options.parentTile;
+
   const flightsListUl = document.createElement('ul');
-  flightsListUl.id = 'flights-list';
+  flightsListUl.id    = 'flights-list';
 
   options.parentTile.appendChild(flightsListUl);
 
-  options.callback(options.randomDestinationList);
-};
+  this.onDestinationClick(this);
+}
+
+RandomDestinationsList.prototype.checkIfActiveDestination = function (destinationUl) {
+
+  if(this.activeDestination === undefined) {
+    return false;
+  } else {
+    return this.activeDestination === destinationUl;
+  }
+}
 
 RandomDestinationsList.prototype.populateFlights = function (options) {
 
   options.flights.forEach(flight => {
-    const destinationUl = document.querySelector('.random-destination-item');
-    const flightDetailsUl  = document.createElement('ul');
+    const flightsListUl = document.getElementById('flights-list');
+
 
     const flightUl = document.createElement('ul');
     flightUl.classList.add('flight-details-selection-item');
+    const flightDetailsUl  = document.createElement('ul');
+
 
     const radioButton = document.createElement('input');
     radioButton.type = 'radio';
@@ -95,7 +120,7 @@ RandomDestinationsList.prototype.populateFlights = function (options) {
     flightUl.appendChild(radioButton);
     flightUl.appendChild(flightDetailsUl);
 
-    destinationUl.appendChild(flightUl);
+    flightsListUl.appendChild(flightUl);
 
     const options2 = {
       view: this.parentObjectInstance,
