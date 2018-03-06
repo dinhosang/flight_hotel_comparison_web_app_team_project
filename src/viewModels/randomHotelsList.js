@@ -2,23 +2,52 @@ const RandomHotelsList = function(options) {
   this.hotels = options.hotels;
   this.parent = options.parent;
 
+  this.checkIfHotelListsExist()
+}
+
+RandomHotelsList.prototype.checkIfHotelListsExist = function () {
+
+  const existingHotelLists = document.getElementsByClassName('hotels-list');
+  const existingHotelListsAsArray = Array.from(existingHotelLists);
+
+  if (existingHotelListsAsArray.length === 0) {
+    this.setupView();
+  } else {
+    this.findIfParentContainsAnExistingHotelList(existingHotelListsAsArray);
+  }
+}
+
+RandomHotelsList.prototype.findIfParentContainsAnExistingHotelList = function (arrayOfExistingHotelLists) {
+  const hotelListArray = arrayOfExistingHotelLists;
+
+  hotelListArray.forEach(hotelList => {
+    if(this.parent.contains(hotelList)){
+      this.parent.removeChild(hotelList)
+    }
+  })
+
+  this.setupView()
+}
+
+RandomHotelsList.prototype.setupView = function () {
+
   this.createSearchResultView();
   this.addTitle();
   this.populateView();
-}
+};
 
 RandomHotelsList.prototype.createSearchResultView = function () {
 
-  this.searchResultView = document.createElement('ul');
-  this.searchResultView.id = 'hotel-list';
+    this.searchResultView = document.createElement('ul');
+    this.searchResultView.classList.add('hotels-list');
 
-  this.parent.appendChild(this.searchResultView);
+    this.parent.appendChild(this.searchResultView);
 }
 
 RandomHotelsList.prototype.addTitle = function () {
   const title = document.createElement('h2');
 
-  title.id    = 'hotels-list-title';
+  title.classList.add('hotels-list-title');
   title.innerText = 'Available Hotels';
 
   this.searchResultView.appendChild(title);
