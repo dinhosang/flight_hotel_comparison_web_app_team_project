@@ -1,0 +1,35 @@
+#results-view-section {
+  padding: 0.5em;
+  max-height: 70%;
+  display: flex;
+  overflow: scroll;
+}
+
+#destination-list {
+  padding: 0.5em;
+  max-height: 60vh;
+  border-right: solid rgb(173, 173, 173) 0.1em;
+  width: 50%;
+  overflow: scroll;
+  text-align: center;
+}
+
+.random-destination-item {
+  margin: 1em;
+}
+
+#results-view-section .hotels-list {
+  padding: 0.5em;
+  width: 50%;
+  max-height: 60vh;
+  overflow: scroll;
+
+}
+
+#results-view-section .hotels-list h2 {
+  text-align: center;
+}
+
+#results-view-section .hotels-list .destination-hotel-item {
+  margin: 1em;
+}

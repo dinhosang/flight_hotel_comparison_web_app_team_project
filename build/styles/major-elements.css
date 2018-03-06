@@ -1,0 +1,32 @@
+body {
+  height: 100vh;
+}
+
+main {
+  min-height: 85%;
+}
+
+h2 {
+  font-size: 1.25em;
+}
+
+#banner {
+  min-height: 10%;
+  max-height: 4em;
+  padding: 0.25em;
+  color: rgb(255, 255, 255);
+  border-bottom: solid rgb(157, 198, 246) 0.01em;
+
+  background-image: url("../images/pexels-mountain-lake-edit.jpeg");
+  background-size: cover;
+}
+
+#banner-title {
+  margin: 0.2em 0.15em;
+  text-align: left;
+  font-size: 1.75em;
+}
+
+footer {
+
+}

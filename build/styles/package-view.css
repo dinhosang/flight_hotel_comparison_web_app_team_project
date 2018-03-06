@@ -1,0 +1,30 @@
+#package-view {
+  border-top: solid rgb(157, 198, 246) 0.01em;
+  padding: 1em;
+}
+
+#package-view-title {
+  text-align: center;
+  text-decoration: underline;
+}
+
+#package-details {
+  display: flex;
+  justify-content: space-between;
+  justify-content: space-around;
+}
+
+#package-details-flight {
+}
+
+#package-details .hotels-list {
+}
+
+#package-save-form {
+  padding: 1em;
+  text-align: center;
+}
+
+#package-view button[name="package-cancel-submit"] {
+  margin: 1em 46%;
+}

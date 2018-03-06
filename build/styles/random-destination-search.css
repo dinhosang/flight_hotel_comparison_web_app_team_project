@@ -1,0 +1,59 @@
+#random-destination-search {
+  border: inset rgb(157, 198, 246) 0.1em;
+  border-radius: 0.15em;
+  padding: 1em;
+  height: 20%;
+  min-height: 3em;
+  color: rgb(111, 105, 105);
+}
+
+#random-destination-search:hover {
+  background-color: rgb(224, 230, 232)
+}
+
+#random-destination-form-title {
+  text-align: center;
+  min-height: 1.5em;
+  max-height: 50%;
+}
+
+#form-input-container {
+  display: flex;
+  justify-content:center;
+  min-height: 50%;
+}
+
+#depart-date-container {
+  margin-right: 2em;
+}
+
+#submit-random-search {
+  width: 8em;
+  height: 2em;
+  float:right;
+  border: 1px solid rgb(162, 247, 250);
+  border-radius: 1em;
+  margin-top: 1em;
+  cursor: pointer;
+  background-color: rgb(227, 247, 250);
+  box-shadow: 0 0 0.9em;
+  opacity: 0.6;
+}
+
+#submit-random-search:hover,  #submit-random-search:focus, #submit-random-search:active {
+  outline-width: 0.15em;
+  border: 1px solid rgb(227, 247, 250);
+  background-color: rgb(162, 247, 250);
+  opacity: 1;
+  color: white;
+}
+
+#submit-random-search:active {
+  box-shadow: 0 0 0.3em;
+  transform: translateY(0.2em);
+}
+
+#submit-random-search {
+  height: 2em;
+  width: 6em;
+}
