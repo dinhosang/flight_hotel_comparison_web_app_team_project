@@ -130,11 +130,14 @@ PackageView.prototype.createPackageForm = function(packageForm){
 
   packageForm.appendChild(saveButton)
 
-  saveButton.addEventListener('click', function(){
+  const onSaveButtonClicked = function(event) {
+    event.preventDefault();
     const array = [this.flight, this.hotel];
     const jsonString = JSON.stringify(array);
     localStorage.setItem('user', jsonString);
-  }.bind(this))
+  }.bind(this)
+
+  saveButton.addEventListener('click', onSaveButtonClicked)
 }
 
 PackageView.prototype.createCancelButton = function(parent, packageView){
