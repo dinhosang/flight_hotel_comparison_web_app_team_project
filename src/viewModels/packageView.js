@@ -20,13 +20,16 @@ PackageView.prototype.createPackageView = function(){
   packageView.appendChild(packageForm)
 
   const cancelButton = document.createElement('button')
-  saveButton.type = 'radio'
-  saveButton.name = 'package-cancel-submit'
+  cancelButton.innerText = 'Cancel'
+  cancelButton.type = 'radio'
+  cancelButton.name = 'package-cancel-submit'
   packageView.appendChild(cancelButton)
 
   this.addTitle(packageView)
   this.populateFlightView(packageDetails)
   this.populateHotelView(packageDetails)
+
+  this.calculateTotalPrice(packageDetails)
   this.createPackageForm(packageForm)
 }
 
@@ -39,7 +42,7 @@ PackageView.prototype.addTitle = function(packageView){
 
 PackageView.prototype.populateFlightView = function(packageDetails){
   const flightDetails = document.createElement('ul')
-  flightDetails.id = 'package-details=flight'
+  flightDetails.id = 'package-details-flight'
 
   const outbound = document.createElement('li')
   outbound.innerText = 'Outbound'
@@ -58,12 +61,12 @@ PackageView.prototype.populateFlightView = function(packageDetails){
 
   flightDetails.appendChild(outbound)
   flightDetails.appendChild(outboundDepartureDate)
-  flightDetails.appendChild(outboundArrivalDate)
   flightDetails.appendChild(outboundDepartureAirport)
+  flightDetails.appendChild(outboundArrivalDate)
   flightDetails.appendChild(outboundArrivalAirport)
 
   const inbound = document.createElement('li')
-  outbound.innerText = 'Inbound'
+  inbound.innerText = 'Inbound'
 
   const inboundDepartureDate = document.createElement('li')
   inboundDepartureDate.innerText = `Departure Date: ${this.flight.itineraries[0].inbound.flights[0].departs_at}`
@@ -79,14 +82,15 @@ PackageView.prototype.populateFlightView = function(packageDetails){
 
   flightDetails.appendChild(inbound)
   flightDetails.appendChild(inboundDepartureDate)
-  flightDetails.appendChild(inboundArrivalDate)
   flightDetails.appendChild(inboundDepartureAirport)
+  flightDetails.appendChild(inboundArrivalDate)
   flightDetails.appendChild(inboundArrivalAirport)
 
+  const flightPrice = this.flight.fare.total_price
   const price = document.createElement('li')
-  price.innerText = this.flight.fare.total_price
+  price.innerText = `Flight price is: ${flightPrice}`
+  flightDetails.appendChild(price)
 
-  packageDetails.appendChild(price)
   packageDetails.appendChild(flightDetails)
 
 }
@@ -96,20 +100,46 @@ PackageView.prototype.populateHotelView = function(packageDetails){
     hotels: [this.hotel],
     parent:packageDetails
   }
+
+  const RandomHotelsList = require('./randomHotelsList.js');
   new RandomHotelsList(options);
+
+  const title = document.querySelector('#package-details h2');
+  title.innerText = "Selected hotel"
+}
+
+PackageView.prototype.calculateTotalPrice = function(packageDetails){
+
+
+  const flightPrice = parseFloat(this.flight.fare.total_price)*100
+
+  const hotelPrice = parseFloat(this.hotel.total_price.amount)*100
+
+  const totalPrice = (flightPrice + hotelPrice) / 100.00
+
+  const price = document.createElement('li')
+  price.innerText = `Total package price: ${totalPrice}`
+
+  packageDetails.appendChild(price)
 }
 
 PackageView.prototype.createPackageForm = function(packageForm){
   const inputSavePackage = document.createElement('input')
-  inputSavePackage.id = 'package-save-name'
-
+  inputSavePackage.id = `package-save-name`
   packageForm.appendChild(inputSavePackage)
 
   const saveButton = document.createElement('button')
+  saveButton.innerText = 'Save Package'
   saveButton.type = 'radio'
   saveButton.name = 'package-save-submit'
 
   packageForm.appendChild(saveButton)
 
-  saveButton.addEventListener('click', console.log('save button clicked');)
+  saveButton.addEventListener('click', function(){
+    const array = [this.flight, this.hotel];
+    const jsonString = JSON.stringify(array);
+    localStorage.setItem('user', jsonString);
+  }.bind(this))
 }
+
+module.exports = PackageView
