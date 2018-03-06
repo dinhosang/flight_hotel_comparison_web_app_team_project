@@ -19,42 +19,37 @@ PackageView.prototype.createPackageView = function(){
   packageForm.id = 'package-save-form'
   packageView.appendChild(packageForm)
 
-  const cancelButton = document.createElement('button')
-  cancelButton.innerText = 'Cancel'
-  cancelButton.type = 'radio'
-  cancelButton.name = 'package-cancel-submit'
-  packageView.appendChild(cancelButton)
+  this.addTitle(packageView);
+  this.populateFlightView(packageDetails);
+  this.populateHotelView(packageDetails);
 
-  this.addTitle(packageView)
-  this.populateFlightView(packageDetails)
-  this.populateHotelView(packageDetails)
-
-  this.calculateTotalPrice(packageDetails)
-  this.createPackageForm(packageForm)
+  this.calculateTotalPrice(packageDetails);
+  this.createPackageForm(packageForm);
+  this.createCancelButton(this.parent, packageView);
 }
 
 PackageView.prototype.addTitle = function(packageView){
-  const title = document.createElement('h2')
-  title.id = 'package-view-title'
-  title.innerText = `Review your chosen package to ${this.hotel.address.city}`
-  packageView.appendChild(title)
+  const title = document.createElement('h2');
+  title.id = 'package-view-title';
+  title.innerText = `Review your chosen package to ${this.hotel.address.city}`;
+  packageView.appendChild(title);
 }
 
 PackageView.prototype.populateFlightView = function(packageDetails){
-  const flightDetails = document.createElement('ul')
-  flightDetails.id = 'package-details-flight'
+  const flightDetails = document.createElement('ul');
+  flightDetails.id = 'package-details-flight';
 
-  const outbound = document.createElement('li')
-  outbound.innerText = 'Outbound'
+  const outbound = document.createElement('li');
+  outbound.innerText = 'Outbound';
 
-  const outboundDepartureDate = document.createElement('li')
-  outboundDepartureDate.innerText = `Departure Date: ${this.flight.itineraries[0].outbound.flights[0].departs_at}`
+  const outboundDepartureDate = document.createElement('li');
+  outboundDepartureDate.innerText = `Departure Date: ${this.flight.itineraries[0].outbound.flights[0].departs_at}`;
 
-  const outboundDepartureAirport = document.createElement('li')
-  outboundDepartureAirport.innerText = `Departure Airport: ${this.flight.itineraries[0].outbound.flights[0].origin.airport}`
+  const outboundDepartureAirport = document.createElement('li');
+  outboundDepartureAirport.innerText = `Departure Airport: ${this.flight.itineraries[0].outbound.flights[0].origin.airport}`;
 
-  const outboundArrivalDate = document.createElement('li')
-  outboundArrivalDate.innerText = `Arrival Date: ${this.flight.itineraries[0].outbound.flights[0].arrives_at}`
+  const outboundArrivalDate = document.createElement('li');
+  outboundArrivalDate.innerText = `Arrival Date: ${this.flight.itineraries[0].outbound.flights[0].arrives_at}`;
 
   const outboundArrivalAirport = document.createElement('li')
   outboundArrivalAirport.innerText = `Arrival Airport: ${this.flight.itineraries[0].outbound.flights[0].destination.airport}`
@@ -140,6 +135,17 @@ PackageView.prototype.createPackageForm = function(packageForm){
     const jsonString = JSON.stringify(array);
     localStorage.setItem('user', jsonString);
   }.bind(this))
+}
+
+PackageView.prototype.createCancelButton = function(parent, packageView){
+  const cancelButton = document.createElement('button')
+  cancelButton.innerText = 'Cancel'
+  cancelButton.type = 'radio'
+  cancelButton.name = 'package-cancel-submit'
+  packageView.appendChild(cancelButton)
+  cancelButton.addEventListener('click', function(){
+    parent.removeChild(packageView)
+  })
 }
 
 module.exports = PackageView
