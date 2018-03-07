@@ -21,7 +21,7 @@ const prepareResultsView = function(InnovationSearchDataFromFormView){
   const options = {
     view: resultsView,
     data: {
-        inspirationArray: ["origin=LON", "depart_date=2018-05-23", "duration=5"],
+        inspirationArray: ["duration=5","origin=LON", "departure_date=2018-05-23"],
         lowfareArray: ["curreny=GBP", "travel_class=BUSINESS", "adults=2"]
     }
   }
@@ -42,13 +42,15 @@ const listDestinations = function(options) {
 
   const urlDetailsToBuild = {
     baseUrl: `${SEARCHURL.INSPIRATION}${key}`,
-    paramArray: urlParamData.inspirationParams.paramsArray
+    paramArray: urlParamData.inspirationArray
   }
 
   const urlBuild = new UrlBuilder(urlDetailsToBuild);
   const url = urlBuild.finalUrl
+  console.log(url);
 
   const callback = function(data) {
+    // urlParamData = options.data.lowfareArray
     resultsView.createDestinationsListView(data, listFlights);
   }
 
