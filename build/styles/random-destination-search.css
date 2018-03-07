@@ -37,7 +37,7 @@
   cursor: pointer;
   background-color: rgb(227, 247, 250);
   box-shadow: 0 0 0.9em;
-  opacity: 0.6;
+  opacity: 0.8;
 }
 
 #submit-random-search:hover,  #submit-random-search:focus, #submit-random-search:active {
