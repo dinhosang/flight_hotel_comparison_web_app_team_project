@@ -17,6 +17,12 @@
     <main>
       <form id="random-destination-search" action="index.html" method="post">
         <h2 id="random-destination-form-title">Find flights from London</h2>
+        <div id="origin-container">
+          <label for="origin-list">Pick Origin</label>
+          <input list="origins" id="origin-list" name="origin-list">
+          <datalist id="origins">
+          </datalist>
+        </div>
         <div id="form-input-container">
           <div id="depart-date-container">
             <label for="depart-date-input-for-random-search">Depart Date:</label>
@@ -31,6 +37,42 @@
               <button type="button" id="submit-random-search">Search</button>
             </div>
           </div>
+        </div>
+        <div id="direct-flight-container">
+          <label for="direct-flight-check-box">Tick for Direct Flights</label>
+          <input type="checkBox" id="direct-flight-check-box">
+        </div>
+        <div id="max-price-container">
+          <label for="max-price-input">Maximum Price</label>
+          <input type="number" id="max-price-input">
+        </div>
+        <div id="currency-container">
+          <label for="currency-list">Pick Currency</label>
+          <input list="currencies" id="currency-list" name="currency-list">
+          <datalist id="currencies">
+          </datalist>
+        </div>
+        <div id="number-of-passengers">
+          <div id="number-of-adults">
+            <label for="number-of-adults-input">Adults</label>
+            <input type="number" id="number-of-adults-input">
+          </div>
+          <div id="number-of-children">
+            <label for="number-of-children-input">Children</label>
+            <input type="number" id="number-of-children-input">
+          </div>
+          <div id="number-of-infants">
+            <label for="number-of-infants-input">Infants</label>
+            <input type="number" id="number-of-infants-input">
+          </div>
+        </div>
+        <div id="cabin-class">
+          <select id="cabin-class-select">
+            <option value="economy">Economy</option>
+            <option value="premium-economy">Premium Economy</option>
+            <option value="business-class">Business class</option>
+            <option value="first-class">First class</option>
+          </select>
         </div>
       </form>
       <section id="results-view-section">

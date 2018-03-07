@@ -6,11 +6,47 @@ const Form = function(callback) {
 
   this.submitButton = document.getElementById('submit-random-search');
 
+  this.prepareOriginList()
   this.prepareButtonEvent(callback);
+  this.prepareCurrencyList();
 }
 
 Form.prototype.prepareButtonEvent = function(callback) {
   this.submitButton.addEventListener('click', callback);
+}
+
+Form.prototype.prepareCurrencyList = function(){
+  const Currencies = require('../helpers/currencyList.js');
+  const currencyList = Object.keys(Currencies)
+  const currencyObjects = Object.values(Currencies)
+
+  for(i = 0; i < currencyList.length; i++){
+    if(i === 3){
+      const currencySelect = document.getElementById('currencies')
+      const option = document.createElement('option')
+      option.value = " "
+      currencySelect.appendChild(option)
+    }
+    const currencyCode = currencyList[i]
+    const currencySymbol = currencyObjects[i].symbol
+    const currencySelect = document.getElementById('currencies')
+    const option = document.createElement('option')
+    option.value = currencyCode + " - " + currencySymbol
+    currencySelect.appendChild(option)
+  }
+
+}
+
+Form.prototype.prepareOriginList = function(){
+  const OriginCodes = require('../helpers/amadeusInspirationOriginCodesEnum.js');
+  const CityCodes = require('../helpers/iataCitiesEnum.js');
+  OriginCodes.forEach(origin => {
+    const originSelect = document.getElementById('origins')
+    const option = document.createElement('option')
+    option.value = origin
+    option.label = CityCodes.BYIATACITY[origin].nameCity
+    originSelect.appendChild(option)
+  })
 }
 
 module.exports = Form;
