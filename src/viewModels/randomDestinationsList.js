@@ -1,7 +1,9 @@
 const RandomDestinationsList = function(options) {
+  
   this.depart   = options.destinations[0].departure_date;
   this.return   = options.destinations[0].return_date;
-  this.flights  = options.destinations;
+  this.destinations       = options.destinations;
+  this.searchRequirements = options.searchRequirements;
 
   this.parent = options.parent;
   this.onDestinationClick   = options.callback;
@@ -27,21 +29,21 @@ RandomDestinationsList.prototype.addTitle = function() {
 }
 
 RandomDestinationsList.prototype.populateView = function() {
-  this.flights.forEach((flightDetails, index) => this.addDestination(flightDetails, index));
+  this.destinations.forEach((destinationDetails, index) => this.addDestination(destinationDetails, index));
 }
 
-RandomDestinationsList.prototype.addDestination = function(flightDetails, index) {
+RandomDestinationsList.prototype.addDestination = function(details, index) {
   const destinationUl = document.createElement('ul');
   destinationUl.classList.add('random-destination-item');
   destinationUl.id = `random-destination-ul-${index}`
 
   const radioButton = document.createElement('input');
   radioButton.type  = 'radio';
-  radioButton.name = 'random-destination'
-  radioButton.id = `random-destination-${index}`
+  radioButton.name  = 'random-destination'
+  radioButton.id    = `random-destination-${index}`
 
   const radioButtonLabel = document.createElement('label');
-  radioButtonLabel.innerText = flightDetails.destination;
+  radioButtonLabel.innerText = details.destination;
   radioButtonLabel.setAttribute('for', radioButton.id);
 
   destinationUl.appendChild(radioButton);
