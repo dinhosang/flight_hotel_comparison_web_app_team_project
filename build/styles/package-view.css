@@ -28,3 +28,7 @@
 #package-view button[name="package-cancel-submit"] {
   margin: 1em 46%;
 }
+
+#hotel-map {
+  width: 300px;
+}

@@ -3,7 +3,6 @@ const CurrencyEnum = require('../helpers/enums/currencyListEnum.js');
 
 const Form = function(callback) {
 
-  // // below not used with fake data
   this.departDateInput   = document.getElementById('depart-date-input-for-random-search');
   this.returnDateInput   = document.getElementById('return-date-input-for-random-search');
 
@@ -73,7 +72,8 @@ Form.prototype.prepareButtonEvent = function(outerCallback) {
     // Maximum Price
     if (this.maxPriceInput.value !== null
       && !isNaN(this.maxPriceInput.value)
-      && this.maxPriceInput.value !== "") {
+      && this.maxPriceInput.value !== ""
+      && this.maxPriceInput.value >= 0) {
         lowfareArrayData.push(`max_price=${this.maxPriceInput.value}`)
     }
 
@@ -88,24 +88,27 @@ Form.prototype.prepareButtonEvent = function(outerCallback) {
 
     // Adults
     if (this.adults.value !== undefined
-      && !isNaN(this.adults.value)){
+      && !isNaN(this.adults.value)
+      && this.adults.value > 0) {
         lowfareArrayData.push(`adults=${this.adults.value}`)
     }
 
     // Children
     if (this.children.value !== undefined
-      && !isNaN(this.children.value)){
+      && !isNaN(this.children.value)
+      && this.children.value >= 0){
       lowfareArrayData.push(`children=${this.children.value}`)
     }
 
     // Infants
     if (this.infants.value !== undefined
-      && !isNaN(this.infants.value)){
+      && !isNaN(this.infants.value)
+      && this.children.value >= 0) {
       lowfareArrayData.push(`infants=${this.infants.value}`)
     }
 
     // Class
-    if (this.cabinClass.value !== null){
+    if (this.cabinClass.value !== null) {
       lowfareArrayData.push(`travel_class=${this.cabinClass.value}`)
     }
 

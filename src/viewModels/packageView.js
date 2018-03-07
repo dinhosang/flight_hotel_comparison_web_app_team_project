@@ -3,14 +3,6 @@ const PackageView = function(options){
   this.hotel = options.hotel;
   this.parent = options.parent;
 
-  this.checkIfPackageViewExists();
-}
-
-PackageView.prototype.checkIfPackageViewExists = function () {
-  const existingPackageView = document.getElementById('package-view');
-  if (existingPackageView !== null) {
-    this.parent.removeChild(existingPackageView);
-  }
   this.createPackageView();
 }
 
@@ -51,13 +43,15 @@ PackageView.prototype.populateFlightView = function(packageDetails){
   outbound.innerText = 'Outbound';
 
   const outboundDepartureDate = document.createElement('li');
-  outboundDepartureDate.innerText = `Departure Date: ${this.flight.itineraries[0].outbound.flights[0].departs_at}`;
+  const outboundDepartureDateFormat = new Date(this.flight.itineraries[0].outbound.flights[0].departs_at).toString();
+  outboundDepartureDate.innerText = `Departure Date: ${outboundDepartureDateFormat.toString().substring(0, outboundDepartureDateFormat.length - 18)}`;
 
   const outboundDepartureAirport = document.createElement('li');
   outboundDepartureAirport.innerText = `Departure Airport: ${this.flight.itineraries[0].outbound.flights[0].origin.airport}`;
 
   const outboundArrivalDate = document.createElement('li');
-  outboundArrivalDate.innerText = `Arrival Date: ${this.flight.itineraries[0].outbound.flights[0].arrives_at}`;
+  const outboundArrivalDateFormat = new Date(this.flight.itineraries[0].outbound.flights[0].arrives_at).toString();
+  outboundArrivalDate.innerText = `Arrival Date: ${outboundArrivalDateFormat.toString().substring(0, outboundArrivalDateFormat.length - 18)}`;
 
   const outboundArrivalAirport = document.createElement('li')
   outboundArrivalAirport.innerText = `Arrival Airport: ${this.flight.itineraries[0].outbound.flights[0].destination.airport}`
@@ -71,14 +65,16 @@ PackageView.prototype.populateFlightView = function(packageDetails){
   const inbound = document.createElement('li')
   inbound.innerText = 'Inbound'
 
-  const inboundDepartureDate = document.createElement('li')
-  inboundDepartureDate.innerText = `Departure Date: ${this.flight.itineraries[0].inbound.flights[0].departs_at}`
+  const inboundDepartureDate = document.createElement('li');
+  const inboundDepartureDateFormat = new Date(this.flight.itineraries[0].inbound.flights[0].departs_at).toString();
+  inboundDepartureDate.innerText = `Departure Date: ${inboundDepartureDateFormat.toString().substring(0, inboundDepartureDateFormat.length - 18)}`;
 
-  const inboundDepartureAirport = document.createElement('li')
+  const inboundDepartureAirport = document.createElement('li');
   inboundDepartureAirport.innerText = `Departure Airport: ${this.flight.itineraries[0].inbound.flights[0].origin.airport}`
 
-  const inboundArrivalDate = document.createElement('li')
-  inboundArrivalDate.innerText = `Arrival Date: ${this.flight.itineraries[0].inbound.flights[0].arrives_at}`
+  const inboundArrivalDate = document.createElement('li');
+  const inboundArrivalDateFormat = new Date(this.flight.itineraries[0].inbound.flights[0].arrives_at).toString();
+  inboundArrivalDate.innerText = `Arrival Date: ${inboundDepartureDateFormat.toString().substring(0, inboundDepartureDateFormat.length - 18)}`
 
   const inboundArrivalAirport = document.createElement('li')
   inboundArrivalAirport.innerText = `Arrival Airport: ${this.flight.itineraries[0].inbound.flights[0].destination.airport}`
@@ -101,29 +97,36 @@ PackageView.prototype.populateFlightView = function(packageDetails){
 PackageView.prototype.populateHotelView = function(packageDetails){
   const options = {
     hotels: [this.hotel],
-    parent:packageDetails
+    parent: packageDetails
   }
 
   const RandomHotelsList = require('./randomHotelsList.js');
   new RandomHotelsList(options);
 
-  // const title = document.querySelector('#package-details h2');
-  // title.innerText = "Selected hotel"
+  const title = document.querySelector('#package-details h2');
+  title.innerText = "Selected hotel"
+
 }
 
 PackageView.prototype.calculateTotalPrice = function(packageDetails){
 
-
   const flightPrice = parseFloat(this.flight.fare.total_price)*100
-
-  const hotelPrice = parseFloat(this.hotel.total_price.amount)*100
-
-  const totalPrice = (flightPrice + hotelPrice) / 100.00
+  const hotelPrice  = parseFloat(this.hotel.total_price.amount)*100
+  const totalPrice  = (flightPrice + hotelPrice) / 100.00
 
   const price = document.createElement('li')
   price.innerText = `Total package price: ${totalPrice}`
 
   packageDetails.appendChild(price)
+  const MapWrapper = require('../helpers/mapWrapper.js')
+
+  const mapDiv = document.createElement('div');
+  mapDiv.id = 'hotel-map'
+
+  const coords = {lat: this.hotel.location.latitude, lng: this.hotel.location.longitude}
+  const map = new MapWrapper(mapDiv, coords, 11);
+  map.addMarker(coords);
+  packageDetails.appendChild(mapDiv);
 }
 
 PackageView.prototype.createPackageForm = function(packageForm){
@@ -150,7 +153,7 @@ PackageView.prototype.createPackageForm = function(packageForm){
 
 PackageView.prototype.createCancelButton = function(parent, packageView){
   const ScrollTo = require('../helpers/scrollTo');
-  const scroll = new ScrollTo('banner-title');
+  const scroll   = new ScrollTo('banner-title');
   const cancelButton = document.createElement('button')
   cancelButton.innerText = 'Cancel'
   cancelButton.type = 'radio'
