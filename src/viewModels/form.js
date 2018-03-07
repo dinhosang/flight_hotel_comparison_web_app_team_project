@@ -1,4 +1,5 @@
 const OriginEnum = require('../helpers/enums/amadeusInspirationOriginCodesEnum.js');
+const CurrencyEnum = require('../helpers/enums/currencyListEnum.js');
 
 const Form = function(callback) {
 
@@ -68,7 +69,7 @@ Form.prototype.prepareButtonEvent = function(outerCallback) {
       inspirationArrayData.push('direct=true')
       lowfareArrayData.push('nonstop=true')
     }
-thingy = this.maxPriceInput.value
+
     // Maximum Price
     if (this.maxPriceInput.value !== null
       && !isNaN(this.maxPriceInput.value)
@@ -77,11 +78,13 @@ thingy = this.maxPriceInput.value
     }
 
     // Pick Currency
-    if (this.currencyInput.value !== null
-      && this.currencyInput.value!== ''
-      && !isNaN(this.maxPriceInput.value)) {
+    if (Object.keys(CurrencyEnum).includes(this.currencyInput.value)) {
         lowfareArrayData.push(`currency=${this.currencyInput.value}`)
-      }
+    } else if (this.currencyInput.value === ' ' || this.currencyInput.value === '') {
+      lowfareArrayData.push('currency=GBP')
+    } else {
+      return
+    }
 
     // Adults
     if (this.adults.value !== undefined
@@ -111,7 +114,7 @@ thingy = this.maxPriceInput.value
       lowfareArray: lowfareArrayData
     }
 
-    outerCallback(innovationSearchData)
+    // outerCallback(innovationSearchData)
   }.bind(this)
 
   this.submitButton.addEventListener('click', innerCallback);
