@@ -57,3 +57,7 @@
   height: 2em;
   width: 6em;
 }
+
+#hotels-map {
+  width: 300px;
+}

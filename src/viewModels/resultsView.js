@@ -11,15 +11,12 @@ ResultsView.prototype.clearSearchResultView = function(){
 ResultsView.prototype.createDestinationsListView = function(details) {
 
   const options = {
-
     destinations: details.response.results,
     parent: this.searchResultView,
     parentObject: this,
     callback: details.callback,
     searchRequirements: details.startingSearchRequirements
   }
-
-  console.log(options.searchRequirements);
 
   const RandomDestinationsList  = require('./randomDestinationsList.js');
   this.randomDestinationsList   = new RandomDestinationsList(options);

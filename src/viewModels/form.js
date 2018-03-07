@@ -33,7 +33,8 @@ Form.prototype.prepareButtonEvent = function(outerCallback) {
         inspirationArrayData.push(`origin=${this.originInput.value}`);
         lowfareArrayData.push(`origin=${this.originInput.value}`);
     } else if (this.originInput.value === ""){
-      inspirationArrayData.push('origin=LON');
+        inspirationArrayData.push('origin=LON');
+        lowfareArrayData.push('origin=LON');
     } else {
       return
     }
