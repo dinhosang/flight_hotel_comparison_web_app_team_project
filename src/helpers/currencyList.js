@@ -1,12 +1,12 @@
 const Currencies = {
-    "USD": {
-        "symbol": "$",
-        "name": "US Dollar",
-        "symbol_native": "$",
+    "GBP": {
+        "symbol": "£",
+        "name": "British Pound Sterling",
+        "symbol_native": "£",
         "decimal_digits": 2,
         "rounding": 0,
-        "code": "USD",
-        "name_plural": "US dollars"
+        "code": "GBP",
+        "name_plural": "British pounds sterling"
     },
     "EUR": {
         "symbol": "€",
@@ -17,14 +17,14 @@ const Currencies = {
         "code": "EUR",
         "name_plural": "euros"
     },
-    "GBP": {
-        "symbol": "£",
-        "name": "British Pound Sterling",
-        "symbol_native": "£",
+    "USD": {
+        "symbol": "$",
+        "name": "US Dollar",
+        "symbol_native": "$",
         "decimal_digits": 2,
         "rounding": 0,
-        "code": "GBP",
-        "name_plural": "British pounds sterling"
+        "code": "USD",
+        "name_plural": "US dollars"
     },
     "CAD": {
         "symbol": "CA$",
