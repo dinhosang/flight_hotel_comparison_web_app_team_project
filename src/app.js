@@ -4,28 +4,17 @@ const main = function() {
 
 const prepareFormView = function() {
   const Form = require('./viewModels/form');
-  new Form(prepareResultsView);
+  const form = new Form(prepareResultsView);
 }
 
 const prepareResultsView = function(InnovationSearchDataFromFormView){
   const ResultsView = require('./viewModels/resultsView');
   const resultsView = new ResultsView();
 
-  // live version
   const options = {
     view: resultsView,
     data: InnovationSearchDataFromFormView
   }
-
-  // fake version
-  // const options = {
-  //   view: resultsView,
-  //   data: {
-  //       inspirationArray: ["duration=5","origin=LON", "departure_date=2018-05-23"],
-  //       lowfareArray: ["curreny=GBP", "travel_class=BUSINESS", "adults=2"]
-  //   }
-  // }
-  //
 
   listDestinations(options);
 }
