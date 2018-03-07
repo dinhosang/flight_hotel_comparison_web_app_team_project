@@ -83,15 +83,6 @@ RandomDestinationsList.prototype.prepareFlightsView = function (options) {
   }
 
   this.activeDestination = options.parentTile;
-  const flightsHeader = document.createElement('h3');
-  flightsHeader.id    = 'flights-list-header'
-  flightsHeader.innerText = `Flights to ${this.activeDestination.innerText}`;
-
-  const flightsListUl = document.createElement('ul');
-  flightsListUl.id    = 'flights-list';
-
-  this.activeDestination.appendChild(flightsHeader);
-  this.activeDestination.appendChild(flightsListUl);
   this.onDestinationClick(this);
 }
 
@@ -118,50 +109,73 @@ RandomDestinationsList.prototype.clearLists = function () {
   this.activeDestination = null;
 }
 
-RandomDestinationsList.prototype.populateFlights = function (options) {
+RandomDestinationsList.prototype.populateFlights = function(options) {
+  const flightsHeader = document.createElement('h3');
+  flightsHeader.id    = 'flights-list-header'
+  flightsHeader.innerText = `Flights to ${this.activeDestination.innerText}`;
+
+  const flightsListUl = document.createElement('ul');
+  flightsListUl.id    = 'flights-list';
+
+  this.activeDestination.appendChild(flightsHeader);
+  this.activeDestination.appendChild(flightsListUl);
+
   options.flights.forEach(flight => {
-    const flightsListUl = document.getElementById('flights-list');
 
-
-    const flightUl = document.createElement('ul');
-    flightUl.classList.add('flight-details-selection-item');
-    const flightDetailsUl  = document.createElement('ul');
-
-
-    const radioButton = document.createElement('input');
-    radioButton.type = 'radio';
-    radioButton.name = 'list-hotels';
-
-    const nameLi = document.createElement('li');
-    nameLi.innerText = flight.itineraries[0].outbound.flights[0].destination.airport;
-
-    const priceLi = document.createElement('li');
-    priceLi.innerText = flight.fare.total_price;
-
-    const nameLabel = document.createElement('label');
-    nameLabel.for = 'list-hotels';
-
-    const priceLabel = document.createElement('label');
-    priceLabel.for = 'list-hotels';
-
-    flightDetailsUl.appendChild(nameLi);
-    flightDetailsUl.appendChild(priceLi);
-
-    flightUl.appendChild(radioButton);
-    flightUl.appendChild(flightDetailsUl);
-
-    flightsListUl.appendChild(flightUl);
-
-    const options2 = {
-      view: this.parentObjectInstance,
+    const data = {
+      callback: options.callback,
       details: flight,
+      header: flightsHeader,
+      list: flightsListUl
     }
 
-    radioButton.addEventListener('click', function(){
-      options.callback(options2)
-    })
+    this.addFlight(data)
   })
 }
 
+RandomDestinationsList.prototype.addFlight = function(options) {
+
+  const callback  = options.callback;
+  const flight    = options.details;
+  const flightsListUl = options.list;
+
+  const flightTile = document.createElement('button');
+  flightTile.classList.add('flight-details-selection-item');
+
+  const flightDetailsUl = document.createElement('ul');
+
+  const outboundFlightsArray  = flight.itineraries[0].outbound.flights;
+  const arrayLength           = outboundFlightsArray.length;
+  const finalOutboundFlight   = outboundFlightsArray[arrayLength -1];
+  const finalDestinationIata  = finalOutboundFlight.destination.airport;
+
+  const airportIataEnum = require('../helpers/enums/iataAirportsEnum');
+  const airportHash = airportIataEnum.BYIATAAIRPORT[finalDestinationIata]
+  const airportName = airportHash.nameAirport;
+  const countryCode = airportHash.codeIso2Country;
+
+  const nameLi = document.createElement('li');
+  nameLi.innerText = `Airport: ${airportName}`
+  // nameLi.innerText = flight.itineraries[0].outbound.flights[0].destination.airport;
+
+  const priceLi = document.createElement('li');
+  priceLi.innerText = flight.fare.total_price;
+
+  flightDetailsUl.appendChild(nameLi);
+  flightDetailsUl.appendChild(priceLi);
+
+  flightTile.appendChild(flightDetailsUl);
+
+  flightsListUl.appendChild(flightTile);
+
+  const options2 = {
+    view: this.parentObjectInstance,
+    details: flight,
+  }
+
+  flightTile.addEventListener('click', function(){
+    callback(options2)
+  })
+}
 
 module.exports = RandomDestinationsList;
