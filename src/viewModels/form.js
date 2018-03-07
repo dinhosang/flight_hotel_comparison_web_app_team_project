@@ -28,9 +28,10 @@ Form.prototype.prepareButtonEvent = function(outerCallback) {
     const lowfareArrayData = [];
 
     // Origin
-    if (this.originInput.value !== null && OriginEnum.includes(this.originInput.value)) {
-      inspirationArrayData.push(`origin=${this.originInput.value}`);
-      lowfareArrayData.push(`origin=${this.originInput.value}`);
+    if (this.originInput.value !== null
+      && OriginEnum.includes(this.originInput.value)) {
+        inspirationArrayData.push(`origin=${this.originInput.value}`);
+        lowfareArrayData.push(`origin=${this.originInput.value}`);
     } else if (this.originInput.value === ""){
       inspirationArrayData.push('origin=LON');
     } else {
@@ -67,29 +68,36 @@ Form.prototype.prepareButtonEvent = function(outerCallback) {
       inspirationArrayData.push('direct=true')
       lowfareArrayData.push('nonstop=true')
     }
-
+thingy = this.maxPriceInput.value
     // Maximum Price
-    if (this.maxPriceInput.value !== null && !isNaN(this.maxPriceInput.value)){
-      lowfareArrayData.push(`max_price=${this.maxPriceInput.value}`)
+    if (this.maxPriceInput.value !== null
+      && !isNaN(this.maxPriceInput.value)
+      && this.maxPriceInput.value !== "") {
+        lowfareArrayData.push(`max_price=${this.maxPriceInput.value}`)
     }
 
     // Pick Currency
-    if (this.currencyInput.value !== null && !isNaN(this.maxPriceInput.value)){
-      lowfareArrayData.push(`currency=${this.currencyInput.value}`)
-    }
+    if (this.currencyInput.value !== null
+      && this.currencyInput.value!== ''
+      && !isNaN(this.maxPriceInput.value)) {
+        lowfareArrayData.push(`currency=${this.currencyInput.value}`)
+      }
 
     // Adults
-    if (this.adults.value !== undefined){
-      lowfareArrayData.push(`adults=${this.adults.value}`)
+    if (this.adults.value !== undefined
+      && !isNaN(this.adults.value)){
+        lowfareArrayData.push(`adults=${this.adults.value}`)
     }
 
     // Children
-    if (this.children.value !== undefined){
+    if (this.children.value !== undefined
+      && !isNaN(this.children.value)){
       lowfareArrayData.push(`children=${this.children.value}`)
     }
 
     // Infants
-    if (this.infants.value !== undefined){
+    if (this.infants.value !== undefined
+      && !isNaN(this.infants.value)){
       lowfareArrayData.push(`infants=${this.infants.value}`)
     }
 
