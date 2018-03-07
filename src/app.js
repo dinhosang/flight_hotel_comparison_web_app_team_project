@@ -31,7 +31,6 @@ const listDestinations = function(options) {
   const dataForUrlForLowfare      = options.data.lowfareArray;
   const resultsView = options.view;
 
-
   const urlDetailsToBuild = {
     baseUrl: `${SEARCHURL.INSPIRATION}${key}`,
     paramArray: dataForUrlForInspiration
@@ -39,7 +38,6 @@ const listDestinations = function(options) {
 
   const urlBuild = new UrlBuilder(urlDetailsToBuild);
   const url = urlBuild.finalUrl
-
 
   const callback = function(requestResponse) {
     const options = {
@@ -65,19 +63,19 @@ const listFlights = function(details) {
   const dataForUrl  = details.searchRequirements;
   const destinationListView = details.view;
 
-
   const urlDetailsToBuild = {
     baseUrl: `${SEARCHURL.LOWFARE}${key}`,
     paramArray: dataForUrl
   }
 
   const urlBuild = new UrlBuilder(urlDetailsToBuild);
-  const url = urlBuild.finalUrl
+  const url = urlBuild.finalUrl;
 
   const request = new Request(url);
 
   const callback = function(data) {
     const options = {
+      currency: data.currency,
       flights: data.results,
       callback: listHotels
     }
@@ -91,8 +89,8 @@ const listHotels = function(options){
   const Request = require('./helpers/request.js');
   const request = new Request('/api/random_search/hotels');
 
-  const resultsView = options.view
-  const flightDetails = options.details
+  const resultsView   = options.view;
+  const flightDetails = options.flightDetails;
 
   const onHotelClick = function(hotel) {
 

@@ -84,9 +84,7 @@ RandomDestinationsList.prototype.prepareFlightsView = function (details) {
   }
 
   const destParam = `destination=${details.destination}`;
-  const finalSearchRequirements = [];
-  finalSearchRequirements.push(this.searchRequirements);
-  finalSearchRequirements.push(destParam);
+  const finalSearchRequirements = this.searchRequirements.concat(destParam)
 
   const options = {
     view: this,
@@ -120,7 +118,7 @@ RandomDestinationsList.prototype.clearLists = function () {
   this.activeDestination = null;
 }
 
-RandomDestinationsList.prototype.populateFlights = function(options) {
+RandomDestinationsList.prototype.populateFlights = function(details) {
   const flightsHeader = document.createElement('h3');
   flightsHeader.id    = 'flights-list-header'
   flightsHeader.innerText = `Flights to ${this.activeDestination.innerText}`;
@@ -131,24 +129,25 @@ RandomDestinationsList.prototype.populateFlights = function(options) {
   this.activeDestination.appendChild(flightsHeader);
   this.activeDestination.appendChild(flightsListUl);
 
-  options.flights.forEach(flight => {
+  details.flights.forEach(flight => {
 
-    const data = {
-      callback: options.callback,
-      details: flight,
+    const options = {
+      callback: details.callback,
+      flightDetails: flight,
+      currency: details.currency,
       header: flightsHeader,
       list: flightsListUl
     }
 
-    this.addFlight(data)
+    this.addFlight(options)
   })
 }
 
-RandomDestinationsList.prototype.addFlight = function(options) {
+RandomDestinationsList.prototype.addFlight = function(details) {
 
-  const callback  = options.callback;
-  const flight    = options.details;
-  const flightsListUl = options.list;
+  const callback  = details.callback;
+  const flight    = details.flightDetails;
+  const flightsListUl = details.list;
 
   const flightTile = document.createElement('button');
   flightTile.classList.add('flight-details-selection-item');
@@ -166,26 +165,56 @@ RandomDestinationsList.prototype.addFlight = function(options) {
   const countryCode = airportHash.codeIso2Country;
 
   const nameLi = document.createElement('li');
-  nameLi.innerText = `Airport: ${airportName}`
+  nameLi.innerText = `Destination Airport: ${airportName}`
+  flightDetailsUl.appendChild(nameLi);
   // nameLi.innerText = flight.itineraries[0].outbound.flights[0].destination.airport;
 
   const priceLi = document.createElement('li');
-  priceLi.innerText = flight.fare.total_price;
+  const currencyCode    = details.currency;
+  const currencyEnum    = require('../helpers/enums/currencyListEnum');
+  const currencySymbol  = currencyEnum[currencyCode].symbol;
 
-  flightDetailsUl.appendChild(nameLi);
+  if(currencySymbol !== currencyCode){
+    priceLi.innerText = `Price: ${currencySymbol}${flight.fare.total_price}`;
+  } else {
+    priceLi.innerText = `Price: ${flight.fare.total_price} ${currencySymbol}`;
+  }
   flightDetailsUl.appendChild(priceLi);
 
-  flightTile.appendChild(flightDetailsUl);
 
+  const outboundStopDisplay = document.createElement('li');
+  const outboundStopCount   = outboundFlightsArray.length;
+  outboundStopDisplay.innerText = `Outbound Stops: ${outboundStopCount}`;
+  if(outboundStopCount !== 1) {
+    flightDetailsUl.appendChild(outboundStopDisplay);
+  }
+
+
+  const inboundStopDisplay  = document.createElement('li');
+  const inboundExists = flight.itineraries[0].inbound !== undefined;
+  let inboundStopCount
+  if(inboundExists) {
+    const inboundFlightsArray = flight.itineraries[0].inbound.flights;
+    inboundStopCount          = inboundFlightsArray.length;
+    inboundStopDisplay.innerText = `Inbound Stops: ${inboundStopCount}`;
+  }
+
+  if(inboundExists && (outboundStopCount !== 1 || inboundStopCount !== 1)) {
+    flightDetailsUl.appendChild(inboundStopDisplay);
+  }
+
+
+  flightTile.appendChild(flightDetailsUl);
   flightsListUl.appendChild(flightTile);
 
-  const options2 = {
+  const options = {
     view: this.parentObjectInstance,
-    details: flight,
+    flightDetails: flight,
+    currency: currencyCode
   }
 
   flightTile.addEventListener('click', function(){
-    callback(options2)
+    callback(options)
   })
 }
 
