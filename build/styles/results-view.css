@@ -1,5 +1,5 @@
 #results-view-section {
-  padding: 0.5em;
+  padding: 0.5em 0.05em;
   max-height: 70%;
   display: flex;
   overflow: scroll;
@@ -9,13 +9,13 @@
   padding: 0.5em;
   max-height: 60vh;
   border-right: solid rgb(173, 173, 173) 0.1em;
-  width: 50%;
+  width: 46%;
   overflow: scroll;
   text-align: center;
 }
 
 .random-destination-item {
-  margin: 1em;
+  margin: 1em auto;
 }
 
 #results-view-section .hotels-list {
@@ -32,16 +32,17 @@
 
 #results-view-section .hotels-list .destination-hotel-item {
   margin: 1em;
+  cursor: pointer;
 }
 
 .random-destination-item {
-  width: 80%;
+  width: 100%;
   padding-top: 1em;
   min-height: 2em;
-  border-radius: 1em;
+  border-radius: 0.5em;
   background-color: rgb(227, 247, 250);
-  border: solid rgb(177, 186, 182) 0.15em;
-  box-shadow: 0 0 0.9em;
+  border: solid rgb(177, 186, 182) 0.01em;
+  box-shadow: 0 0 0.5em;
   opacity: 0.8;
   /* cursor: pointer; */
 }
@@ -52,6 +53,7 @@
 
 .random-destination-item:hover,  .random-destination-item:focus, .random-destination-item:active {
   outline-width: 0.1em;
+  box-shadow: 0em 0em 0.1em;
   opacity: 1;
 }
 
@@ -68,7 +70,7 @@
 }
 
 .flight-details-selection-item {
-  width: 95%;
+  width: 50%;
   margin: 1em auto;
   border-radius: 0.75em;
   border: solid rgb(214, 208, 209) 0.15em;
@@ -83,7 +85,10 @@
 }
 
 .flight-details-selection-item:hover,  .flight-details-selection-item:focus, .flight-details-selection-item:active {
+  box-shadow: 0 0.1em 0px;
   background-color: rgb(162, 247, 250);
-  outline-width: 0.3em;
+  outline-width: 0.1em;
+  transform: translateY(-0.05em);
   opacity: 1;
+  color: white;
 }
