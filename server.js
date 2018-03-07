@@ -1,3 +1,4 @@
+const port = process.env.PORT || 3000;
 const express = require('express');
 const server  = express();
 const parser  = require('body-parser');
@@ -8,6 +9,8 @@ server.use(express.static(`${__dirname}/build`));
 server.use(parser.urlencoded({extended: true}));
 server.use(index_controller);
 
-server.listen(3000, function(){
+
+const app = server.listen(port, function(){
+  const port = app.address().port
   console.log(`Server listening on port ${this.address().port}`);
 })

@@ -5,8 +5,10 @@
   "main": "server.js",
   "scripts": {
     "test": "mocha ./specs",
-    "start": "nodemon server.js",
-    "webpack": "webpack -w"
+    "start": "node server.js",
+    "localstart": "nodemon server.js",
+    "webpack": "webpack -w",
+    "heroku-postbuild": "webpack -p --config ./webpack.config.js --progress"
   },
   "keywords": [],
   "author": "",
