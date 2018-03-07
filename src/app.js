@@ -7,20 +7,65 @@ const prepareFormView = function() {
   const form = new Form(prepareResultsView);
 }
 
-const prepareResultsView = function(){
+const prepareResultsView = function(InnovationSearchDataFromFormView){
   const ResultsView = require('./viewModels/resultsView');
   const resultsView = new ResultsView();
-  listDestinations(resultsView);
+
+  // live version
+  // const options = {
+  //   view: resultsView,
+  //   data: InnovationSearchDataFromFormView
+  // }
+
+  // fake version
+  const options = {
+    view: resultsView,
+    data: {
+        inspirationArray: ["duration=5","origin=LON", "departure_date=2018-05-23"],
+        lowfareArray: ["curreny=GBP", "travel_class=BUSINESS", "adults=2"]
+    }
+  }
+  //
+
+  listDestinations(options);
 }
 
-const listDestinations = function(resultsView) {
+
+const listDestinations = function(options) {
+
   const Request = require('./helpers/request.js');
-  const request = new Request('/api/random_search/destinations');
-  const callback = function(data) {
-    resultsView.createDestinationsListView(data, listFlights);
+  const key     = require('./keys/amadeus-comparison-api.js');
+  const UrlBuilder  = require('./helpers/urlBuilder');
+  const SEARCHURL   = require('./helpers/enums/searchUrlEnum');
+
+  const dataForUrlForInspiration  = options.data.inspirationArray;
+  const dataForUrlForLowfare      = options.data.lowfareArray;
+  const resultsView = options.view;
+
+
+  const urlDetailsToBuild = {
+    baseUrl: `${SEARCHURL.INSPIRATION}${key}`,
+    paramArray: dataForUrlForInspiration
   }
+
+  const urlBuild = new UrlBuilder(urlDetailsToBuild);
+  const url = urlBuild.finalUrl
+
+
+  const callback = function(requestResponse) {
+    const options = {
+      response: requestResponse,
+      callback: listFlights,
+      startingSearchRequirements: dataForUrlForLowfare
+    }
+    resultsView.createDestinationsListView(options);
+  }
+
+
+  const request = new Request(url);
   request.get(callback);
 }
+
 
 const listFlights = function(randomDestinationview) {
   const Request = require('./helpers/request.js');

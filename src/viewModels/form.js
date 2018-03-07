@@ -119,7 +119,7 @@ thingy = this.maxPriceInput.value
 }
 
 Form.prototype.prepareCurrencyList = function(){
-  const Currencies = require('../helpers/currencyList.js');
+  const Currencies = require('../helpers/enums/currencyListEnum.js');
   const currencyList = Object.keys(Currencies);
   const currencyObjects = Object.values(Currencies);
 
@@ -143,8 +143,8 @@ Form.prototype.prepareCurrencyList = function(){
 }
 
 Form.prototype.prepareOriginList = function(){
-  const OriginCodes = require('../helpers/amadeusInspirationOriginCodesEnum.js');
-  const CityCodes = require('../helpers/iataCitiesEnum.js');
+  const OriginCodes = require('../helpers/enums/amadeusInspirationOriginCodesEnum.js');
+  const CityCodes = require('../helpers/enums/iataCitiesEnum.js');
   OriginCodes.forEach(origin => {
     const originSelect = document.getElementById('origins')
     const option = document.createElement('option')

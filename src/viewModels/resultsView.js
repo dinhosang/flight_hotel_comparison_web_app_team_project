@@ -8,13 +8,18 @@ ResultsView.prototype.clearSearchResultView = function(){
   this.searchResultView.innerHTML = '';
 }
 
-ResultsView.prototype.createDestinationsListView = function (destinationsData, callbackFunction) {
+ResultsView.prototype.createDestinationsListView = function(details) {
+
   const options = {
-    destinations: destinationsData.results,
+
+    destinations: details.response.results,
     parent: this.searchResultView,
     parentObject: this,
-    callback: callbackFunction
+    callback: details.callback,
+    searchRequirements: details.startingSearchRequirements
   }
+
+  console.log(options.searchRequirements);
 
   const RandomDestinationsList  = require('./randomDestinationsList.js');
   this.randomDestinationsList   = new RandomDestinationsList(options);
