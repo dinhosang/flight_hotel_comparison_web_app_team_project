@@ -19,8 +19,6 @@ ResultsView.prototype.createDestinationsListView = function(details) {
     searchRequirements: details.startingSearchRequirements
   }
 
-  console.log(options.searchRequirements);
-
   const RandomDestinationsList  = require('./randomDestinationsList.js');
   this.randomDestinationsList   = new RandomDestinationsList(options);
 }
