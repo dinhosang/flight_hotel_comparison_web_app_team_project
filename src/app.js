@@ -30,6 +30,7 @@ const prepareResultsView = function(InnovationSearchDataFromFormView){
   listDestinations(options);
 }
 
+
 const listDestinations = function(options) {
 
   const Request = require('./helpers/request.js');
@@ -37,26 +38,34 @@ const listDestinations = function(options) {
   const UrlBuilder  = require('./helpers/urlBuilder');
   const SEARCHURL   = require('./helpers/enums/searchUrlEnum');
 
-  const urlParamData  = options.data;
-  const resultsView   = options.view;
+  const dataForUrlForInspiration  = options.data.inspirationArray;
+  const dataForUrlForLowfare      = options.data.lowfareArray;
+  const resultsView = options.view;
+
 
   const urlDetailsToBuild = {
     baseUrl: `${SEARCHURL.INSPIRATION}${key}`,
-    paramArray: urlParamData.inspirationArray
+    paramArray: dataForUrlForInspiration
   }
 
   const urlBuild = new UrlBuilder(urlDetailsToBuild);
   const url = urlBuild.finalUrl
-  console.log(url);
 
-  const callback = function(data) {
-    // urlParamData = options.data.lowfareArray
-    resultsView.createDestinationsListView(data, listFlights);
+
+  const callback = function(requestResponse) {
+    const options = {
+      response: requestResponse,
+      callback: listFlights,
+      startingSearchRequirements: dataForUrlForLowfare
+    }
+    resultsView.createDestinationsListView(options);
   }
+
 
   const request = new Request(url);
   request.get(callback);
 }
+
 
 const listFlights = function(randomDestinationview) {
   const Request = require('./helpers/request.js');

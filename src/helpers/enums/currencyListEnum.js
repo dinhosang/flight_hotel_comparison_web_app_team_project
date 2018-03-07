@@ -1,4 +1,4 @@
-const Currencies = {
+const CURRENCIES = {
     "GBP": {
         "symbol": "£",
         "name": "British Pound Sterling",
@@ -1063,4 +1063,7 @@ const Currencies = {
     }
 }
 
-module.exports = Currencies
+Object.freeze(CURRENCIES);
+Object.preventExtensions(CURRENCIES);
+
+module.exports = CURRENCIES;
