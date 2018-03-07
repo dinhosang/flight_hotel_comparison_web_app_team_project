@@ -4,21 +4,34 @@
     <meta charset="utf-8">
     <title></title>
     <script src="bundle.js"></script>
-    <link rel="stylesheet" href="reset.css">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="/styles/reset.css">
+    <link rel="stylesheet" href="/styles/major-elements.css">
+    <link rel="stylesheet" href="/styles/random-destination-search.css">
+    <link rel="stylesheet" href="/styles/results-view.css">
+    <link rel="stylesheet" href="/styles/package-view.css">
   </head>
   <body>
     <header id="banner">
-      <h1 id="banner-title"></h1>
+      <h1 id="banner-title">Flightr</h1>
     </header>
     <main>
       <form id="random-destination-search" action="index.html" method="post">
         <h2 id="random-destination-form-title">Find flights from London</h2>
-        <label for="depart-date-input-for-random-search">Depart Date:</label>
-        <input type="date" id="depart-date-input-for-random-search">
-        <label for="return-date-input-for-random-search">Return Date:</label>
-        <input type="date" id="return-date-input-for-random-search">
-        <button type="button" id="submit-random-search">Search</button>
+        <div id="form-input-container">
+          <div id="depart-date-container">
+            <label for="depart-date-input-for-random-search">Depart Date:</label>
+            <input type="date" id="depart-date-input-for-random-search">
+          </div>
+          <div id="return-date-container">
+            <div class="">
+              <label for="return-date-input-for-random-search">Return Date:</label>
+              <input type="date" id="return-date-input-for-random-search">
+            </div>
+            <div class="">
+              <button type="button" id="submit-random-search">Search</button>
+            </div>
+          </div>
+        </div>
       </form>
       <section id="results-view-section">
 
