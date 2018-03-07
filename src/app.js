@@ -4,12 +4,11 @@ const main = function() {
 
 const prepareFormView = function() {
   const Form = require('./viewModels/form');
-  new Form(prepareResultsView);
+  const form = new Form(prepareResultsView);
 }
 
 const prepareResultsView = function(){
   const ResultsView = require('./viewModels/resultsView');
-
   const resultsView = new ResultsView();
   listDestinations(resultsView);
 }
