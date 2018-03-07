@@ -27,14 +27,15 @@ Form.prototype.prepareButtonEvent = function(outerCallback) {
   innerCallback = function() {
     const inspirationArrayData = [];
     const lowfareArrayData = [];
-
+    
     // Origin
     if (this.originInput.value !== null
       && OriginEnum.includes(this.originInput.value)) {
         inspirationArrayData.push(`origin=${this.originInput.value}`);
         lowfareArrayData.push(`origin=${this.originInput.value}`);
     } else if (this.originInput.value === ""){
-      inspirationArrayData.push('origin=LON');
+        inspirationArrayData.push('origin=LON');
+        lowfareArrayData.push(`origin=LON`);
     } else {
       return
     }
