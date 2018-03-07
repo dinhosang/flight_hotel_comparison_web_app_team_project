@@ -114,7 +114,7 @@ Form.prototype.prepareButtonEvent = function(outerCallback) {
       lowfareArray: lowfareArrayData
     }
 
-    // outerCallback(innovationSearchData)
+    outerCallback(innovationSearchData)
   }.bind(this)
 
   this.submitButton.addEventListener('click', innerCallback);
