@@ -1,4 +1,4 @@
-const OriginEnum = require('../helpers/amadeusInspirationOriginCodesEnum.js');
+const OriginEnum = require('../helpers/enums/amadeusInspirationOriginCodesEnum.js');
 
 const Form = function(callback) {
 
@@ -110,8 +110,7 @@ thingy = this.maxPriceInput.value
       inspirationArray: inspirationArrayData,
       lowfareArray: lowfareArrayData
     }
-    console.log(inspirationArrayData);
-    console.log(lowfareArrayData);
+
     outerCallback(innovationSearchData)
   }.bind(this)
 
