@@ -12,19 +12,19 @@ const prepareResultsView = function(InnovationSearchDataFromFormView){
   const resultsView = new ResultsView();
 
   // live version
-  // const options = {
-  //   view: resultsView,
-  //   data: InnovationSearchDataFromFormView
-  // }
-
-  // fake version
   const options = {
     view: resultsView,
-    data: {
-        inspirationArray: ["duration=5","origin=LON", "departure_date=2018-05-23"],
-        lowfareArray: ["curreny=GBP", "travel_class=BUSINESS", "adults=2"]
-    }
+    data: InnovationSearchDataFromFormView
   }
+
+  // fake version
+  // const options = {
+  //   view: resultsView,
+  //   data: {
+  //       inspirationArray: ["duration=5","origin=LON", "departure_date=2018-05-23"],
+  //       lowfareArray: ["curreny=GBP", "travel_class=BUSINESS", "adults=2"]
+  //   }
+  // }
   //
 
   listDestinations(options);
@@ -66,18 +66,35 @@ const listDestinations = function(options) {
   request.get(callback);
 }
 
-
-const listFlights = function(randomDestinationview) {
+const listFlights = function(details) {
   const Request = require('./helpers/request.js');
-  const request = new Request('/api/random_search/flights');
+
+  const key         = require('./keys/amadeus-comparison-api.js');
+  const UrlBuilder  = require('./helpers/urlBuilder');
+  const SEARCHURL   = require('./helpers/enums/searchUrlEnum');
+
+  const dataForUrl  = details.searchRequirements;
+  const destinationListView = details.view;
+
+
+  const urlDetailsToBuild = {
+    baseUrl: `${SEARCHURL.LOWFARE}${key}`,
+    paramArray: dataForUrl
+  }
+
+  const urlBuild = new UrlBuilder(urlDetailsToBuild);
+  const url = urlBuild.finalUrl
+
+  const request = new Request(url);
 
   const callback = function(data) {
     const options = {
       flights: data.results,
       callback: listHotels
     }
-    randomDestinationview.populateFlights(options);
+    destinationListView.populateFlights(options);
   }
+
   request.get(callback);
 }
 

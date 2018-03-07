@@ -61,7 +61,8 @@ RandomDestinationsList.prototype.addDestination = function(details, index) {
   const intermediaryCallback = function() {
 
     const options = {
-      parentTile: destinationUl
+      parentTile: destinationUl,
+      destination: details.destination
     }
     this.prepareFlightsView(options)
   }.bind(this)
@@ -71,9 +72,9 @@ RandomDestinationsList.prototype.addDestination = function(details, index) {
   this.searchResultView.appendChild(destinationUl);
 }
 
-RandomDestinationsList.prototype.prepareFlightsView = function (options) {
+RandomDestinationsList.prototype.prepareFlightsView = function (details) {
 
-  const alreadyClicked = this.checkIfActiveDestination(options.parentTile);
+  const alreadyClicked = this.checkIfActiveDestination(details.parentTile);
 
   if(alreadyClicked){
     this.clearLists();
@@ -82,8 +83,18 @@ RandomDestinationsList.prototype.prepareFlightsView = function (options) {
     this.clearLists();
   }
 
-  this.activeDestination = options.parentTile;
-  this.onDestinationClick(this);
+  const destParam = `destination=${details.destination}`;
+  const finalSearchRequirements = [];
+  finalSearchRequirements.push(this.searchRequirements);
+  finalSearchRequirements.push(destParam);
+
+  const options = {
+    view: this,
+    searchRequirements: finalSearchRequirements
+  }
+
+  this.activeDestination = details.parentTile;
+  this.onDestinationClick(options);
 }
 
 RandomDestinationsList.prototype.checkIfActiveDestination = function (destinationUl) {
