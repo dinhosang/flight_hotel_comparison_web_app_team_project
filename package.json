@@ -1,4 +1,7 @@
 {
+  "engines": {
+    "node": "8.2.1"
+  },
   "name": "flightr",
   "version": "1.0.0",
   "description": "",
