@@ -7,8 +7,16 @@ const prepareFormView = function() {
   new Form(prepareResultsView);
 }
 
-const prepareResultsView = function(){
+const prepareResultsView = function(InnovationSearchDataFromFormView){
   const ResultsView = require('./viewModels/resultsView');
+  const UrlBuilder  = require('./helpers/urlBuilder');
+  const searchUrl   = require('./helpers/enums/searchUrlEnum')
+
+  const data = InnovationSearchDataFromFormView;
+  const urlDetailsToBuild = {
+    baseUrl: searchUrl.INSPIRATION,
+    paramArray: data.inspirationParameters.paramArray,
+  }
 
   const resultsView = new ResultsView();
   listDestinations(resultsView);
