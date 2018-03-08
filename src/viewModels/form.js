@@ -87,93 +87,95 @@ Form.prototype.getUserInput = function(prepareResultsView){
     }
 
     // Depart Date
-    const departDateInput             = this.departDateInput.value;
+    const departDateField             = this.departDateInput.value;
     // check if date input is valid date
-    const departDateFieldHasValue     = departDateInput !== null;
+    const departDateFieldHasValue     = departDateField !== null;
     // valid date will be parsed into a number and returned true
     // invalid date will not parse into number and Form will not process search request
-    const departDateFieldValueIsValid = isNaN(Date.parse(departDateInput)) === false;
+    const departDateFieldValueIsValid = isNaN(Date.parse(departDateField)) === false;
     if (departDateFieldHasValue && departDateFieldValueIsValid) {
-        inspirationSearchParameters.push(`departure_date=${departDateInput}`);
-        lowfareSearchParameters.push(`departure_date=${departDateInput}`);
+        inspirationSearchParameters.push(`departure_date=${departDateField}`);
+        lowfareSearchParameters.push(`departure_date=${departDateField}`);
     } else {
       return;
     }
 
     // Return Date
-    if (this.returnDateInput.value !== null) {
-      // check if input is a valid date
-      if (isNaN(Date.parse(this.returnDateInput.value))===false){
-        const returnDate = this.returnDateInput.value;
-        const departDate = this.departDateInput.value;
-        //check if return date is later than start date
-        const duration = parseInt((new Date(returnDate) - new Date(departDate)) / (1000 * 60 * 60 * 24));
-        if (duration > 0) {
-          inspirationSearchParameters.push(`duration=${duration}`);
-          lowfareSearchParameters.push(`return_date=${returnDate}`);
-        }
-      }
+    const returnDateField             = this.returnDateInput.value;
+    const returnDateFieldHasValue     = returnDateField !== null;
+    const returnDateFieldValueIsValid = isNaN(Date.parse(returnDateField))===false;
+    // calculating duration between depart and return date; information returned in milliseconds
+    const durationBetweenDates        = new Date(returnDateField) - new Date(departDateField);
+    // preparing to convert above to days
+    const millisecondToDayConverter   = (1000 * 60 * 60 * 24);
+    // returning length of time (integer) in days
+    const duration = parseInt( durationBetweenDates / millisecondToDayConverter);
+    if (returnDateFieldHasValue && returnDateFieldValueIsValid && duration > 0) {
+      //the two API queries take in different formats and fields
+      inspirationSearchParameters.push(`duration=${duration}`);
+      lowfareSearchParameters.push(`return_date=${returnDateField}`);
     }
 
     // Direct Flights
+    // if user selects direct flight checkbox, adds true as a parameter to API query
     if (this.directFlightInput.checked === true){
-      inspirationSearchParameters.push('direct=true')
-      lowfareSearchParameters.push('nonstop=true')
+      inspirationSearchParameters.push('direct=true');
+      lowfareSearchParameters.push('nonstop=true');
     }
 
     // Maximum Price
-    if (this.maxPriceInput.value !== null
-      && !isNaN(this.maxPriceInput.value)
-      && this.maxPriceInput.value !== ""
-      && this.maxPriceInput.value >= 0) {
-        lowfareSearchParameters.push(`max_price=${this.maxPriceInput.value}`)
+    const maxPriceField               = this.maxPriceInput.value;
+    const maxPriceFieldValueIsANumber = isNaN(maxPriceField) === false;
+    if (maxPriceField !== null && maxPriceFieldValueIsANumber
+        && maxPriceField !== "" && maxPriceField >= 0) {
+        lowfareSearchParameters.push(`max_price=${maxPriceField}`);
     }
 
     // Pick Currency
-    if (Object.keys(Currencies).includes(this.currencyInput.value)) {
-        lowfareSearchParameters.push(`currency=${this.currencyInput.value}`)
-    } else if (this.currencyInput.value === ' ' || this.currencyInput.value === '') {
-      lowfareSearchParameters.push('currency=GBP')
+    const currencyFieldValue        = this.currencyInput.value;
+    const currencyCodes             = Object.keys(Currencies);
+    const currencyFieldValueIsValid = currencyCodes.includes(currencyFieldValue);
+    if (currencyFieldValueIsValid) {
+      lowfareSearchParameters.push(`currency=${currencyFieldValue}`);
+    // below else if is setting a default if currency field is empty
+    } else if (currencyFieldValue === ' ' || currencyFieldValue === '') {
+      lowfareSearchParameters.push('currency=GBP');
     } else {
-      return
+      return;
     }
 
     // Adults
     if (this.adults.value !== undefined
       && !isNaN(this.adults.value)
       && this.adults.value >= 0) {
-        lowfareSearchParameters.push(`adults=${this.adults.value}`)
+        lowfareSearchParameters.push(`adults=${this.adults.value}`);
     }
 
     // Children
     if (this.children.value !== undefined
       && !isNaN(this.children.value)
       && this.children.value >= 0){
-      lowfareSearchParameters.push(`children=${this.children.value}`)
+      lowfareSearchParameters.push(`children=${this.children.value}`);
     }
 
     // Infants
     if (this.infants.value !== undefined
       && !isNaN(this.infants.value)
       && this.children.value >= 0) {
-      lowfareSearchParameters.push(`infants=${this.infants.value}`)
+      lowfareSearchParameters.push(`infants=${this.infants.value}`);
     }
 
     // Class
     if (this.cabinClass.value !== null) {
-      lowfareSearchParameters.push(`travel_class=${this.cabinClass.value}`)
+      lowfareSearchParameters.push(`travel_class=${this.cabinClass.value}`);
     }
 
     const innovationSearchData = {
       inspirationArray: inspirationSearchParameters,
       lowfareArray: lowfareSearchParameters
     }
-
-    prepareResultsView(innovationSearchData)
-
+    // prepareResultsView is invoked to pass data to make API request
+    prepareResultsView(innovationSearchData);
 }
-
-
-
 
 module.exports = Form;
