@@ -1,7 +1,7 @@
-const express = require('express');
-const server  = express();
-const parser  = require('body-parser');
-const index_controller = require('./src/controllers/index_controller.js')
+const express         = require('express');
+const server          = express();
+const parser          = require('body-parser');
+const indexController = require('./src/controllers/indexController.js')
 
 server.use(parser.json());
 server.use(express.static(`${__dirname}/build`));

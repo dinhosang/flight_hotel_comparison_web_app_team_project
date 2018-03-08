@@ -62,28 +62,35 @@ PackageView.prototype.populateFlightView = function(packageDetails){
   flightDetails.appendChild(outboundArrivalDate)
   flightDetails.appendChild(outboundArrivalAirport)
 
+
+
   const inbound = document.createElement('li')
   inbound.innerText = 'Inbound'
+  flightDetails.appendChild(inbound);
 
-  const inboundDepartureDate = document.createElement('li');
-  const inboundDepartureDateFormat = new Date(this.flight.itineraries[0].inbound.flights[0].departs_at).toString();
-  inboundDepartureDate.innerText = `Departure Date: ${inboundDepartureDateFormat.toString().substring(0, inboundDepartureDateFormat.length - 18)}`;
+  const allflights  = this.flight.itineraries[0];
+  const inboundExists = allflights.inbound !== undefined;
 
-  const inboundDepartureAirport = document.createElement('li');
-  inboundDepartureAirport.innerText = `Departure Airport: ${this.flight.itineraries[0].inbound.flights[0].origin.airport}`
+  if(inboundExists) {
+    const inboundDepartureDate = document.createElement('li');
+    const inboundDepartureDateFormat = new Date(this.flight.itineraries[0].inbound.flights[0].departs_at).toString();
+    inboundDepartureDate.innerText = `Departure Date: ${inboundDepartureDateFormat.toString().substring(0, inboundDepartureDateFormat.length - 18)}`;
 
-  const inboundArrivalDate = document.createElement('li');
-  const inboundArrivalDateFormat = new Date(this.flight.itineraries[0].inbound.flights[0].arrives_at).toString();
-  inboundArrivalDate.innerText = `Arrival Date: ${inboundDepartureDateFormat.toString().substring(0, inboundDepartureDateFormat.length - 18)}`
+    const inboundDepartureAirport = document.createElement('li');
+    inboundDepartureAirport.innerText = `Departure Airport: ${this.flight.itineraries[0].inbound.flights[0].origin.airport}`;
 
-  const inboundArrivalAirport = document.createElement('li')
-  inboundArrivalAirport.innerText = `Arrival Airport: ${this.flight.itineraries[0].inbound.flights[0].destination.airport}`
+    const inboundArrivalDate = document.createElement('li');
+    const inboundArrivalDateFormat = new Date(this.flight.itineraries[0].inbound.flights[0].arrives_at).toString();
+    inboundArrivalDate.innerText = `Arrival Date: ${inboundDepartureDateFormat.toString().substring(0, inboundDepartureDateFormat.length - 18)}`;
 
-  flightDetails.appendChild(inbound)
-  flightDetails.appendChild(inboundDepartureDate)
-  flightDetails.appendChild(inboundDepartureAirport)
-  flightDetails.appendChild(inboundArrivalDate)
-  flightDetails.appendChild(inboundArrivalAirport)
+    const inboundArrivalAirport = document.createElement('li');
+    inboundArrivalAirport.innerText = `Arrival Airport: ${this.flight.itineraries[0].inbound.flights[0].destination.airport}`;
+
+    flightDetails.appendChild(inboundDepartureDate);
+    flightDetails.appendChild(inboundDepartureAirport);
+    flightDetails.appendChild(inboundArrivalDate);
+    flightDetails.appendChild(inboundArrivalAirport);
+  }
 
   const flightPrice = this.flight.fare.total_price
   const price = document.createElement('li')
@@ -117,11 +124,11 @@ PackageView.prototype.calculateTotalPrice = function(packageDetails){
   const price = document.createElement('li')
   price.innerText = `Total package price: ${totalPrice}`
 
-  packageDetails.appendChild(price)
-  const MapWrapper = require('../helpers/mapWrapper.js')
+  packageDetails.appendChild(price);
+  const MapWrapper = require('../helpers/mapWrapper.js');
 
   const mapDiv = document.createElement('div');
-  mapDiv.id = 'hotel-map'
+  mapDiv.id = 'hotel-map';
 
   const coords = {lat: this.hotel.location.latitude, lng: this.hotel.location.longitude}
   const map = new MapWrapper(mapDiv, coords, 10);
