@@ -1,66 +1,74 @@
 const RandomHotelsList = function(options) {
-  this.hotels = options.hotels;
-  this.parent = options.parent;
+  this.hotels             = options.hotelObjectsFromAPIQuery;
+  this.parentHtmlElement  = options.parentElementToAttachHotels;
+  this.hotelsList         = null;
 
-  if(options.callback !== undefined) {
-    this.onHotelClick = options.callback;
+  if(options.populatePackageViewCallback !== undefined) {
+    this.onHotelClick     = options.populatePackageViewCallback;
   }
 
-  this.checkIfHotelListsExist()
+  this.checkIfHotelListsExist();
 }
 
 RandomHotelsList.prototype.checkIfHotelListsExist = function () {
 
-  const existingHotelLists = document.getElementsByClassName('hotels-list');
-  const existingHotelListsAsArray = Array.from(existingHotelLists);
+  // finds all html elements with the 'hotels-list' class
+  const existingHotelListsHtmlCollection = document.getElementsByClassName('hotels-list');
+  // transforms the above returned HTML Collection into an Array
+  const existingHotelListsAsArray = Array.from(existingHotelListsHtmlCollection);
 
   if (existingHotelListsAsArray.length === 0) {
     this.setupView();
   } else {
-    this.findIfParentContainsAnExistingHotelList(existingHotelListsAsArray);
+    this.findIfParentHtmlElementContainsAnExistingHotelList(existingHotelListsAsArray);
   }
 }
 
-RandomHotelsList.prototype.findIfParentContainsAnExistingHotelList = function (arrayOfExistingHotelLists) {
-  const hotelListArray = arrayOfExistingHotelLists;
+RandomHotelsList.prototype.findIfParentHtmlElementContainsAnExistingHotelList = function (arrayOfExistingHotelLists) {
 
-  hotelListArray.forEach(hotelList => {
-    if(this.parent.contains(hotelList)){
-      this.parent.removeChild(hotelList)
+  arrayOfExistingHotelLists.forEach(hotelList => {
+    if(this.parentHtmlElement.contains(hotelList)){
+      this.parentHtmlElement.removeChild(hotelList)
     }
   })
-  this.setupView()
+  this.setupView();
 }
 
 RandomHotelsList.prototype.setupView = function () {
-  this.createSearchResultView();
-  this.addTitle();
-  this.populateView();
+  this.createHotelsList();
+  this.addHeading();
+  this.populateHotelsList();
 };
 
-RandomHotelsList.prototype.createSearchResultView = function () {
+RandomHotelsList.prototype.createHotelsList = function () {
 
-  this.searchResultView = document.createElement('ul');
-  this.searchResultView.classList.add('hotels-list');
+  this.hotelsList = document.createElement('ul');
+  this.hotelsList.classList.add('hotels-list');
 
-  this.parent.appendChild(this.searchResultView);
+  this.parentHtmlElement.appendChild(this.hotelsList);
 }
 
-RandomHotelsList.prototype.addTitle = function () {
-  const title = document.createElement('h2');
+RandomHotelsList.prototype.addHeading = function () {
+  const heading = document.createElement('h2');
 
-  title.classList.add('hotels-list-title');
-  title.innerText = 'Available Hotels';
+  heading.classList.add('hotels-list-title');
+  if(this.hotels.length > 1) {
+    heading.innerText = 'Available Hotels';
+  } else if (this.hotels.length == 1){
+    heading.innerText = 'Hotel'
+  } else {
+    heading.innerText = 'No Open Hotels Found'
+  }
 
-  this.searchResultView.appendChild(title);
+  this.hotelsList.appendChild(heading);
 }
 
-RandomHotelsList.prototype.populateView = function () {
+RandomHotelsList.prototype.populateHotelsList = function () {
 
   // const MapWrapper = require('../helpers/mapWrapper.js');
   // this.mapDiv = document.createElement('div');
   // this.mapDiv.id = 'hotels-map'
-  // this.parent.appendChild(this.mapDiv);
+  // this.parentHtmlElement.appendChild(this.mapDiv);
   // const coords = {lat: this.hotels[0].location.latitude, lng: this.hotels[0].location.longitude}
   // this.hotelsMap =  new MapWrapper(this.mapDiv, coords, 8);
   this.hotels.forEach(hotelDetails => this.addHotelTile(hotelDetails));
@@ -91,12 +99,12 @@ RandomHotelsList.prototype.addHotelTile = function (hotel) {
 
   const addressUl   = this.createAddressUl(hotel.address);
 
-  const contactsLi  = this.createContactsUl(hotel.contacts);
+  const contactsUl  = this.createContactsUl(hotel.contacts);
 
   hotelUl.appendChild(nameLi);
   hotelUl.appendChild(priceLi);
   hotelUl.appendChild(addressUl);
-  hotelUl.appendChild(contactsLi);
+  hotelUl.appendChild(contactsUl);
 
   const callback = function() {
     this.onHotelClick(hotel)
@@ -107,7 +115,7 @@ RandomHotelsList.prototype.addHotelTile = function (hotel) {
     hotelUl.addEventListener('click', callback.bind(this))
   }
 
-  this.searchResultView.appendChild(hotelUl);
+  this.hotelsList.appendChild(hotelUl);
 }
 
 RandomHotelsList.prototype.createAddressUl = function (addressHash) {

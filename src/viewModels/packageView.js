@@ -3,7 +3,15 @@ const PackageView = function(options){
   this.hotel = options.hotel;
   this.parent = options.parent;
 
+  this.removeAnyPriorPackageViews();
   this.createPackageView();
+}
+
+PackageView.prototype.removeAnyPriorPackageViews = function () {
+  const previousPackageView = document.getElementById('package-view')
+  if (previousPackageView !== null){
+    this.parent.removeChild(previousPackageView);
+  }
 }
 
 PackageView.prototype.createPackageView = function(){
@@ -96,8 +104,8 @@ PackageView.prototype.populateFlightView = function(packageDetails){
 
 PackageView.prototype.populateHotelView = function(packageDetails){
   const options = {
-    hotels: [this.hotel],
-    parent: packageDetails
+    hotelObjectsFromAPIQuery: [this.hotel],
+    parentElementToAttachHotels: packageDetails
   }
 
   const RandomHotelsList = require('./randomHotelsList.js');
