@@ -19,21 +19,74 @@
 
 #form-input-container {
   display: flex;
-  justify-content:center;
-  min-height: 50%;
+  flex-wrap: wrap;
+  justify-content:flex-start;
+  min-height: 40%;
+}
+
+#other-form-input-container {
+  display: flex;
+  justify-content:flex-start;
+  flex-wrap: wrap;
+  min-height: 40%;
+  font-size: 0.85em;
+}
+
+#origin-container {
+  margin-right: 1em;
+  margin-top: 0.3em;
+  display: flex;
+}
+
+#origin-container div {
+  margin-left: 1.1em;
+}
+
+#origin-container p {
+  font-size: 0.3em;
 }
 
 #depart-date-container {
-  margin-right: 2em;
+  margin-right: 1em;
+  min-width: 5%;
+}
+
+#depart-date-container input {
+  margin-left: 1em;
+  margin-top: 0.3em;
+  min-width: 12em;
+  max-width: 50%;
+}
+
+#return-date-container {
+  margin-right: 1em;
+  margin-top: 0.3em;
+  min-width: 5%;
+}
+
+#return-date-container input {
+  margin-left: 1em;
+  min-width: 12em;
+  max-width: 50%;
+}
+
+#cabin-class {
+  display: block;
+  margin-top: 0.3em;
+  min-width: 5%;
+}
+
+#cabin-class select {
+  margin-left: 2em;
 }
 
 #submit-random-search {
   width: 8em;
   height: 2em;
-  float:right;
+  /* float:right; */
   border: 1px solid rgb(162, 247, 250);
   border-radius: 1em;
-  margin-top: 1em;
+  /* margin-top: 1em; */
   cursor: pointer;
   background-color: rgb(227, 247, 250);
   box-shadow: 0 0 0.9em;
@@ -57,3 +110,71 @@
   height: 2em;
   width: 6em;
 }
+
+#direct-flight-container {
+  max-width: 26%;
+  min-width: 7em;
+  margin-right: 0.5em;
+}
+
+#direct-flight-container label {
+  margin-top: 0.1em;
+}
+
+#currency-container {
+  display: flex;
+  min-width: 4.5em;
+  max-width: 20em;
+  margin-right: 0.5em;
+}
+
+#currency-container input {
+  width: 5em;
+  height: 1em;
+}
+
+#currency-container div {
+  margin-left: 1em;
+}
+
+#currency-container p {
+  font-size: 0.3em;
+}
+
+#currency-container div {
+  display: block;
+}
+
+#max-price-container {
+  max-height: 1em;
+  min-width: 9em;
+  max-width: 33%;
+  margin-right: 1em;
+
+}
+
+#max-price-container label {
+  min-width: 4.5em;
+  max-width: 10em;
+}
+
+#max-price-container input {
+  margin-left: 1em;
+  min-width: 5em;
+  max-width: 10%;
+  height: 1em;
+}
+
+/* #number-of-passengers {
+  display: flex;
+} */
+
+/* .minor-form-input-container {
+  width: 40%;
+  display: flex;
+  max-height: 1.5em;
+}
+
+.minor-form-input-container div{
+  display: flex;
+} */

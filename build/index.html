@@ -16,63 +16,78 @@
     </header>
     <main>
       <form id="random-destination-search" action="index.html" method="post">
-        <h2 id="random-destination-form-title">Find flights from London</h2>
-        <div id="origin-container">
-          <label for="origin-list">Pick Origin</label>
-          <input list="origins" id="origin-list" name="origin-list">
-          <datalist id="origins">
-          </datalist>
-        </div>
-        <div id="form-input-container">
-          <div id="depart-date-container">
-            <label for="depart-date-input-for-random-search">Depart Date:</label>
-            <input type="date" id="depart-date-input-for-random-search">
-          </div>
-          <div id="return-date-container">
-            <div class="">
-              <label for="return-date-input-for-random-search">Return Date:</label>
-              <input type="date" id="return-date-input-for-random-search">
+        <h2 id="random-destination-form-title">Take a trip somewhere new:</h2>
+        <div id="outer-input-container">
+          <div id="form-input-container">
+            <div id="origin-container">
+              <label for="origin-list">Origin City: </label>
+              <div class="">
+                <input list="origins" id="origin-list" name="origin-list">
+                <datalist id="origins" placeholder="London">
+                </datalist>
+                <p>Default: London, GB</p>
+              </div>
             </div>
-            <div class="">
-              <button type="button" id="submit-random-search">Search</button>
+            <div id="depart-date-container">
+              <label for="depart-date-input-for-random-search">Depart Date:</label>
+              <input type="date" id="depart-date-input-for-random-search">
+            </div>
+            <div id="return-date-container">
+                <label for="return-date-input-for-random-search">Return Date:</label>
+                <input type="date" id="return-date-input-for-random-search">
+            </div>
+            <div id="cabin-class">
+              <label for="cabin-class-select">Seat Class: </label>
+              <select id="cabin-class-select">
+                <option value="ECONOMY">Economy</option>
+                <option value="PREMIUM_ECONOMY">Premium Economy</option>
+                <option value="BUSINESS">Business class</option>
+                <option value="FIRST">First class</option>
+              </select>
             </div>
           </div>
-        </div>
-        <div id="direct-flight-container">
-          <label for="direct-flight-check-box">Tick for Direct Flights</label>
-          <input type="checkBox" id="direct-flight-check-box">
-        </div>
-        <div id="max-price-container">
-          <label for="max-price-input">Maximum Price</label>
-          <input type="number" id="max-price-input">
-        </div>
-        <div id="currency-container">
-          <label for="currency-list">Pick Currency</label>
-          <input list="currencies" id="currency-list" name="currency-list">
-          <datalist id="currencies">
-          </datalist>
-        </div>
-        <div id="number-of-passengers">
-          <div id="number-of-adults">
-            <label for="number-of-adults-input">Adults</label>
-            <input type="number" id="number-of-adults-input">
+          <div id="other-form-input-container">
+            <!-- <div class="minor-form-input-container"> -->
+              <div id="direct-flight-container">
+                <label for="direct-flight-check-box">Direct Flight</label>
+                <input type="checkBox" id="direct-flight-check-box">
+              </div>
+              <div id="currency-container">
+                <label for="currency-list">Currency: </label>
+                <div class="">
+                  <input list="currencies" id="currency-list" name="currency-list">
+                  <datalist id="currencies">
+                  </datalist>
+                  <p>Default: GBP, £</p>
+                </div>
+              </div>
+              <div id="max-price-container">
+                <label for="max-price-input">Max Price: </label>
+                <input type="number" id="max-price-input">
+              </div>
+            <!-- </div> -->
+            <!-- <div class="minor-form-input-container"> -->
+              <!-- <div id="number-of-passengers"> -->
+                <div id="number-of-adults">
+                  <label for="number-of-adults-input">Adults</label>
+                  <input type="number" id="number-of-adults-input">
+                </div>
+                <div id="number-of-children">
+                  <label for="number-of-children-input">Children</label>
+                  <input type="number" id="number-of-children-input">
+                </div>
+                <div id="number-of-infants">
+                  <label for="number-of-infants-input">Infants</label>
+                  <input type="number" id="number-of-infants-input">
+                </div>
+              <!-- </div> -->
+            <!-- </div> -->
+            <div class="">
+              <button type="button" id="submit-random-search">
+                Search
+              </button>
+            </div>
           </div>
-          <div id="number-of-children">
-            <label for="number-of-children-input">Children</label>
-            <input type="number" id="number-of-children-input">
-          </div>
-          <div id="number-of-infants">
-            <label for="number-of-infants-input">Infants</label>
-            <input type="number" id="number-of-infants-input">
-          </div>
-        </div>
-        <div id="cabin-class">
-          <select id="cabin-class-select">
-            <option value="ECONOMY">Economy</option>
-            <option value="PREMIUM_ECONOMY">Premium Economy</option>
-            <option value="BUSINESS">Business class</option>
-            <option value="FIRST">First class</option>
-          </select>
         </div>
       </form>
       <section id="results-view-section">
