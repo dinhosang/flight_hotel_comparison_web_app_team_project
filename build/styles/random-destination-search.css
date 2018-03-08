@@ -20,13 +20,13 @@
 #form-input-container {
   display: flex;
   flex-wrap: wrap;
-  justify-content:flex-start;
+  justify-content: center;
   min-height: 40%;
 }
 
 #other-form-input-container {
   display: flex;
-  justify-content:flex-start;
+  justify-content: center;
   flex-wrap: wrap;
   min-height: 40%;
   font-size: 0.85em;
@@ -48,14 +48,20 @@
 
 #depart-date-container {
   margin-right: 1em;
+  margin-top: 0.3em;
   min-width: 5%;
+  display: flex;
 }
 
-#depart-date-container input {
+#depart-date-container div {
+  display: block;
   margin-left: 1em;
-  margin-top: 0.3em;
-  min-width: 12em;
-  max-width: 50%;
+  min-width: 8em;
+  max-width: 14%;
+}
+
+#depart-date-container p {
+  font-size: 0.3em;
 }
 
 #return-date-container {
@@ -81,16 +87,17 @@
 }
 
 #submit-random-search {
-  width: 8em;
+  width: 6em;
   height: 2em;
-  /* float:right; */
   border: 1px solid rgb(162, 247, 250);
   border-radius: 1em;
-  /* margin-top: 1em; */
+
   cursor: pointer;
   background-color: rgb(227, 247, 250);
   box-shadow: 0 0 0.9em;
   opacity: 0.8;
+
+  margin-top: 0.5em;
 }
 
 #submit-random-search:hover,  #submit-random-search:focus, #submit-random-search:active {
@@ -106,15 +113,11 @@
   transform: translateY(0.2em);
 }
 
-#submit-random-search {
-  height: 2em;
-  width: 6em;
-}
-
 #direct-flight-container {
   max-width: 26%;
   min-width: 7em;
   margin-right: 0.5em;
+  margin-top: 0.3em;
 }
 
 #direct-flight-container label {
@@ -124,8 +127,9 @@
 #currency-container {
   display: flex;
   min-width: 4.5em;
-  max-width: 20em;
+  max-width: 21em;
   margin-right: 0.5em;
+  margin-top: 0.3em;
 }
 
 #currency-container input {
@@ -147,34 +151,53 @@
 
 #max-price-container {
   max-height: 1em;
-  min-width: 9em;
-  max-width: 33%;
-  margin-right: 1em;
-
+  min-width: 10em;
+  max-width: 12%;
+  margin-right: 0.3em;
+  margin-top: 0.3em;
 }
 
 #max-price-container label {
   min-width: 4.5em;
-  max-width: 10em;
+  max-width: 10%;
 }
 
 #max-price-container input {
-  margin-left: 1em;
+  margin-left: 0.3em;
   min-width: 5em;
   max-width: 10%;
   height: 1em;
 }
 
-/* #number-of-passengers {
-  display: flex;
-} */
-
-/* .minor-form-input-container {
-  width: 40%;
-  display: flex;
-  max-height: 1.5em;
+#number-of-adults {
+  margin-right: 0.3em;
+  margin-top: 0.3em;
+  min-width: 8em;
+  max-width: 10%;
 }
 
-.minor-form-input-container div{
-  display: flex;
-} */
+#number-of-adults input {
+  width: 30%;
+}
+
+#number-of-children {
+  margin-right: 0.5em;
+  margin-top: 0.3em;
+  min-width: 8em;
+  max-width: 10%;
+}
+
+#number-of-children input {
+  width: 30%;
+}
+
+#number-of-infants {
+  margin-right: 0.5em;
+  margin-top: 0.3em;
+  min-width: 8em;
+  max-width: 10%;
+}
+
+#number-of-infants input {
+  width: 30%;
+}
