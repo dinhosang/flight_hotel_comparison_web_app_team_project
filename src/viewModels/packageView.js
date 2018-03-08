@@ -8,7 +8,7 @@ const PackageView = function(options){
 }
 
 PackageView.prototype.removeAnyPriorPackageViews = function () {
-  const previousPackageView = document.getElementById('package-view')
+  const previousPackageView = document.querySelector('main #package-view')
   if (previousPackageView !== null){
     this.parent.removeChild(previousPackageView);
   }
