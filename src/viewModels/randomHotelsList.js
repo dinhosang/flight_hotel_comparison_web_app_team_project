@@ -57,17 +57,17 @@ RandomHotelsList.prototype.addTitle = function () {
 
 RandomHotelsList.prototype.populateView = function () {
 
-  const MapWrapper = require('../helpers/mapWrapper.js');
-  this.mapDiv = document.createElement('div');
-  this.mapDiv.id = 'hotels-map'
-  this.parent.appendChild(this.mapDiv);
-  const coords = {lat: this.hotels[0].location.latitude, lng: this.hotels[0].location.longitude}
-  this.hotelsMap =  new MapWrapper(this.mapDiv, coords, 8);
+  // const MapWrapper = require('../helpers/mapWrapper.js');
+  // this.mapDiv = document.createElement('div');
+  // this.mapDiv.id = 'hotels-map'
+  // this.parent.appendChild(this.mapDiv);
+  // const coords = {lat: this.hotels[0].location.latitude, lng: this.hotels[0].location.longitude}
+  // this.hotelsMap =  new MapWrapper(this.mapDiv, coords, 8);
   this.hotels.forEach(hotelDetails => this.addHotelTile(hotelDetails));
 }
 
 RandomHotelsList.prototype.addHotelTile = function (hotel) {
-  const coords = {lat: hotel.location.latitude, lng: hotel.location.longitude}
+  // const coords = {lat: hotel.location.latitude, lng: hotel.location.longitude}
   // const map = document.getElementById('hotels-map').;
   // map.addMarker(coords);
 

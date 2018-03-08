@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8">
     <title></title>
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>
     <script src="bundle.js"></script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>
     <link rel="stylesheet" href="/styles/reset.css">
     <link rel="stylesheet" href="/styles/major-elements.css">
     <link rel="stylesheet" href="/styles/random-destination-search.css">
@@ -16,15 +16,21 @@
       <h1 id="banner-title">Flightr</h1>
     </header>
     <main>
+      <div id="search-tabs">
+        <ul id="search-tab-links">
+          <li class="tab">Search Flights / Hotels</li>
+          <li class="tab">Saved Packages</li>
+        </ul>
+      </div>
       <form id="random-destination-search" action="index.html" method="post">
         <h2 id="random-destination-form-title">Find flights from London</h2>
-        <div id="origin-container">
-          <label for="origin-list">Pick Origin</label>
-          <input list="origins" id="origin-list" name="origin-list">
-          <datalist id="origins">
-          </datalist>
-        </div>
         <div id="form-input-container">
+          <div id="origin-container">
+            <label for="origin-list">Pick Origin: </label>
+            <input list="origins" id="origin-list" name="origin-list">
+            <datalist id="origins">
+            </datalist>
+          </div>
           <div id="depart-date-container">
             <label for="depart-date-input-for-random-search">Depart Date:</label>
             <input type="date" id="depart-date-input-for-random-search">
@@ -34,37 +40,37 @@
               <label for="return-date-input-for-random-search">Return Date:</label>
               <input type="date" id="return-date-input-for-random-search">
             </div>
-            <div class="">
+            <div>
               <button type="button" id="submit-random-search">Search</button>
             </div>
           </div>
         </div>
         <div id="direct-flight-container">
-          <label for="direct-flight-check-box">Tick for Direct Flights</label>
           <input type="checkBox" id="direct-flight-check-box">
+          <label for="direct-flight-check-box">Direct Flights</label>
         </div>
         <div id="max-price-container">
           <label for="max-price-input">Maximum Price</label>
-          <input type="number" id="max-price-input">
+          <input type="number" id="max-price-input" min="0">
         </div>
         <div id="currency-container">
-          <label for="currency-list">Pick Currency</label>
+          <label for="currency-list">Pick Currency:</label>
           <input list="currencies" id="currency-list" name="currency-list">
           <datalist id="currencies">
           </datalist>
         </div>
         <div id="number-of-passengers">
           <div id="number-of-adults">
-            <label for="number-of-adults-input">Adults</label>
-            <input type="number" id="number-of-adults-input">
+            <label for="number-of-adults-input">Adults:</label>
+            <input type="number" id="number-of-adults-input" min="0">
           </div>
           <div id="number-of-children">
-            <label for="number-of-children-input">Children</label>
-            <input type="number" id="number-of-children-input">
+            <label for="number-of-children-input">Children:</label>
+            <input type="number" id="number-of-children-input" min="0">
           </div>
           <div id="number-of-infants">
-            <label for="number-of-infants-input">Infants</label>
-            <input type="number" id="number-of-infants-input">
+            <label for="number-of-infants-input">Infants:</label>
+            <input type="number" id="number-of-infants-input" min="0">
           </div>
         </div>
         <div id="cabin-class">

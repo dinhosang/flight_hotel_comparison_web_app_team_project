@@ -44,7 +44,7 @@ PackageView.prototype.populateFlightView = function(packageDetails){
 
   const outboundDepartureDate = document.createElement('li');
   const outboundDepartureDateFormat = new Date(this.flight.itineraries[0].outbound.flights[0].departs_at).toString();
-  outboundDepartureDate.innerText = `Departure Date: ${outboundDepartureDateFormat.toString().substring(0, outboundDepartureDateFormat.length - 18)}`;
+  outboundDepartureDate.innerText = `Departure Date: ${outboundDepartureDateFormat.toString().substring(0, outboundDepartureDateFormat.length -18)}`;
 
   const outboundDepartureAirport = document.createElement('li');
   outboundDepartureAirport.innerText = `Departure Airport: ${this.flight.itineraries[0].outbound.flights[0].origin.airport}`;
@@ -124,7 +124,7 @@ PackageView.prototype.calculateTotalPrice = function(packageDetails){
   mapDiv.id = 'hotel-map'
 
   const coords = {lat: this.hotel.location.latitude, lng: this.hotel.location.longitude}
-  const map = new MapWrapper(mapDiv, coords, 11);
+  const map = new MapWrapper(mapDiv, coords, 10);
   map.addMarker(coords);
   packageDetails.appendChild(mapDiv);
 }
