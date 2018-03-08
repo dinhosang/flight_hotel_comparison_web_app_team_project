@@ -1,14 +1,22 @@
+//basic setup to populate browser
+const Form        = require('./viewModels/form');
+const ResultsView = require('./viewModels/resultsView');
+const Request     = require('./helpers/request.js');
+const key         = require('./keys/amadeus-comparison-api.js');
+const UrlBuilder  = require('./helpers/urlBuilder');
+const SEARCHURL   = require('./helpers/enums/searchUrlEnum');
+const PackageView = require('./viewModels/packageView.js');
+const ScrollTo    = require('./helpers/scrollTo.js');
+
 const main = function() {
   prepareFormView();
 }
 
 const prepareFormView = function() {
-  const Form = require('./viewModels/form');
   const form = new Form(prepareResultsView);
 }
 
 const prepareResultsView = function(InnovationSearchDataFromFormView){
-  const ResultsView = require('./viewModels/resultsView');
   const resultsView = new ResultsView();
 
   const options = {
@@ -22,10 +30,6 @@ const prepareResultsView = function(InnovationSearchDataFromFormView){
 
 const listDestinations = function(options) {
 
-  const Request = require('./helpers/request.js');
-  const key     = require('./keys/amadeus-comparison-api.js');
-  const UrlBuilder  = require('./helpers/urlBuilder');
-  const SEARCHURL   = require('./helpers/enums/searchUrlEnum');
 
   const dataForUrlForInspiration  = options.data.inspirationArray;
   const dataForUrlForLowfare      = options.data.lowfareArray;
@@ -54,11 +58,6 @@ const listDestinations = function(options) {
 }
 
 const listFlights = function(details) {
-  const Request = require('./helpers/request.js');
-
-  const key         = require('./keys/amadeus-comparison-api.js');
-  const UrlBuilder  = require('./helpers/urlBuilder');
-  const SEARCHURL   = require('./helpers/enums/searchUrlEnum');
 
   const dataForUrl  = details.searchRequirements;
   const destinationListView = details.view;
@@ -86,7 +85,6 @@ const listFlights = function(details) {
 }
 
 const listHotels = function(options){
-  const Request = require('./helpers/request.js');
   const request = new Request('/api/random_search/hotels');
 
   const resultsView   = options.view;
@@ -119,10 +117,9 @@ const listHotels = function(options){
 }
 
 const showPackageDetails = function(data) {
-  const PackageView = require('./viewModels/packageView.js');
+
   new PackageView(data)
 
-  const ScrollTo = require('./helpers/scrollTo.js')
   const scroll = new ScrollTo('package-view')
 
   scroll.scrollTo();
