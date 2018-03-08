@@ -4,7 +4,7 @@ const ResultsView = require('./viewModels/resultsView');
 const Request     = require('./helpers/request.js');
 const key         = require('./keys/amadeus-comparison-api.js');
 const UrlBuilder  = require('./helpers/urlBuilder');
-const SEARCHURL   = require('./helpers/enums/searchUrlEnum');
+const SEARCH_URL   = require('./helpers/enums/searchUrlEnum');
 const PackageView = require('./viewModels/packageView.js');
 const ScrollTo    = require('./helpers/scrollTo.js');
 
@@ -19,29 +19,24 @@ const prepareFormView = function() {
 const prepareResultsView = function(InnovationSearchDataFromFormView){
   const resultsView = new ResultsView();
 
-  const options = {
-    view: resultsView,
-    data: InnovationSearchDataFromFormView
-  }
-
-  listDestinations(options);
+  listDestinations(resultsView, InnovationSearchDataFromFormView);
 }
 
 
-const listDestinations = function(options) {
+const listDestinations = function(resultsView, InnovationSearchDataFromFormView) {
 
-
-  const dataForUrlForInspiration  = options.data.inspirationArray;
-  const dataForUrlForLowfare      = options.data.lowfareArray;
-  const resultsView = options.view;
+  const dataForUrlForInspirationAPISearch  = InnovationSearchDataFromFormView.inspirationArray;
+  const dataForUrlForLowfareAPISearch      = InnovationSearchDataFromFormView.lowfareArray;
 
   const urlDetailsToBuild = {
-    baseUrl: `${SEARCHURL.INSPIRATION}${key}`,
-    paramArray: dataForUrlForInspiration
+    //appending URL and key
+    baseUrl: `${SEARCH_URL.INSPIRATION}${key}`,
+    parameterArray: dataForUrlForInspirationAPISearch
   }
 
+  //below object creates the complete URL to make the API query
   const urlBuild = new UrlBuilder(urlDetailsToBuild);
-  const url = urlBuild.finalUrl
+  const url      = urlBuild.finalUrl;
 
   const callback = function(requestResponse) {
     const options = {
