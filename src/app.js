@@ -4,7 +4,7 @@ const ResultsView = require('./viewModels/resultsView');
 const Request     = require('./helpers/request.js');
 const key         = require('./keys/amadeus-comparison-api.js');
 const UrlBuilder  = require('./helpers/urlBuilder');
-const SEARCH_URL   = require('./helpers/enums/searchUrlEnum');
+const SEARCH_URL  = require('./helpers/enums/searchUrlEnum');
 const PackageView = require('./viewModels/packageView.js');
 const ScrollTo    = require('./helpers/scrollTo.js');
 
@@ -38,28 +38,27 @@ const listDestinations = function(resultsView, InnovationSearchDataFromFormView)
   const urlBuild = new UrlBuilder(urlDetailsToBuild);
   const url      = urlBuild.finalUrl;
 
-  const callback = function(requestResponse) {
-    const options = {
-      response: requestResponse,
-      callback: listFlights,
-      startingSearchRequirements: dataForUrlForLowfare
+  const callbackForDestinationsRequestToInvoke = function(APIResponseData) {
+    const dataToListDestinations = {
+      response: APIResponseData,
+      callbackToInvokeListFlights: listFlights,
+      startingSearchRequirements: dataForUrlForLowfareAPISearch
     }
-    resultsView.createDestinationsListView(options);
+    resultsView.createDestinationsListView(dataToListDestinations);
   }
 
-
-  const request = new Request(url);
-  request.get(callback);
+  const destinationRequest = new Request(url);
+  destinationRequest.get(callbackForDestinationsRequestToInvoke);
 }
 
-const listFlights = function(details) {
+const listFlights = function(informationForListingFlights) {
 
-  const dataForUrl  = details.searchRequirements;
-  const destinationListView = details.view;
+  const dataForUrl  = informationForListingFlights.searchRequirements;
+  const destinationListView = informationForListingFlights.destinationsList;
 
   const urlDetailsToBuild = {
-    baseUrl: `${SEARCHURL.LOWFARE}${key}`,
-    paramArray: dataForUrl
+    baseUrl: `${SEARCH_URL.LOW_FARE}${key}`,
+    parameterArray: dataForUrl
   }
 
   const urlBuild = new UrlBuilder(urlDetailsToBuild);

@@ -1,3 +1,6 @@
+const RandomDestinationsList  = require('./randomDestinationsList.js');
+const RandomHotelsList = require('./randomHotelsList.js');
+
 const ResultsView = function() {
   this.searchResultView = document.getElementById('results-view-section');
 
@@ -8,23 +11,21 @@ ResultsView.prototype.clearSearchResultView = function(){
   this.searchResultView.innerHTML = '';
 }
 
-ResultsView.prototype.createDestinationsListView = function(details) {
+ResultsView.prototype.createDestinationsListView = function(dataToListDestinations) {
 
-  const options = {
-    destinations: details.response.results,
-    parent: this.searchResultView,
+  const modifiedDataToListDestinations = {
+    // getting data back from response body of API request, following data structure of API
+    destinations: dataToListDestinations.response.results,
+    resultsViewSectionElement: this.searchResultView,
     parentObject: this,
-    callback: details.callback,
-    searchRequirements: details.startingSearchRequirements
+    listFlightsCallback: dataToListDestinations.callbackToInvokeListFlights,
+    lowfareSearchRequirements: dataToListDestinations.startingSearchRequirements
   }
 
-  const RandomDestinationsList  = require('./randomDestinationsList.js');
-  this.randomDestinationsList   = new RandomDestinationsList(options);
+  new RandomDestinationsList(modifiedDataToListDestinations);
 }
 
 ResultsView.prototype.createHotelsListView = function(data){
-
-  const RandomHotelsList = require('./randomHotelsList.js');
   this.hotelsList = new RandomHotelsList(data);
 }
 
