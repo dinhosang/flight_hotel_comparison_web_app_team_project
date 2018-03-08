@@ -19,25 +19,85 @@
 
 #form-input-container {
   display: flex;
-  justify-content:center;
-  min-height: 50%;
+  flex-wrap: wrap;
+  justify-content: center;
+  min-height: 40%;
+}
+
+#other-form-input-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  min-height: 40%;
+  font-size: 0.85em;
+}
+
+#origin-container {
+  margin-right: 1em;
+  margin-top: 0.3em;
+  display: flex;
+}
+
+#origin-container div {
+  margin-left: 1.1em;
+}
+
+#origin-container p {
+  font-size: 0.3em;
 }
 
 #depart-date-container {
-  margin-right: 2em;
+  margin-right: 1em;
+  margin-top: 0.3em;
+  min-width: 5%;
+  display: flex;
+}
+
+#depart-date-container div {
+  display: block;
+  margin-left: 1em;
+  min-width: 8em;
+  max-width: 14%;
+}
+
+#depart-date-container p {
+  font-size: 0.3em;
+}
+
+#return-date-container {
+  margin-right: 1em;
+  margin-top: 0.3em;
+  min-width: 5%;
+}
+
+#return-date-container input {
+  margin-left: 1em;
+  min-width: 12em;
+  max-width: 50%;
+}
+
+#cabin-class {
+  display: block;
+  margin-top: 0.3em;
+  min-width: 5%;
+}
+
+#cabin-class select {
+  margin-left: 2em;
 }
 
 #submit-random-search {
-  width: 8em;
+  width: 6em;
   height: 2em;
-  float:right;
   border: 1px solid rgb(162, 247, 250);
   border-radius: 1em;
-  margin-top: 1em;
+
   cursor: pointer;
   background-color: rgb(227, 247, 250);
   box-shadow: 0 0 0.9em;
   opacity: 0.8;
+
+  margin-top: 0.5em;
 }
 
 #submit-random-search:hover,  #submit-random-search:focus, #submit-random-search:active {
@@ -53,9 +113,93 @@
   transform: translateY(0.2em);
 }
 
-#submit-random-search {
-  height: 2em;
-  width: 6em;
+#direct-flight-container {
+  max-width: 26%;
+  min-width: 7em;
+  margin-right: 0.5em;
+  margin-top: 0.3em;
+}
+
+#direct-flight-container label {
+  margin-top: 0.1em;
+}
+
+#currency-container {
+  display: flex;
+  min-width: 4.5em;
+  max-width: 21em;
+  margin-right: 0.5em;
+  margin-top: 0.3em;
+}
+
+#currency-container input {
+  width: 5em;
+  height: 1em;
+}
+
+#currency-container div {
+  margin-left: 1em;
+}
+
+#currency-container p {
+  font-size: 0.3em;
+}
+
+#currency-container div {
+  display: block;
+}
+
+#max-price-container {
+  max-height: 1em;
+  min-width: 10em;
+  max-width: 12%;
+  margin-right: 0.3em;
+  margin-top: 0.3em;
+}
+
+#max-price-container label {
+  min-width: 4.5em;
+  max-width: 10%;
+}
+
+#max-price-container input {
+  margin-left: 0.3em;
+  min-width: 5em;
+  max-width: 10%;
+  height: 1em;
+}
+
+#number-of-adults {
+  margin-right: 0.3em;
+  margin-top: 0.3em;
+  min-width: 8em;
+  max-width: 10%;
+}
+
+#number-of-adults input {
+  width: 30%;
+}
+
+#number-of-children {
+  margin-right: 0.5em;
+  margin-top: 0.3em;
+  min-width: 8em;
+  max-width: 10%;
+}
+
+#number-of-children input {
+  width: 30%;
+}
+
+#number-of-infants {
+  margin-right: 0.5em;
+  margin-top: 0.3em;
+  min-width: 8em;
+  max-width: 10%;
+}
+
+#number-of-infants input {
+  width: 30%;
 }
 
 #hotels-map {

@@ -34,7 +34,7 @@ Form.prototype.prepareButtonEvent = function(outerCallback) {
         lowfareArrayData.push(`origin=${this.originInput.value}`);
     } else if (this.originInput.value === ""){
         inspirationArrayData.push('origin=LON');
-        lowfareArrayData.push('origin=LON');
+        lowfareArrayData.push(`origin=LON`);
     } else {
       return
     }
@@ -90,7 +90,7 @@ Form.prototype.prepareButtonEvent = function(outerCallback) {
     // Adults
     if (this.adults.value !== undefined
       && !isNaN(this.adults.value)
-      && this.adults.value > 0) {
+      && this.adults.value >= 0) {
         lowfareArrayData.push(`adults=${this.adults.value}`)
     }
 
