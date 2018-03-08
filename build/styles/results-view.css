@@ -37,7 +37,7 @@
 
 .random-destination-item {
   width: 100%;
-  padding-top: 1em;
+  /* padding-top: 1em; */
   min-height: 2em;
   border-radius: 0.5em;
   background-color: rgb(227, 247, 250);
@@ -47,7 +47,7 @@
   /* cursor: pointer; */
 }
 
-.random-destination-item label, .random-destination-item input {
+.random-destination-item {
   cursor: pointer;
 }
 

@@ -31,7 +31,6 @@ const listDestinations = function(options) {
   const dataForUrlForLowfare      = options.data.lowfareArray;
   const resultsView = options.view;
 
-
   const urlDetailsToBuild = {
     baseUrl: `${SEARCHURL.INSPIRATION}${key}`,
     paramArray: dataForUrlForInspiration
@@ -39,7 +38,6 @@ const listDestinations = function(options) {
 
   const urlBuild = new UrlBuilder(urlDetailsToBuild);
   const url = urlBuild.finalUrl
-
 
   const callback = function(requestResponse) {
     const options = {
@@ -55,18 +53,35 @@ const listDestinations = function(options) {
   request.get(callback);
 }
 
-
-const listFlights = function(randomDestinationview) {
+const listFlights = function(details) {
   const Request = require('./helpers/request.js');
-  const request = new Request('/api/random_search/flights');
+
+  const key         = require('./keys/amadeus-comparison-api.js');
+  const UrlBuilder  = require('./helpers/urlBuilder');
+  const SEARCHURL   = require('./helpers/enums/searchUrlEnum');
+
+  const dataForUrl  = details.searchRequirements;
+  const destinationListView = details.view;
+
+  const urlDetailsToBuild = {
+    baseUrl: `${SEARCHURL.LOWFARE}${key}`,
+    paramArray: dataForUrl
+  }
+
+  const urlBuild = new UrlBuilder(urlDetailsToBuild);
+  const url = urlBuild.finalUrl;
+
+  const request = new Request(url);
 
   const callback = function(data) {
     const options = {
+      currency: data.currency,
       flights: data.results,
       callback: listHotels
     }
-    randomDestinationview.populateFlights(options);
+    destinationListView.populateFlights(options);
   }
+
   request.get(callback);
 }
 
@@ -74,8 +89,8 @@ const listHotels = function(options){
   const Request = require('./helpers/request.js');
   const request = new Request('/api/random_search/hotels');
 
-  const resultsView = options.view
-  const flightDetails = options.details
+  const resultsView   = options.view;
+  const flightDetails = options.flightDetails;
 
   const onHotelClick = function(hotel) {
 

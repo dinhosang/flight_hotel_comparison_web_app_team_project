@@ -1,11 +1,15 @@
 const RandomDestinationsList = function(options) {
+
   this.depart   = options.destinations[0].departure_date;
   this.return   = options.destinations[0].return_date;
-  this.flights  = options.destinations;
+  this.destinations       = options.destinations;
+  this.searchRequirements = options.searchRequirements;
 
   this.parent = options.parent;
   this.onDestinationClick   = options.callback;
   this.parentObjectInstance = options.parentObject;
+
+  this.activeDestination = null;
 
   this.createSearchResultView();
   this.addTitle();
@@ -27,112 +31,191 @@ RandomDestinationsList.prototype.addTitle = function() {
 }
 
 RandomDestinationsList.prototype.populateView = function() {
-  this.flights.forEach((flightDetails, index) => this.addDestination(flightDetails, index));
+  this.destinations.forEach((destinationDetails, index) => this.addDestination(destinationDetails, index));
 }
 
-RandomDestinationsList.prototype.addDestination = function(flightDetails, index) {
-  const destinationUl = document.createElement('ul');
-  destinationUl.classList.add('random-destination-item');
+RandomDestinationsList.prototype.addDestination = function(details, index) {
+  const destinationUl = document.createElement('ul')
+  const destinationButton = document.createElement('button');
+
+  destinationButton.classList.add('random-destination-item');
+  destinationUl.classList.add('random-destination-container')
   destinationUl.id = `random-destination-ul-${index}`
 
-  const radioButton = document.createElement('input');
-  radioButton.type  = 'radio';
-  radioButton.name = 'random-destination'
-  radioButton.id = `random-destination-${index}`
+  destinationButton.innerText = details.destination;
 
-  const radioButtonLabel = document.createElement('label');
-  radioButtonLabel.innerText = flightDetails.destination;
-  radioButtonLabel.setAttribute('for', radioButton.id);
+  // const radioButton = document.createElement('input');
+  // radioButton.type  = 'radio';
+  // radioButton.name  = 'random-destination'
+  // radioButton.id    = `random-destination-${index}`
+  //
+  // const radioButtonLabel = document.createElement('label');
+  // radioButtonLabel.innerText = details.destination;
+  // radioButtonLabel.setAttribute('for', radioButton.id);
 
-  destinationUl.appendChild(radioButton);
-  destinationUl.appendChild(radioButtonLabel);
+  // destinationUl.appendChild(radioButton);
+  // destinationUl.appendChild(radioButtonLabel);
+  destinationUl.appendChild(destinationButton)
 
-  const options = {
-    parentTile: destinationUl,
-    callback:   this.onDestinationClick,
-    radio: radioButton
-  }
-  radioButton.addEventListener('click', this.prepareFlightsView.bind(this, options));
 
+  const intermediaryCallback = function() {
+
+    const options = {
+      parentTile: destinationUl,
+      destination: details.destination
+    }
+    this.prepareFlightsView(options)
+  }.bind(this)
+
+
+  destinationButton.addEventListener('click', intermediaryCallback);
   this.searchResultView.appendChild(destinationUl);
 }
 
-RandomDestinationsList.prototype.prepareFlightsView = function (options) {
+RandomDestinationsList.prototype.prepareFlightsView = function (details) {
 
-  const alreadyClicked = this.checkIfActiveDestination(options.parentTile);
+  const alreadyClicked = this.checkIfActiveDestination(details.parentTile);
+
   if(alreadyClicked){
+    this.clearLists();
     return;
+  } else if(this.activeDestination !== null){
+    this.clearLists();
   }
 
-  if(this.activeDestination !== undefined){
-    const flightsUl = document.getElementById('flights-list');
-    this.activeDestination.removeChild(flightsUl);
+  const destParam = `destination=${details.destination}`;
+  const finalSearchRequirements = this.searchRequirements.concat(destParam)
+
+  const options = {
+    view: this,
+    searchRequirements: finalSearchRequirements
   }
 
-  this.activeDestination = options.parentTile;
-
-  const flightsListUl = document.createElement('ul');
-  flightsListUl.id    = 'flights-list';
-
-  options.parentTile.appendChild(flightsListUl);
-
-  this.onDestinationClick(this);
+  this.activeDestination = details.parentTile;
+  this.onDestinationClick(options);
 }
 
 RandomDestinationsList.prototype.checkIfActiveDestination = function (destinationUl) {
 
-  if(this.activeDestination === undefined) {
+  if(this.activeDestination === null) {
     return false;
   } else {
     return this.activeDestination === destinationUl;
   }
 }
 
-RandomDestinationsList.prototype.populateFlights = function (options) {
+RandomDestinationsList.prototype.clearLists = function () {
+  const flightsHeader = document.getElementById('flights-list-header');
+  const flightsUl     = document.getElementById('flights-list');
+  const hotelsList    = document.getElementsByClassName('hotels-list')[0];
 
-  options.flights.forEach(flight => {
-    const flightsListUl = document.getElementById('flights-list');
+  if(hotelsList !== undefined) {
+    this.parent.removeChild(hotelsList);
+  }
 
+  this.activeDestination.removeChild(flightsHeader);
+  this.activeDestination.removeChild(flightsUl);
+  this.activeDestination = null;
+}
 
-    const flightUl = document.createElement('ul');
-    flightUl.classList.add('flight-details-selection-item');
-    const flightDetailsUl  = document.createElement('ul');
+RandomDestinationsList.prototype.populateFlights = function(details) {
+  const flightsHeader = document.createElement('h3');
+  flightsHeader.id    = 'flights-list-header'
+  flightsHeader.innerText = `Flights to ${this.activeDestination.innerText}`;
 
+  const flightsListUl = document.createElement('ul');
+  flightsListUl.id    = 'flights-list';
 
-    const radioButton = document.createElement('input');
-    radioButton.type = 'radio';
-    radioButton.name = 'list-hotels';
+  this.activeDestination.appendChild(flightsHeader);
+  this.activeDestination.appendChild(flightsListUl);
 
-    const nameLi = document.createElement('li');
-    nameLi.innerText = flight.itineraries[0].outbound.flights[0].destination.airport;
+  details.flights.forEach(flight => {
 
-    const priceLi = document.createElement('li');
-    priceLi.innerText = flight.fare.total_price;
-
-    const nameLabel = document.createElement('label');
-    nameLabel.for = 'list-hotels';
-
-    const priceLabel = document.createElement('label');
-    priceLabel.for = 'list-hotels';
-
-    flightDetailsUl.appendChild(nameLi);
-    flightDetailsUl.appendChild(priceLi);
-
-    flightUl.appendChild(radioButton);
-    flightUl.appendChild(flightDetailsUl);
-
-    flightsListUl.appendChild(flightUl);
-
-    const options2 = {
-      view: this.parentObjectInstance,
-      details: flight,
+    const options = {
+      callback: details.callback,
+      flightDetails: flight,
+      currency: details.currency,
+      header: flightsHeader,
+      list: flightsListUl
     }
 
-    radioButton.addEventListener('click', listHotels = function(){
-      options.callback(options2)
-    })
+    this.addFlight(options)
   })
 }
 
+RandomDestinationsList.prototype.addFlight = function(details) {
+
+  const callback  = details.callback;
+  const flight    = details.flightDetails;
+  const flightsListUl = details.list;
+
+  const flightTile = document.createElement('button');
+  flightTile.classList.add('flight-details-selection-item');
+
+  const flightDetailsUl = document.createElement('ul');
+
+  const outboundFlightsArray  = flight.itineraries[0].outbound.flights;
+  const arrayLength           = outboundFlightsArray.length;
+  const finalOutboundFlight   = outboundFlightsArray[arrayLength -1];
+  const finalDestinationIata  = finalOutboundFlight.destination.airport;
+
+  const airportIataEnum = require('../helpers/enums/iataAirportsEnum');
+  const airportHash = airportIataEnum.BYIATAAIRPORT[finalDestinationIata]
+  const airportName = airportHash.nameAirport;
+  const countryCode = airportHash.codeIso2Country;
+
+  const nameLi = document.createElement('li');
+  nameLi.innerText = `Destination Airport: ${airportName}`
+  flightDetailsUl.appendChild(nameLi);
+  // nameLi.innerText = flight.itineraries[0].outbound.flights[0].destination.airport;
+
+  const priceLi = document.createElement('li');
+  const currencyCode    = details.currency;
+  const currencyEnum    = require('../helpers/enums/currencyListEnum');
+  const currencySymbol  = currencyEnum[currencyCode].symbol;
+
+  if(currencySymbol !== currencyCode){
+    priceLi.innerText = `Price: ${currencySymbol}${flight.fare.total_price}`;
+  } else {
+    priceLi.innerText = `Price: ${flight.fare.total_price} ${currencySymbol}`;
+  }
+  flightDetailsUl.appendChild(priceLi);
+
+
+  const outboundStopDisplay = document.createElement('li');
+  const outboundStopCount   = outboundFlightsArray.length;
+  outboundStopDisplay.innerText = `Outbound Stops: ${outboundStopCount}`;
+  if(outboundStopCount !== 1) {
+    flightDetailsUl.appendChild(outboundStopDisplay);
+  }
+
+
+  const inboundStopDisplay  = document.createElement('li');
+  const inboundExists = flight.itineraries[0].inbound !== undefined;
+  let inboundStopCount
+  if(inboundExists) {
+    const inboundFlightsArray = flight.itineraries[0].inbound.flights;
+    inboundStopCount          = inboundFlightsArray.length;
+    inboundStopDisplay.innerText = `Inbound Stops: ${inboundStopCount}`;
+  }
+
+  if(inboundExists && (outboundStopCount !== 1 || inboundStopCount !== 1)) {
+    flightDetailsUl.appendChild(inboundStopDisplay);
+  }
+
+
+  flightTile.appendChild(flightDetailsUl);
+  flightsListUl.appendChild(flightTile);
+
+  const options = {
+    view: this.parentObjectInstance,
+    flightDetails: flight,
+    currency: currencyCode
+  }
+
+  flightTile.addEventListener('click', function(){
+    callback(options)
+  })
+}
 
 module.exports = RandomDestinationsList;
