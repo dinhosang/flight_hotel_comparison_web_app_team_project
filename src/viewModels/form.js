@@ -114,6 +114,8 @@ Form.prototype.getUserInput = function(prepareResultsView){
       //the two API queries take in different formats and fields
       inspirationSearchParameters.push(`duration=${duration}`);
       lowfareSearchParameters.push(`return_date=${returnDateField}`);
+    } else {
+      return;
     }
 
     // Direct Flights
@@ -145,24 +147,33 @@ Form.prototype.getUserInput = function(prepareResultsView){
     }
 
     // Adults
-    if (this.adults.value !== undefined
-      && !isNaN(this.adults.value)
-      && this.adults.value >= 0) {
-        lowfareSearchParameters.push(`adults=${this.adults.value}`);
+    const adultsFieldValue    = this.adults.value;
+    const adultsFieldHasValue = adultsFieldValue !== undefined;
+    const adultsFieldIsValid  = !isNaN(adultsFieldValue);
+
+    if (adultsFieldHasValue && adultsFieldIsValid
+      && adultsFieldValue >= 0) {
+        lowfareSearchParameters.push(`adults=${adultsFieldValue}`);
     }
 
     // Children
-    if (this.children.value !== undefined
-      && !isNaN(this.children.value)
-      && this.children.value >= 0){
-      lowfareSearchParameters.push(`children=${this.children.value}`);
+    const childrenFieldValue    = this.children.value;
+    const childrenFieldHasValue = childrenFieldValue !== undefined;
+    const childrenFieldIsValid  = !isNaN(childrenFieldValue);
+
+    if (childrenFieldHasValue && childrenFieldIsValid
+      && childrenFieldValue >= 0){
+        lowfareSearchParameters.push(`children=${childrenFieldValue}`);
     }
 
     // Infants
-    if (this.infants.value !== undefined
-      && !isNaN(this.infants.value)
-      && this.children.value >= 0) {
-      lowfareSearchParameters.push(`infants=${this.infants.value}`);
+    const infantsFieldValue    = this.infants.value;
+    const infantsFieldHasValue = infantsFieldValue !== undefined;
+    const infantsFieldIsValid  = !isNaN(infantsFieldValue);
+    if (infantsFieldHasValue
+      && infantsFieldIsValid
+      && infantsFieldValue >= 0) {
+        lowfareSearchParameters.push(`infants=${infantsFieldValue}`);
     }
 
     // Class

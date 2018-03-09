@@ -1,5 +1,5 @@
 const UrlBuilder = function(urlDetails) {
-  //baseURL is held in an array because to allow for joining with parameter array to make complete URL
+  //baseURL is held in an array to allow for joining with parameter array to make complete URL
   this.baseUrl        = [urlDetails.baseUrl];
   this.parameterArray = urlDetails.parameterArray;
   this.completeArray  = null;
