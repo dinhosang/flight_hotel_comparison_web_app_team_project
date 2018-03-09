@@ -24,38 +24,23 @@ RecentLowfareSearches.prototype.checkIfRecentSearch = function(lowfareSearchUrl,
     }
 
 
-    let savedFlightSearch = null;
-    allFlightSearches.forEach(flightSearch => {
-      if(flightSearch.url === lowfareSearchUrl){
-        savedFlightSearch = flightSearch;
-      }
+    let savedFlightSearchArray = allFlightSearches.filter(flightSearch => {
+      flightSearch.url === lowfareSearchUrl
     })
 
-
-    let timeDifferenceInMinutes;
-    if(savedFlightSearch !== null) {
-      const currentTime       = new Date();
-      const flightSavedTime   = savedFlightSearch.searchTime;
-      timeDifferenceInMinutes = this.compareDates(currentTime, flightSavedTime)
-    }
-
-    // needs to be less than 5 as the above calculation seems to drop
-    // any floating point so there is no concept of 5.1 etc.
-    if(timeDifferenceInMinutes < 5) {
+    if(savedFlightSearchArray.length > 0) {
       const returnValue = {
         withinFiveMinutes: true,
-        search: savedFlightSearch.searchResponse,
-        // // below was a check to see what the timeDifference returned
-        // timeDifference: timeDifferenceInMinutes
+        search: savedFlightSearchArray[0].searchResponse
       }
-      functionToSendResponse(err, returnValue);
+
+      functionToSendResponse(err, returnValue)
     } else {
       const returnValue = {
         withinFiveMinutes: false,
         search: lowfareSearchUrl
       }
 
-      this.removeSearch(lowfareSearchUrl);
       functionToSendResponse(err, returnValue);
     }
   })
