@@ -1,14 +1,14 @@
 const express = require('express');
 const parser  = require('body-parser');
-const savedFlightsRouter  = new express.Router();
-const SavedFlightSearches = require('../dataModels/recentFlightSearches.js');
+const savedLowfareSearchesRouter  = new express.Router();
+const SavedLowfareSearches = require('../dataModels/recentLowfareSearches.js');
 // // Can't put below here as it has not made the connection by the time this server
 // // file is run, it does have a connection by when a request is made though.
-// const searches = new SavedFlightSearches();
+// const searches = new SavedLowfareSearches();
 
 
-savedFlightsRouter.get('/:url', function(req, res) {
-  const searches = new SavedFlightSearches();
+savedLowfareSearchesRouter.get('/:url', function(req, res) {
+  const searches = new SavedLowfareSearches();
 
   const lowfareSearchUrl        = req.params.url;
 
@@ -25,8 +25,8 @@ savedFlightsRouter.get('/:url', function(req, res) {
   searches.checkIfRecentSearch(lowfareSearchUrl, sendResponseToRequest);
 });
 
-savedFlightsRouter.post('/', function(req, res) {
-  const searches = new SavedFlightSearches();
+savedLowfareSearchesRouter.post('/', function(req, res) {
+  const searches = new SavedLowfareSearches();
 
   const lowfareSearchUrl      = req.body.url
   const flightsDetailsFromApi = req.body.flights
@@ -46,4 +46,4 @@ savedFlightsRouter.post('/', function(req, res) {
   searches.saveSearch(lowfareSearchUrl, flightsDetailsFromApi, sendResponseToRequest);
 });
 
-module.exports = savedFlightsRouter;
+module.exports = savedLowfareSearchesRouter;

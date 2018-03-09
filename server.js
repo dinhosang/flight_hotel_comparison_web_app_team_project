@@ -1,12 +1,11 @@
 const express = require('express');
 const server  = express();
 const parser  = require('body-parser');
-const SavedFlightSearches = require('./server/dataModels/recentFlightSearches.js')
 
 server.use(parser.json());
 server.use(express.static(`${__dirname}/build`));
 server.use(parser.urlencoded({extended: true}));
-server.use('/api/savedFlights', require(`${__dirname}/server/controllers/savedFlightsController.js`))
+server.use('/api/savedLowfareSearches', require(`${__dirname}/server/controllers/savedLowfareSearchesController.js`));
 
 
 server.listen(3000, function(){

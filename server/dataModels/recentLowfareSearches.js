@@ -1,10 +1,10 @@
 const db = require('../database/mongodb');
 
-const RecentFlightSearches = function(){
+const RecentLowfareSearches = function(){
   this.flightSearches = db.connection.collection('saved_flights');
 }
 
-RecentFlightSearches.prototype.saveSearch = function(lowfareAPIUrl, lowfareAPIDataArray, functionToSendResponse) {
+RecentLowfareSearches.prototype.saveSearch = function(lowfareAPIUrl, lowfareAPIDataArray, functionToSendResponse) {
   dataToSave = {
     url: lowfareAPIUrl,
     flights: lowfareAPIDataArray,
@@ -15,7 +15,7 @@ RecentFlightSearches.prototype.saveSearch = function(lowfareAPIUrl, lowfareAPIDa
   });
 }
 
-RecentFlightSearches.prototype.checkIfRecentSearch = function(lowfareSearchUrl, functionToSendResponse) {
+RecentLowfareSearches.prototype.checkIfRecentSearch = function(lowfareSearchUrl, functionToSendResponse) {
   this.flightSearches.find().toArray(function(err, allFlightSearches) {
     if(err) {
       console.log(err);
@@ -61,4 +61,4 @@ RecentFlightSearches.prototype.checkIfRecentSearch = function(lowfareSearchUrl, 
   })
 }
 
-module.exports = RecentFlightSearches;
+module.exports = RecentLowfareSearches;
