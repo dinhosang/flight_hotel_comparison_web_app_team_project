@@ -9,17 +9,15 @@ const SavedLowfareSearches = require('../dataModels/recentLowfareSearches.js');
 
 savedLowfareSearchesRouter.get('/:url', function(req, res) {
   const searches = new SavedLowfareSearches();
-
-  const lowfareSearchUrl        = req.params.url;
-
-  const sendResponseToRequest = function(err, returnValue) {
+  const lowfareSearchUrl      = req.params.url;
+  const sendResponseToRequest = function(err, returnedDataFromDatabase) {
     if(err) {
       console.log(err);
       res.status(500);
       res.send();
     }
 
-    res.json(returnValue);
+    res.json(returnedDataFromDatabase);
   }
 
   searches.checkIfRecentSearch(lowfareSearchUrl, sendResponseToRequest);

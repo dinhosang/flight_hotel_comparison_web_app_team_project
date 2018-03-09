@@ -1,13 +1,13 @@
 const db = require('../database/mongodb');
 
 const RecentLowfareSearches = function(){
-  this.flightSearches = db.connection.collection('saved_flights');
+  this.flightSearches = db.connection.collection('saved_lowfare_searches');
 }
 
-RecentLowfareSearches.prototype.saveSearch = function(lowfareAPIUrl, lowfareAPIDataArray, functionToSendResponse) {
+RecentLowfareSearches.prototype.saveSearch = function(lowfareAPIUrl, lowfareAPIDataHash, functionToSendResponse) {
   dataToSave = {
     url: lowfareAPIUrl,
-    flights: lowfareAPIDataArray,
+    searchResponse: lowfareAPIDataHash,
     searchTime: new Date()
   }
   this.flightSearches.save(dataToSave, function(err, result) {
@@ -46,7 +46,7 @@ RecentLowfareSearches.prototype.checkIfRecentSearch = function(lowfareSearchUrl,
     if(timeDifferenceInMinutes < 5) {
       const returnValue = {
         withinFiveMinutes: true,
-        flights: savedFlightSearch.flights,
+        search: savedFlightSearch.searchResponse,
         // // below was a check to see what the timeDifference returned
         // timeDifference: timeDifferenceInMinutes
       }
@@ -54,7 +54,7 @@ RecentLowfareSearches.prototype.checkIfRecentSearch = function(lowfareSearchUrl,
     } else {
       const returnValue = {
         withinFiveMinutes: false,
-        flights: lowfareSearchUrl
+        search: lowfareSearchUrl
       }
       functionToSendResponse(err, returnValue);
     }

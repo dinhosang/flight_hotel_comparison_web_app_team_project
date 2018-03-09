@@ -35,8 +35,8 @@ const listDestinations = function(resultsView, InnovationSearchDataFromFormView)
   }
 
   //below object creates the complete URL to make the API query
-  const urlBuild = new UrlBuilder(urlDetailsToBuild);
-  const url      = urlBuild.finalUrl;
+  const urlBuild  = new UrlBuilder(urlDetailsToBuild);
+  const searchUrl = urlBuild.finalUrl;
 
   const callbackForDestinationsRequestToInvoke = function(APIResponseData) {
     const dataToListDestinations = {
@@ -47,13 +47,13 @@ const listDestinations = function(resultsView, InnovationSearchDataFromFormView)
     resultsView.createDestinationsListView(dataToListDestinations);
   }
 
-  const destinationRequest = new Request(url);
+  const destinationRequest = new Request(searchUrl);
   destinationRequest.get(callbackForDestinationsRequestToInvoke);
 }
 
 const listFlights = function(informationForListingFlights) {
 
-  const dataForUrl  = informationForListingFlights.searchRequirements;
+  const dataForUrl          = informationForListingFlights.searchRequirements;
   const destinationListView = informationForListingFlights.destinationsList;
 
   const urlDetailsToBuild = {
@@ -61,21 +61,53 @@ const listFlights = function(informationForListingFlights) {
     parameterArray: dataForUrl
   }
 
-  const urlBuild = new UrlBuilder(urlDetailsToBuild);
-  const url = urlBuild.finalUrl;
+  const urlBuild  = new UrlBuilder(urlDetailsToBuild);
+  const searchUrl = urlBuild.finalUrl;
 
-  const request = new Request(url);
+  const encodedSearchUrl  = encodeURIComponent(searchUrl);
+  const databaseSearchUrl = `${SEARCH_URL.SAVED_LOW_FARE}${encodedSearchUrl}`;
+  const requestToDatabase = new Request(databaseSearchUrl);
 
-  const callback = function(data) {
-    const options = {
-      currency: data.currency,
-      flights: data.results,
-      callback: listHotels
+  const callbackForDatabaseRequest = function(responseFromDataBase){
+    if(responseFromDataBase.withinFiveMinutes) {
+      const dataForListingFlights = {
+        currency: responseFromDataBase.search.currency,
+        flights: responseFromDataBase.search.results,
+        callback: listHotels
+      }
+      destinationListView.populateFlights(dataForListingFlights);
+    } else {
+      const searchUrl = responseFromDataBase.search
+
+      const amadeusApiLowfareRequest = new Request(searchUrl)
+      const callbackForAmadeusRequest = function(responseFromAmadeus) {
+        const dataForListingFlights = {
+          currency: responseFromAmadeus.currency,
+          flights: responseFromAmadeus.results,
+          callback: listHotels
+        }
+
+        destinationListView.populateFlights(dataForListingFlights);
+      }
+
+      amadeusApiLowfareRequest.get(callbackForAmadeusRequest)
     }
-    destinationListView.populateFlights(options);
   }
 
-  request.get(callback);
+  requestToDatabase.get(callbackForDatabaseRequest);
+
+  // const request = new Request(url);
+  //
+  // const callback = function(data) {
+  //   const options = {
+  //     currency: data.currency,
+  //     flights: data.results,
+  //     callback: listHotels
+  //   }
+  //   destinationListView.populateFlights(options);
+  // }
+  //
+  // request.get(callback);
 }
 
 const listHotels = function(informationForMakingHotelSearch){
