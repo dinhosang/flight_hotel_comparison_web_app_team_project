@@ -2,6 +2,7 @@ const RandomHotelsList = function(options) {
   this.hotels             = options.hotelObjectsFromAPIQuery;
   this.parentHtmlElement  = options.parentElementToAttachHotels;
   this.hotelsList         = null;
+  this.hotelsMap          = null;
 
   if(options.populatePackageViewCallback !== undefined) {
     this.onHotelClick     = options.populatePackageViewCallback;
@@ -41,11 +42,18 @@ RandomHotelsList.prototype.setupView = function () {
 };
 
 RandomHotelsList.prototype.createHotelsList = function () {
-
+  // creating a section to contain hotels list and map
+  this.hotelsSearchResultsSection = document.createElement('section');
+  // creating hotel list
   this.hotelsList = document.createElement('ul');
   this.hotelsList.classList.add('hotels-list');
+  // creating map
+  this.hotelsMap = document.createElement('div');
+  this.hotelsMap.id = 'hotels-map';
 
-  this.parentHtmlElement.appendChild(this.hotelsList);
+  this.hotelsSearchResultsSection.appendChild(this.hotelsList);
+  this.hotelsSearchResultsSection.appendChild(this.hotelsMap);
+  this.parentHtmlElement.appendChild(this.hotelsSearchResultsSection);
 }
 
 RandomHotelsList.prototype.addHeading = function () {
@@ -64,20 +72,20 @@ RandomHotelsList.prototype.addHeading = function () {
 }
 
 RandomHotelsList.prototype.populateHotelsList = function () {
-
-  // const MapWrapper = require('../helpers/mapWrapper.js');
-  // this.mapDiv = document.createElement('div');
-  // this.mapDiv.id = 'hotels-map'
-  // this.parentHtmlElement.appendChild(this.mapDiv);
-  // const coords = {lat: this.hotels[0].location.latitude, lng: this.hotels[0].location.longitude}
-  // this.hotelsMap =  new MapWrapper(this.mapDiv, coords, 8);
+  // creating a new map with focus on general area
+  // by taking latitude and longitude of first result as focus
+  const MapWrapper = require('../helpers/mapWrapper.js');
+  this.mapDiv = document.getElementById('hotels-map');
+  this.parentHtmlElement.appendChild(this.mapDiv);
+  const coords = {lat: this.hotels[0].location.latitude, lng: this.hotels[0].location.longitude}
+  this.hotelsMap = new MapWrapper(this.mapDiv, coords, 11);
+  // populating hotel list and map with hotel results
   this.hotels.forEach(hotelDetails => this.addHotelTile(hotelDetails));
 }
 
 RandomHotelsList.prototype.addHotelTile = function (hotel) {
-  // const coords = {lat: hotel.location.latitude, lng: hotel.location.longitude}
-  // const map = document.getElementById('hotels-map').;
-  // map.addMarker(coords);
+  const coords = {lat: hotel.location.latitude, lng: hotel.location.longitude}
+  this.hotelsMap.addMarker(coords);
 
 
   const hotelUl = document.createElement('ul');

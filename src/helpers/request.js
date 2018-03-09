@@ -10,7 +10,11 @@ Request.prototype.get = function(callback) {
       return;
     }
     const responseBody = JSON.parse(this.responseText);
-    callback(responseBody);
+    if (callback) {
+      callback(responseBody);
+    } else {
+      return responseBody;
+    }
   });
   request.send();
 }

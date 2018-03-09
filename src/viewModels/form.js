@@ -93,7 +93,10 @@ Form.prototype.getUserInput = function(prepareResultsView){
     // valid date will be parsed into a number and returned true
     // invalid date will not parse into number and Form will not process search request
     const departDateFieldValueIsValid = isNaN(Date.parse(departDateField)) === false;
-    if (departDateFieldHasValue && departDateFieldValueIsValid) {
+    const departDateIsPresentDayOrLater = parseInt((new Date(departDateField) - new Date())/(1000 * 60 * 60 * 24))>=0
+
+    if (departDateFieldHasValue && departDateFieldValueIsValid
+      && departDateIsPresentDayOrLater) {
         inspirationSearchParameters.push(`departure_date=${departDateField}`);
         lowfareSearchParameters.push(`departure_date=${departDateField}`);
     } else {
@@ -109,7 +112,7 @@ Form.prototype.getUserInput = function(prepareResultsView){
     // preparing to convert above to days
     const millisecondToDayConverter   = (1000 * 60 * 60 * 24);
     // returning length of time (integer) in days
-    const duration = parseInt( durationBetweenDates / millisecondToDayConverter);
+    const duration = parseInt(durationBetweenDates / millisecondToDayConverter);
     if (returnDateFieldHasValue && returnDateFieldValueIsValid && duration > 0) {
       //the two API queries take in different formats and fields
       inspirationSearchParameters.push(`duration=${duration}`);
