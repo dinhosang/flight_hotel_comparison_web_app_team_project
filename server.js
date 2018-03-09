@@ -53,42 +53,45 @@ MongoClient.connect('mongodb://localhost:27017', function(err, client) {
         res.send()
       }
 
+      let savedFlightSearch = null;
 
-      res.json(allFlightSearches);
+      allFlightSearches.forEach(flightSearch => {
+        console.log(lowfareSearchUrl);
+        if(flightSearch.url === lowfareSearchUrl){
+          savedFlightSearch = flightSearch;
+        }
+      })
+      console.log('saved search', savedFlightSearch);
+      let timeDifferenceInMinutes;
+      if(savedFlightSearch !== null) {
+        const currentTime     = new Date();
+        const flightSavedTime = savedFlightSearch.searchTime;
+        console.log(flightSavedTime);
+        const millisecondToMinutesConverter = (1000 * 60);
 
+        const timeDifference = currentTime - flightSavedTime;
+        timeDifferenceInMinutes = parseInt(timeDifference / millisecondToMinutesConverter);
+      }
 
-  //     // console.log(allFlightSearches);
-  //     allFlightSearches.forEach(flightSearch => {
-  //       if(flightSearch.url === lowfareSearchUrl){
-  //         const currentTime     = new Date();
-  //         const flightSavedTime = flightSearch.timeStamp;
-  //
-  //         const millisecondToMinutesConverter = (1000 * 60);
-  //
-  //         const timeDifference = currentTime - flightSavedTime;
-  //         const timeDifferenceInMinutes = parseInt(timeDifference / millisecondToMinutesConverter)
-  //
-  //         if(timeDifferenceInMinutes <= 5) {
-  //           const returnValue = {
-  //             withinFiveMinutes: true,
-  //             flights: flightSearch.flights
-  //           }
-  //           res.json(returnValue);
-  //         } else {
-  //           const returnValue = {
-  //             withinFiveMinutes: false,
-  //             flights: flightSearch.url
-  //           }
-  //           res.json(returnValue);
-  //         }
-  //       }
-  //     })
-    })
-
-  })
-
-});
-
+      // needs to be less than 5 as the above calculation seems to  drop
+      // any floating point so there is no concept of 5.1 etc.
+      if(timeDifferenceInMinutes < 5) {
+        const returnValue = {
+          withinFiveMinutes: true,
+          flights: savedFlightSearch.flights,
+          timeDifference: timeDifferenceInMinutes
+        }
+        res.json(returnValue);
+      } else {
+        const returnValue = {
+          withinFiveMinutes: false,
+          flights: lowfareSearchUrl
+        }
+        res.json(returnValue);
+      }
+    }) // .find request to db
+  }) // Server.get
+}) // MongoClient
 
 server.listen(3000, function(){
   console.log(`Server listening on port ${this.address().port}`);
