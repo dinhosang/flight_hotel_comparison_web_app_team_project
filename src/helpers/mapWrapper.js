@@ -5,10 +5,16 @@ const MapWrapper = function (container, coords, zoom) {
   });
 }
 
-MapWrapper.prototype.addMarker = function(coords) {
+MapWrapper.prototype.addMarker = function(coords, info) {
   const marker = new google.maps.Marker({
     position: coords,
     map: this.googleMap
+  });
+  marker.addListener('click', function () {
+    const infoWindow = new google.maps.InfoWindow({
+      content: info
+    });
+    infoWindow.open(this.map, marker);
   });
 }
 

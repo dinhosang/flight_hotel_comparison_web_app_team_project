@@ -85,7 +85,7 @@ RandomHotelsList.prototype.populateHotelsList = function () {
 
 RandomHotelsList.prototype.addHotelTile = function (hotel) {
   const coords = {lat: hotel.location.latitude, lng: hotel.location.longitude}
-  this.hotelsMap.addMarker(coords);
+  this.hotelsMap.addMarker(coords, `${hotel.property_name}`);
 
 
   const hotelUl = document.createElement('ul');
