@@ -27,7 +27,7 @@ savedLowfareSearchesRouter.post('/', function(req, res) {
   const searches = new SavedLowfareSearches();
 
   const lowfareSearchUrl      = req.body.url
-  const flightsDetailsFromApi = req.body.flights
+  const flightsDetailsFromApi = req.body.searchResponse
 
   const sendResponseToRequest = function(err, result) {
     if(err) {

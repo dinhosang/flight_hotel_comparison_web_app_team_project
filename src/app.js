@@ -77,9 +77,12 @@ const listFlights = function(informationForListingFlights) {
       }
       destinationListView.populateFlights(dataForListingFlights);
     } else {
-      const searchUrl = responseFromDataBase.search
+      const searchUrl = responseFromDataBase.search;
+      const amadeusApiLowfareRequest = new Request(searchUrl);
 
-      const amadeusApiLowfareRequest = new Request(searchUrl)
+      const databaseUrl = `${SEARCH_URL.SAVE_TO_DB_LOW_FARE}`;
+      const saveResponseToDatabaseRequest = new Request(databaseUrl);
+
       const callbackForAmadeusRequest = function(responseFromAmadeus) {
         const dataForListingFlights = {
           currency: responseFromAmadeus.currency,
@@ -88,26 +91,19 @@ const listFlights = function(informationForListingFlights) {
         }
 
         destinationListView.populateFlights(dataForListingFlights);
+        const dataToSaveToDatabase = {
+          url: searchUrl,
+          searchResponse: responseFromAmadeus
+        }
+
+        saveResponseToDatabaseRequest.post(console.log, dataToSaveToDatabase)
       }
 
       amadeusApiLowfareRequest.get(callbackForAmadeusRequest)
     }
   }
-
+  
   requestToDatabase.get(callbackForDatabaseRequest);
-
-  // const request = new Request(url);
-  //
-  // const callback = function(data) {
-  //   const options = {
-  //     currency: data.currency,
-  //     flights: data.results,
-  //     callback: listHotels
-  //   }
-  //   destinationListView.populateFlights(options);
-  // }
-  //
-  // request.get(callback);
 }
 
 const listHotels = function(informationForMakingHotelSearch){

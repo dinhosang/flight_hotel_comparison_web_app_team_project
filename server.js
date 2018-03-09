@@ -2,7 +2,7 @@ const express = require('express');
 const server  = express();
 const parser  = require('body-parser');
 
-server.use(parser.json());
+server.use(parser.json({limit: '50mb'}));
 server.use(express.static(`${__dirname}/build`));
 server.use(parser.urlencoded({extended: true}));
 server.use('/api/savedLowfareSearches', require(`${__dirname}/server/controllers/savedLowfareSearchesController.js`));
