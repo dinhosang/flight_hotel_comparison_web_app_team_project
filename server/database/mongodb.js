@@ -3,6 +3,10 @@ const ObjectID    = require('mongodb').ObjectID;
 
 const MongoConnection = function() {
   this.database = null;
+  this.makeConnection();
+}
+
+MongoConnection.prototype.makeConnection = function() {
   MongoClient.connect('mongodb://localhost:27017', function(err, client) {
     if(err) {
       console.log(`Error connecting: ${err}`);
@@ -15,7 +19,7 @@ const MongoConnection = function() {
 }
 
 MongoConnection.prototype.convertId = function(stringId) {
-  return ObjectID(stringId)
+  return ObjectID(stringId);
 }
 
 module.exports = MongoConnection;
