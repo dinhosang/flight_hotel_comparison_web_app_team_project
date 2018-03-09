@@ -24,8 +24,8 @@ RecentLowfareSearches.prototype.checkIfRecentSearch = function(lowfareSearchUrl,
     }
 
 
-    let savedFlightSearchArray = allFlightSearches.filter(flightSearch => {
-      flightSearch.url === lowfareSearchUrl
+    const savedFlightSearchArray = allFlightSearches.filter(flightSearch => {
+      return flightSearch.url === lowfareSearchUrl
     })
 
     if(savedFlightSearchArray.length > 0) {
