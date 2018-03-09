@@ -1,7 +1,7 @@
 const MongoClient = require('mongodb').MongoClient;
 const ObjectID    = require('mongodb').ObjectID;
 
-const MongoConnetion = function() {
+const MongoConnection = function() {
   this.database = null;
   MongoClient.connect('mongodb://localhost:27017', function(err, client) {
     if(err) {
@@ -18,4 +18,4 @@ MongoConnection.prototype.convertId = function(stringId) {
   return ObjectID(stringId)
 }
 
-module.exports = MongoConnection();
+module.exports = MongoConnection;
