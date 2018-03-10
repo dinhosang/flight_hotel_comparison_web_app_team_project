@@ -79,43 +79,84 @@ RandomHotelsList.prototype.addHotelTile = function (hotel) {
   // const map = document.getElementById('hotels-map').;
   // map.addMarker(coords);
 
+  const hotelTable = document.createElement('table');
+  hotelTable.classList.add('destination-hotel-item');
 
-  const hotelUl = document.createElement('ul');
-  hotelUl.classList.add('destination-hotel-item');
+  const nameRow       = document.createElement('tr');
+  nameRow.classList.add('hotel-name');
+  const nameCell1     = document.createElement('td');
+  nameCell1.innerText = "Name:"
+  const nameCell2     = document.createElement('td');
+  nameCell2.innerText = `${hotel.property_name}`;
+  nameRow.appendChild(nameCell1);
+  nameRow.appendChild(nameCell2);
 
-
-  const nameLi      = document.createElement('li');
-  nameLi.classList.add('hotel-name');
-  nameLi.innerText  = `Name: ${hotel.property_name}`;
-
-
-  const priceLi = document.createElement('li');
+  const priceRow = document.createElement('tr');
+  priceRow.classList.add('hotel-price');
   const amount  = hotel.total_price.amount;
   const currency    = hotel.total_price.currency;
+  const priceCell1 = document.createElement('td');
+  priceCell1.innerText = "Price:";
+  const priceCell2 = document.createElement('td');
+  priceCell2.innerText = `${amount} ${currency}`;
+  priceRow.appendChild(priceCell1);
+  priceRow.appendChild(priceCell2);
 
-  priceLi.classList.add('hotel-price');
-  priceLi.innerText = `Price: ${amount} ${currency}`;
+  // Address
+  // const addressUl   = this.createAddressUl(hotel.address);
+  const addressRow = document.createElement('tr');
+  addressRow.classList.add('hotel-address');
+  const address    = hotel.address;
 
+  const addressRowTitleCell = document.createElement('td');
+  addressRowTitleCell.setAttribute('rowspan', "4");
+  addressRowTitleCell.classList.add('hotel-address-title');
+  addressRow.appendChild(addressRowTitleCell);
+  const addressRowTitle = document.createElement('h3');
+  addressRowTitle.innerText = 'Address:';
+  addressRowTitleCell.appendChild(addressRowTitle);
 
-  const addressUl   = this.createAddressUl(hotel.address);
+  const line1Row       = document.createElement('tr');
+  const line1          = document.createElement('td');
+  line1.innerText      = address.line1;
+  line1Row.appendChild(line1);
+  addressRow.appendChild(line1Row);
 
-  const contactsUl  = this.createContactsUl(hotel.contacts);
+  const cityRow        = document.createElement('tr');
+  const city           = document.createElement('td');
+  city.innerText       = address.city;
+  cityRow.appendChild(city);
+  addressRow.appendChild(cityRow);
 
-  hotelUl.appendChild(nameLi);
-  hotelUl.appendChild(priceLi);
-  hotelUl.appendChild(addressUl);
-  hotelUl.appendChild(contactsUl);
+  const postalCodeRow  = document.createElement('tr');
+  const postalCode     = document.createElement('td');
+  postalCode.innerText = address.postal_code;
+  postalCodeRow.appendChild(postalCode);
+  addressRow.appendChild(postalCodeRow);
+
+  const countryRow     = document.createElement('tr');
+  const country        = document.createElement('td');
+  country.innerText = address.country;
+  countryRow.appendChild(country);
+  addressRow.appendChild(countryRow);
+
+  // const contactsUl  = this.createContactsUl(hotel.contacts);
+
+  hotelTable.appendChild(nameRow);
+  hotelTable.appendChild(priceRow);
+  hotelTable.appendChild(addressRow);
+  // hotelTable.appendChild(contactsUl);
 
   const callback = function() {
     this.onHotelClick(hotel)
   }
 
   if(this.onHotelClick !== undefined) {
-    hotelUl.tabindex="0";
-    hotelUl.addEventListener('click', callback.bind(this))
+    hotelTable.tabindex="0";
+    hotelTable.addEventListener('click', callback.bind(this))
   }
 
-  this.hotelsList.appendChild(hotelUl);
+  this.hotelsList.appendChild(hotelTable);
 }
 
 RandomHotelsList.prototype.createAddressUl = function (addressHash) {
