@@ -34,4 +34,15 @@ UserAccounts.prototype.savePackage = function (accountId, dataToSendToDatabase, 
   });
 }
 
+
+UserAccounts.prototype.getPackagesForAccount = function (id, functionToSendResponse) {
+  this.accounts.findOne({_id: id}, (err, account) => {
+    if(!account || account.packages === undefined) {
+      functionToSendResponse(err, [])
+    } else {
+      functionToSendResponse(err, account.packages)
+    };
+  });
+}
+
 module.exports = UserAccounts;

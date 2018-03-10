@@ -7,7 +7,7 @@ const Accounts      = require('../dataModels/userAccounts');
 // if that is required
 accountRouter.put('/:id/packages/', (req, res) => {
   const accounts      = new Accounts();
-  const accountId     = req.params.id
+  const accountId     = req.params.id;
 
   const saveName      = req.body.userInputtedSaveName;
   const flightDetails = req.body.flightDetails;
@@ -16,13 +16,13 @@ accountRouter.put('/:id/packages/', (req, res) => {
   const sendResponseToRequest = (err, result) => {
     if (err) {
       console.log(`Error updating a quote: ${err}`);
-      res.status(500)
-      res.send()
-      return
+      res.status(500);
+      res.send();
+      return;
     }
 
     console.log('Saved package to user account in database');
-    res.send(result)
+    res.send(result);
   };
 
   const dataToSendToDatabase = {
@@ -32,6 +32,23 @@ accountRouter.put('/:id/packages/', (req, res) => {
   }
 
   accounts.savePackage(accountId, dataToSendToDatabase, sendResponseToRequest);
+})
+
+accountRouter.get('/:id/packages/', (req, res) => {
+  const accounts  = new Accounts();
+  const accountId = req.params.id;
+
+  const sendResponseToRequest = (err, returnedDataFromDatabase) => {
+    if(err) {
+      console.log(err);
+      res.status(500);
+      res.send();
+    }
+
+    res.json(returnedDataFromDatabase);
+  }
+
+  accounts.getPackagesForAccount(accountId, sendResponseToRequest);
 })
 
 module.exports = accountRouter;
