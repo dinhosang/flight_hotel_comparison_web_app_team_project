@@ -11,18 +11,9 @@ body {
   font-family: 'Lato', sans-serif;
 }
 
-main {
-  min-height: 85%;
-}
-
-h2 {
-  font-size: 1.25em;
-}
-
 #banner {
-  /* display:flex; */
-  min-height: 10%;
-  max-height: 4em;
+  height: 10%;
+  min-height: 2em;
   padding: 0.25em;
   color: rgb(255, 255, 255);
   border-bottom: solid rgb(157, 198, 246) 0.01em;
@@ -37,14 +28,45 @@ h2 {
   font-size: 1.75em;
 }
 
-#search-tab-links li {
+main {
+  /* min-height: 85%; */
+  height: 85%;
+}
+
+#search-tabs {
+  /* 6.8% of body */
+  height: 8%;
+  min-height: 3em;
+  width: 100%;
+  display: flex;
+}
+
+#search-tabs button {
   display: inline-block;
   text-align: center;
   text-decoration: none;
-  padding: 15px;
   cursor: pointer;
+  padding: 0.5%;
+
+  height: 100%;
+
+  width: 15%;
+  min-width: 5em;
+  margin-right: 0.15em;
+
+  border-right: solid 1px;
+  border-bottom: solid 1px;
+  border-top: solid 1px;
+  border-left: none;
+  border-color: rgb(68, 73, 72);
+  background-color: rgb(255, 254, 254);
+}
+
+h2 {
+  font-size: 1.25em;
 }
 
 footer {
+  height: 5%;
   text-align: center;
 }
