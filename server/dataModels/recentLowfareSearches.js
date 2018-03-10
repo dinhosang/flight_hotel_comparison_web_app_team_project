@@ -6,7 +6,7 @@ const RecentLowfareSearches = function(){
 }
 
 RecentLowfareSearches.prototype.saveSearch = function(lowfareAPIUrl, lowfareAPIDataHash, functionToSendResponse) {
-  dataToSave = {
+  const dataToSave = {
     url: lowfareAPIUrl,
     searchResponse: lowfareAPIDataHash,
     searchTime: new Date()

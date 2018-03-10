@@ -1,5 +1,7 @@
-const RandomHotelsList  = require('./randomHotelsList.js');
-const ScrollTo          = require('../helpers/scrollTo');
+const ScrollTo  = require('../helpers/scrollTo');
+const Request   = require('../helpers/request');
+const SearchUrlConstant = require('../helpers/enums/searchUrlEnum')
+const RandomHotelsList  = require('./randomHotelsList');
 
 const PackageView = function(options){
   this.flight = options.flight;
@@ -156,16 +158,19 @@ PackageView.prototype.createPackageForm = function(packageForm){
     event.preventDefault();
 
     const packageDetailsHash = {
+      userInputtedSaveName: inputSavePackage.value,
       flightDetails: this.flight,
       hotelDetails: this.hotel
     };
 
-
-    const array = [this.flight, this.hotel];
-    const jsonString = JSON.stringify(array);
-    localStorage.setItem('user', jsonString);
-
-
+    const accountId           = 'user';
+    const urlForAccount       = `${SearchUrlConstant.DB_ACCOUNTS}${accountId}`
+    const urlForSavingPackage = `${urlForAccount}${SearchUrlConstant.SAVE_PACKAGE}`;
+    const savePackageToDatabaseRequest = new Request(urlForSavingPackage);
+    savePackageToDatabaseRequest.put(packageDetailsHash);
+    // const array = [this.flight, this.hotel];
+    // const jsonString = JSON.stringify(array);
+    // localStorage.setItem('user', jsonString);
   }.bind(this)
 
   saveButton.addEventListener('click', onSaveButtonClicked);

@@ -15,7 +15,7 @@ Request.prototype.get = function(callback) {
   request.send();
 }
 
-Request.prototype.post = function(callback, body) {
+Request.prototype.post = function(body, callback) {
   const request = new XMLHttpRequest();
   request.open('POST', this.url);
   request.setRequestHeader('Content-Type', 'application/json');
@@ -24,12 +24,14 @@ Request.prototype.post = function(callback, body) {
       return;
     }
     const responseBody = JSON.parse(this.responseText);
-    callback(responseBody);
+    if(callback !== undefined) {
+      callback(responseBody);
+    };
   });
   request.send(JSON.stringify(body));
 }
 
-Request.prototype.put = function(callback, body) {
+Request.prototype.put = function(body, callback) {
   const request = new XMLHttpRequest();
   request.open('PUT', this.url);
   request.setRequestHeader('Content-Type','application/json');
@@ -38,7 +40,9 @@ Request.prototype.put = function(callback, body) {
       return;
     }
     const responseBody = JSON.parse(request.responseText);
-    callback(responseBody)
+    if(callback !== undefined) {
+      callback(responseBody);
+    };
   });
   request.send(JSON.stringify(body));
 }

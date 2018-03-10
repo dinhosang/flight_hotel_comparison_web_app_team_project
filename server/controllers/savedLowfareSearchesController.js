@@ -1,8 +1,8 @@
 const express = require('express');
-const parser  = require('body-parser');
 const savedLowfareSearchesRouter  = new express.Router();
-const SavedLowfareSearches = require('../dataModels/recentLowfareSearches.js');
-// // Can't put below here as it has not made the connection by the time this server
+const SavedLowfareSearches = require('../dataModels/recentLowfareSearches');
+// // Can't type below commented code here
+// // as it has not made the connection by the time this server
 // // file is run, it does have a connection by when a request is made though.
 // const searches = new SavedLowfareSearches();
 

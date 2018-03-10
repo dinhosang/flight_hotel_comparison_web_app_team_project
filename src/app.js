@@ -80,7 +80,7 @@ const listFlights = function(informationForListingFlights) {
       const searchUrl = responseFromDataBase.search;
       const amadeusApiLowfareRequest = new Request(searchUrl);
 
-      const databaseUrl = `${SEARCH_URL.SAVE_TO_DB_LOW_FARE}`;
+      const databaseUrl = `${SEARCH_URL.SAVED_LOW_FARE}`;
       const saveResponseToDatabaseRequest = new Request(databaseUrl);
 
       const callbackForAmadeusRequest = function(responseFromAmadeus) {
@@ -96,13 +96,13 @@ const listFlights = function(informationForListingFlights) {
           searchResponse: responseFromAmadeus
         }
 
-        saveResponseToDatabaseRequest.post(console.log, dataToSaveToDatabase)
+        saveResponseToDatabaseRequest.post(dataToSaveToDatabase)
       }
 
       amadeusApiLowfareRequest.get(callbackForAmadeusRequest)
     }
   }
-  
+
   requestToDatabase.get(callbackForDatabaseRequest);
 }
 
