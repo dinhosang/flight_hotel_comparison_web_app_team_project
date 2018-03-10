@@ -105,10 +105,16 @@ RandomDestinationsList.prototype.checkIfActiveDestination = function (destinatio
 RandomDestinationsList.prototype.clearLists = function () {
   const flightsListHeader = document.getElementById('flights-list-header');
   const flightsUl         = document.getElementById('flights-list');
-  const hotelsList        = document.getElementsByClassName('hotels-list')[0];
 
-  if(hotelsList !== undefined) {
-    this.resultsViewSection.removeChild(hotelsList);
+  const hotelsLists       = document.getElementsByClassName('hotels-list');
+  const packageView       = document.querySelector('main #package-view')
+
+  if(hotelsLists.length === 2) {
+    this.resultsViewSection.removeChild(hotelsLists[0])
+    const main = document.querySelector('main');
+    main.removeChild(packageView)
+  } else if (hotelsLists.length === 1){
+    this.resultsViewSection.removeChild(hotelsLists[0])
   }
 
   this.activeDestination.removeChild(flightsListHeader);
