@@ -1,9 +1,9 @@
 #random-destination-search {
-  border: inset rgb(157, 198, 246) 0.1em;
+  border-bottom: inset rgb(157, 198, 246) 0.1em;
   border-radius: 0.15em;
-  padding: 1em;
   height: 20%;
-  min-height: 3em;
+  min-width: 30em;
+  min-height: 10vh;
   color: rgb(111, 105, 105);
 }
 
@@ -13,77 +13,97 @@
 
 #random-destination-form-title {
   text-align: center;
-  min-height: 1.5em;
-  max-height: 50%;
+  padding: 1% 0.5% 1% 0.5%;
+  /* min-height: 2em; */
+  height: 30%;
+}
+
+#outer-input-container {
+  height: 70%;
+  width: 70%;
+  margin: auto;
+  min-height: 8vh;
+  font-size: 150%;
+  padding: 0 1% 0 1%;
+}
+
+#outer-input-container input {
+  width: 100%;
+}
+
+#outer-input-container select {
+  width: 55%;
 }
 
 #form-input-container {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
-  min-height: 40%;
+  justify-content: space-evenly;
+  min-height: 4vh;
+  width: 100%
 }
 
 #other-form-input-container {
   display: flex;
-  justify-content: center;
   flex-wrap: wrap;
-  min-height: 40%;
-  font-size: 0.85em;
+  justify-content: space-evenly;
+  min-height: 4vh;
 }
 
 #origin-container {
-  margin-right: 1em;
-  margin-top: 0.3em;
   display: flex;
+  flex-grow: 1;
+  min-width: 5em;
 }
 
 #origin-container div {
-  margin-left: 1.1em;
+  margin-left: 0.5em;
+  width: 50%
 }
 
 #origin-container p {
-  font-size: 0.3em;
+  font-size: 0.6em;
 }
 
 #depart-date-container {
-  margin-right: 1em;
-  margin-top: 0.3em;
-  min-width: 5%;
   display: flex;
+  flex-grow: 1;
+  min-width: 5em;
 }
 
 #depart-date-container div {
+  margin-left: 0.5em;
   display: block;
-  margin-left: 1em;
-  min-width: 8em;
-  max-width: 14%;
 }
 
 #depart-date-container p {
-  font-size: 0.3em;
+  font-size: 0.6em;
 }
 
 #return-date-container {
-  margin-right: 1em;
-  margin-top: 0.3em;
-  min-width: 5%;
+  display: flex;
+  flex-grow: 1;
+  min-width: 5em;
 }
 
-#return-date-container input {
-  margin-left: 1em;
-  min-width: 12em;
-  max-width: 50%;
+#return-date-container div {
+  margin-left: 0.5em;
+  display: block;
+}
+
+#return-date-container p {
+  font-size: 0.6em;
 }
 
 #cabin-class {
   display: block;
-  margin-top: 0.3em;
-  min-width: 5%;
+  flex-grow: 1;
+  min-width: 5em;
 }
 
 #cabin-class select {
-  margin-left: 2em;
+  margin-left: 0.5em;
+  font-size: 65%;
 }
 
 #submit-random-search {

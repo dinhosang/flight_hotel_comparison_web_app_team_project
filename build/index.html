@@ -10,16 +10,19 @@
     <link rel="stylesheet" href="/styles/random-destination-search.css">
     <link rel="stylesheet" href="/styles/results-view.css">
     <link rel="stylesheet" href="/styles/package-view.css">
+    <link rel="stylesheet" href="/styles/font-size.css">
   </head>
   <body>
     <header id="banner">
       <h1 id="banner-title">Flightr</h1>
+      <nav id="search-tabs">
+        <div class="left-search-tab-div"></div>
+        <button class="selected-tab">Search Flights / Hotels</button>
+        <button>Saved Packages</button>
+        <div class="right-search-tab-div"></div>
+      </nav>
     </header>
     <main>
-      <nav id="search-tabs">
-        <button class="tab">Search Flights / Hotels</button>
-        <button class="tab">Saved Packages</button>
-      </nav>
       <form id="random-destination-search" action="index.html" method="post">
         <h2 id="random-destination-form-title">Take a trip somewhere new:</h2>
         <div id="outer-input-container">
@@ -39,11 +42,13 @@
                 <input type="date" id="depart-date-input-for-random-search">
                 <p>Required</p>
               </div>
-
             </div>
             <div id="return-date-container">
-                <label for="return-date-input-for-random-search">Return Date:</label>
+              <label for="return-date-input-for-random-search">Return Date:</label>
+              <div class="">
                 <input type="date" id="return-date-input-for-random-search">
+                <p>Required</p>
+              </div>
             </div>
             <div id="cabin-class">
               <label for="cabin-class-select">Seat Class: </label>
@@ -100,6 +105,5 @@
         <p>Powered by Amadeus</p>
       </a>
     </footer>
-
   </body>
 </html>
