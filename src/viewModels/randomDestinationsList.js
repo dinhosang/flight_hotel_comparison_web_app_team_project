@@ -106,15 +106,16 @@ RandomDestinationsList.prototype.clearLists = function () {
   const flightsListHeader = document.getElementById('flights-list-header');
   const flightsUl         = document.getElementById('flights-list');
 
+  const hotelsSection     = document.getElementById('hotels-search-results-section')
   const hotelsLists       = document.getElementsByClassName('hotels-list');
   const packageView       = document.querySelector('main #package-view')
 
   if(hotelsLists.length === 2) {
-    this.resultsViewSection.removeChild(hotelsLists[0])
+    this.resultsViewSection.removeChild(hotelsSection)
     const main = document.querySelector('main');
     main.removeChild(packageView)
   } else if (hotelsLists.length === 1){
-    this.resultsViewSection.removeChild(hotelsLists[0])
+    this.resultsViewSection.removeChild(hotelsSection)
   }
 
   this.activeDestination.removeChild(flightsListHeader);

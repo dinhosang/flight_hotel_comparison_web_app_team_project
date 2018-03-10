@@ -26,10 +26,10 @@ RandomHotelsList.prototype.checkIfHotelListsExist = function () {
 }
 
 RandomHotelsList.prototype.findIfParentHtmlElementContainsAnExistingHotelList = function (arrayOfExistingHotelLists) {
-
+  const hotelMapSection = document.getElementById('hotels-search-results-section')
   arrayOfExistingHotelLists.forEach(hotelList => {
-    if(this.parentHtmlElement.contains(hotelList)){
-      this.parentHtmlElement.removeChild(hotelList)
+    if(hotelMapSection.contains(hotelList)){
+      this.parentHtmlElement.removeChild(hotelMapSection)
     }
   })
   this.setupView();
@@ -43,16 +43,21 @@ RandomHotelsList.prototype.setupView = function () {
 
 RandomHotelsList.prototype.createHotelsList = function () {
   // creating a section to contain hotels list and map
-  this.hotelsSearchResultsSection = document.createElement('section');
+  this.hotelsSearchResultsSection    = document.createElement('section');
+  this.hotelsSearchResultsSection.id = 'hotels-search-results-section';
   // creating hotel list
   this.hotelsList = document.createElement('ul');
   this.hotelsList.classList.add('hotels-list');
-  // creating map
-  this.hotelsMap = document.createElement('div');
-  this.hotelsMap.id = 'hotels-map';
-
   this.hotelsSearchResultsSection.appendChild(this.hotelsList);
-  this.hotelsSearchResultsSection.appendChild(this.hotelsMap);
+
+  // creating map if doesn't already exist
+
+  if(this.onHotelClick !== undefined) {
+    this.hotelsMap = document.createElement('div');
+    this.hotelsMap.id = 'hotels-list-map';
+    this.hotelsSearchResultsSection.appendChild(this.hotelsMap);
+  }
+
   this.parentHtmlElement.appendChild(this.hotelsSearchResultsSection);
 }
 
@@ -74,18 +79,22 @@ RandomHotelsList.prototype.addHeading = function () {
 RandomHotelsList.prototype.populateHotelsList = function () {
   // creating a new map with focus on general area
   // by taking latitude and longitude of first result as focus
-  const MapWrapper = require('../helpers/mapWrapper.js');
-  this.mapDiv = document.getElementById('hotels-map');
-  this.parentHtmlElement.appendChild(this.mapDiv);
-  const coords = {lat: this.hotels[0].location.latitude, lng: this.hotels[0].location.longitude}
-  this.hotelsMap = new MapWrapper(this.mapDiv, coords, 11);
+  if(this.onHotelClick !== undefined) {
+    const MapWrapper = require('../helpers/mapWrapper.js');
+    this.mapDiv = document.getElementById('hotels-list-map');
+    this.parentHtmlElement.appendChild(this.mapDiv);
+    const coords = {lat: this.hotels[0].location.latitude, lng: this.hotels[0].location.longitude}
+    this.hotelsMap = new MapWrapper(this.mapDiv, coords, 11);
+  }
   // populating hotel list and map with hotel results
   this.hotels.forEach(hotelDetails => this.addHotelTile(hotelDetails));
 }
 
 RandomHotelsList.prototype.addHotelTile = function (hotel) {
-  const coords = {lat: hotel.location.latitude, lng: hotel.location.longitude}
-  this.hotelsMap.addMarker(coords, `${hotel.property_name}`);
+  if(this.onHotelClick !== undefined) {
+    const coords = {lat: hotel.location.latitude, lng: hotel.location.longitude}
+    this.hotelsMap.addMarker(coords, `${hotel.property_name}`);
+  }
 
   const hotelTable = document.createElement('table');
   hotelTable.classList.add('destination-hotel-item');

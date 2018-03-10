@@ -133,12 +133,13 @@ PackageView.prototype.calculateTotalPrice = function(packageDetails){
   const MapWrapper = require('../helpers/mapWrapper.js');
 
   const mapDiv  = document.createElement('div');
-  mapDiv.id     = 'hotel-map';
+  mapDiv.id     = 'package-hotel-map';
 
   const coords  = {lat: this.hotel.location.latitude,
                   lng: this.hotel.location.longitude};
   const map     = new MapWrapper(mapDiv, coords, 10);
   map.addMarker(coords);
+
   packageDetails.appendChild(mapDiv);
 }
 
