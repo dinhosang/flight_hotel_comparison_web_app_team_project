@@ -93,7 +93,12 @@ Form.prototype.getUserInput = function(prepareResultsView){
     // valid date will be parsed into a number and returned true
     // invalid date will not parse into number and Form will not process search request
     const departDateFieldValueIsValid = isNaN(Date.parse(departDateField)) === false;
-    if (departDateFieldHasValue && departDateFieldValueIsValid) {
+    // calculating whether date entered is after present date by creating new date object
+    // and calculating the difference between them - a negative value is before the current date and therefore invalid
+    const departDateIsPresentDayOrLater = parseInt((new Date(departDateField) - new Date())/(1000 * 60 * 60 * 24))>=0;
+
+    if (departDateFieldHasValue && departDateFieldValueIsValid
+      && departDateIsPresentDayOrLater) {
         inspirationSearchParameters.push(`departure_date=${departDateField}`);
         lowfareSearchParameters.push(`departure_date=${departDateField}`);
     } else {
