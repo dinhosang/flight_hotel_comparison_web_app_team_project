@@ -12,7 +12,7 @@ const MongoConnection = function() {
       }
 
       this.connection = client.db('flight_hotel_app')
-      console.log('Connected to databse')
+      console.log('Connected to database')
       instance = this
     }.bind(this))
   }
