@@ -266,10 +266,10 @@ RandomDestinationsList.prototype.addFlight = function(details) {
 
 
   const inboundFlightsArray   = flight.itineraries[0].inbound.flights;
-  const inboundarrayLength    = inboundFlightsArray.length;
+  const inboundArrayLength    = inboundFlightsArray.length;
   const firstLegOfInbound     = inboundFlightsArray[0];
-  const finalInboundFlight    = inboundFlightsArray[arrayLength -1];
-
+  const finalInboundFlight    = inboundFlightsArray[inboundArrayLength -1];
+  console.log(finalInboundFlight);
   const inboundRowOne       = document.createElement('tr');
   const inboundRowHead      = document.createElement('td');
   inboundRowHead.setAttribute('rowspan', '5');
@@ -306,6 +306,7 @@ RandomDestinationsList.prototype.addFlight = function(details) {
   inboundArrivalTime.innerText   = 'Arrival Time:';
   const inboundArrivalTimeValue  = document.createElement('td');
   inboundArrivalTimeValue.classList.add('info-column');
+
   const inboundArrivalTimeFromHash   = finalInboundFlight.arrives_at;
   const inboundArrivalTimeArray      = inboundArrivalTimeFromHash.split('T');
   const inboundArrivalTimeFormatted  = inboundArrivalTimeArray.join(', ');
