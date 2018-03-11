@@ -1,4 +1,4 @@
-const CURRENCIES = {
+const allCurrencies = {
     "GBP": {
         "symbol": "£",
         "name": "British Pound Sterling",
@@ -1063,7 +1063,24 @@ const CURRENCIES = {
     }
 }
 
-Object.freeze(CURRENCIES);
-Object.preventExtensions(CURRENCIES);
+// not all currencies are accepted by Amadeus API
+const acceptedCurrencies = ['AED', 'AFN', 'AMD', 'ARS', 'AUD', 'BRL', 'BWP',
+                            'CAD', 'CHF', 'CNY', 'COP', 'CZK', 'DKK', 'EUR',
+                            'GBP', 'HKD', 'IDR', 'INR', 'JOD', 'JPY', 'MAD',
+                            'MRO', 'MXN', 'MYR', 'NOK', 'PHP', 'PLN', 'QAR',
+                            'RUB', 'SAR', 'SEK', 'THB', 'TND', 'TWD', 'UAH',
+                            'UNK', 'USD', 'ZAR', 'KWD', 'KRW', 'BHD', 'LTL',
+                            'LVL', 'TZS', 'XPF']
+
+const arrayAllCurrenciesKeys = Object.keys(allCurrencies);
+CURRENCIES = {};
+
+// performing search in this direction incase there are accepted currencies not included
+// in the allCurrencies object
+arrayAllCurrenciesKeys.forEach(symbol => {
+  if(acceptedCurrencies.includes(symbol)) {
+    CURRENCIES[symbol] = allCurrencies[symbol]
+  }
+})
 
 module.exports = CURRENCIES;

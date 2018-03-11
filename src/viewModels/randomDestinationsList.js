@@ -1,6 +1,7 @@
 const currencyEnum        = require('../helpers/enums/currencyListEnum');
 const airportIataConstant = require('../helpers/enums/iataAirportsEnum');
 const cityIataConstant    = require('../helpers/enums/iataCitiesEnum');
+const Spinner             = require('../helpers/spinner');
 
 const RandomDestinationsList = function(dataForListingDestinations) {
 
@@ -12,6 +13,8 @@ const RandomDestinationsList = function(dataForListingDestinations) {
   this.resultsViewSection   = dataForListingDestinations.resultsViewSectionElement;
   this.onDestinationClick   = dataForListingDestinations.listFlightsCallback;
   this.parentObjectInstance = dataForListingDestinations.parentObject;
+
+  this.spinnerForAwaitingResponseFromAPI = new Spinner();
 
   this.destinationsUl       = null;
   this.activeDestination    = null;
@@ -45,9 +48,11 @@ RandomDestinationsList.prototype.addDestinationTile = function(destinationDetail
 
   destinationTileButton.classList.add('random-destination-item');
   destinationTile.classList.add('random-destination-container');
-  // destinationTile.id = `random-destination-ul-${index}`;
 
-  destinationTileButton.innerText = destinationDetails.destination;
+  const detinationCityIata        = destinationDetails.destination;
+  const destinationCityName       = cityIataConstant.BYIATACITY[detinationCityIata].nameCity;
+  const destinatonCountryCode     = cityIataConstant.BYIATACITY[detinationCityIata].codeIso2Country;
+  destinationTileButton.innerText = `${destinationCityName}, ${destinatonCountryCode}`;
 
   destinationTile.appendChild(destinationTileButton)
 
@@ -90,6 +95,8 @@ RandomDestinationsList.prototype.prepareFlightsList = function (dataForPreparing
   }
 
   this.activeDestination = dataForPreparingFlightsList.currentDestinationTile;
+  this.activeDestination.appendChild(this.spinnerForAwaitingResponseFromAPI);
+
   // below invokes the list flight callback that was assigned in the constructor
   this.onDestinationClick(informationForListingFlights);
   if(this.activeDestination !== null) {
@@ -141,6 +148,8 @@ RandomDestinationsList.prototype.populateFlights = function(details) {
   const flightsListHeader     = document.createElement('h3');
   flightsListHeader.id        = 'flights-list-header';
   flightsListHeader.innerText = `Flights to ${this.activeDestination.innerText}`;
+
+  this.activeDestination.removeChild(this.spinnerForAwaitingResponseFromAPI);
 
   const flightsListUl = document.createElement('ul');
   flightsListUl.id    = 'flights-list';

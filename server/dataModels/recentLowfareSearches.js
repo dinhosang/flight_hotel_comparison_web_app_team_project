@@ -23,26 +23,62 @@ RecentLowfareSearches.prototype.checkIfRecentSearch = function(lowfareSearchUrl,
       functionToSendResponse(err);
     }
 
-
     const savedFlightSearchArray = allFlightSearches.filter(flightSearch => {
       return flightSearch.url === lowfareSearchUrl
     })
 
-    if(savedFlightSearchArray.length > 0) {
-      const returnValue = {
-        withinFiveMinutes: true,
-        search: savedFlightSearchArray[0].searchResponse
-      }
+    let timeDifferenceInMinutes;
 
-      functionToSendResponse(err, returnValue)
+    if(savedFlightSearchArray.length > 0) {
+      const timeNow = new Date();
+      const timeSearchWasSaved  = new Date(savedFlightSearchArray[0].searchTime);
+      timeDifferenceInMinutes   = this.compareDates(timeNow, timeSearchWasSaved)
     } else {
       const returnValue = {
         withinFiveMinutes: false,
         search: lowfareSearchUrl
       }
+      functionToSendResponse(err, returnValue);
+      return;
+    }
 
+    console.log("-------------", timeDifferenceInMinutes);
+
+    if(timeDifferenceInMinutes >= 5) {
+      const returnValue = {
+        withinFiveMinutes: false,
+        search: lowfareSearchUrl
+      }
+      functionToSendResponse(err, returnValue);
+      this.removeSearch(lowfareSearchUrl);
+    } else {
+      const returnValue = {
+        withinFiveMinutes: true,
+        search: savedFlightSearchArray[0].searchResponse
+      }
       functionToSendResponse(err, returnValue);
     }
+// // // below is commented out until the clearingAllOutOfDateSearches
+// // // can be done as part of a search for a url, previous form
+// // // of having it be on object instantiation wasn't happening fast enough
+// // // in that formulation.
+// //
+//     if(savedFlightSearchArray.length > 0) {
+//       const returnValue = {
+//         withinFiveMinutes: true,
+//         search: savedFlightSearchArray[0].searchResponse
+//       }
+//
+//       functionToSendResponse(err, returnValue)
+//     } else {
+//       const returnValue = {
+//         withinFiveMinutes: false,
+//         search: lowfareSearchUrl
+//       }
+//
+//       functionToSendResponse(err, returnValue);
+//     }
+// //
   })
 }
 

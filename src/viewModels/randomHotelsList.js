@@ -295,16 +295,19 @@ RandomHotelsList.prototype.addHotelTile = function (hotel) {
     hotelTile.tabIndex="0";
     hotelTile.addEventListener('click', callback.bind(this))
 
-    const coords = {lat: hotel.location.latitude, lng: hotel.location.longitude}
-    const marker = this.hotelsMap.addMarker(coords, callback.bind(this), hotelTile);
+    // not all hotel objects returned from the Amadeus API have location keys!
+    if(hotel.location !== undefined){
+      const coords = {lat: hotel.location.latitude, lng: hotel.location.longitude}
+      const marker = this.hotelsMap.addMarker(coords, callback.bind(this), hotelTile);
 
-    hotelTile.addEventListener('mouseover', function() {
-      this.hotelsMap.googleMap.panTo({lat: hotel.location.latitude, lng: hotel.location.longitude});
-    }.bind(this))
+      hotelTile.addEventListener('mouseover', function() {
+        this.hotelsMap.googleMap.panTo({lat: hotel.location.latitude, lng: hotel.location.longitude});
+      }.bind(this))
 
-    hotelTile.addEventListener('mouseover', () => {
-      this.hotelsMap.bounceMarker(marker);
-    })
+      hotelTile.addEventListener('mouseover', () => {
+        this.hotelsMap.bounceMarker(marker);
+      })
+    }
   }
 
   this.hotelsList.appendChild(hotelTile);

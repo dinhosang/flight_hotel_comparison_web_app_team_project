@@ -4,8 +4,9 @@ const MapWrapper = function (container, coords, zoom) {
     zoom: zoom
   });
 
-  this.activeMarker = null;
-  this.activeTile   = null;
+  this.airportMarker  = null;
+  this.activeMarker   = null;
+  this.activeTile     = null;
 }
 
 MapWrapper.prototype.addAirportMarker = function (coords, hotelsListTitle) {
@@ -14,12 +15,17 @@ MapWrapper.prototype.addAirportMarker = function (coords, hotelsListTitle) {
     map: this.googleMap,
     icon: 'http://maps.google.com/mapfiles/kml/pal2/icon48.png'
   });
-
+  this.airportMarker = marker;
+  marker.setAnimation(google.maps.Animation.DROP);
+  marker.setAnimation(google.maps.Animation.BOUNCE);
   marker.addListener('mouseover', function() {
     hotelsListTitle.scrollIntoView({
       behavior: 'instant'
-    })
-  })
+    });
+    if(this.activeMarker !== null) {
+      this.activeMarker.setAnimation(null);
+    }
+  });
 }
 
 MapWrapper.prototype.addMarker = function(coords, populatePackageView, hotelTile) {
@@ -31,8 +37,8 @@ MapWrapper.prototype.addMarker = function(coords, populatePackageView, hotelTile
   marker.addListener('mouseover', function() {
     hotelTile.scrollIntoView({
       behavior: 'smooth'
-    })
-    this.bounceMarker(marker)
+    });
+    this.bounceMarker(marker);
 
     if(this.activeTile !== null && this.activeTile !== hotelTile) {
       this.activeTile.removeAttribute('id');
@@ -42,18 +48,23 @@ MapWrapper.prototype.addMarker = function(coords, populatePackageView, hotelTile
       this.activeTile = hotelTile;
       this.activeTile.setAttribute('id', 'map-focused');
     }
-  }.bind(this))
+  }.bind(this));
 
   return marker;
 }
 
 MapWrapper.prototype.bounceMarker = function (marker) {
+
+  if(this.airportMarker !== null && this.airportMarker.animation !== null) {
+    this.airportMarker.setAnimation(null);
+  }
+
   if(this.activeMarker !== null && this.activeMarker !== marker){
     this.activeMarker.setAnimation(null);
-    marker.setAnimation(google.maps.Animation.BOUNCE)
+    marker.setAnimation(google.maps.Animation.BOUNCE);
     this.activeMarker = marker;
   } else if (this.activeMarker === null){
-    marker.setAnimation(google.maps.Animation.BOUNCE)
+    marker.setAnimation(google.maps.Animation.BOUNCE);
     this.activeMarker = marker;
   }
 };
