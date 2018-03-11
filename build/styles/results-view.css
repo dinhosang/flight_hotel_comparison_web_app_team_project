@@ -1,21 +1,41 @@
 #results-view-section {
-  padding: 0.5em 0.05em;
-  max-height: 70%;
+  /* padding: 0.5em 0.05em; */
   display: flex;
   overflow: scroll;
 }
 
 #destination-list {
-  padding: 0.5em;
-  max-height: 60vh;
+  height: 71vh;
   border-right: solid rgb(173, 173, 173) 0.1em;
-  width: 46%;
+  width: 30%;
   overflow: scroll;
   text-align: center;
 }
 
-.random-destination-item {
+#destination-list:hover {
+  background-color: rgba(230, 232, 233, 0.69);
+}
+
+.random-destination-container {
+  width: 80%;
   margin: 1em auto;
+  border-radius: 3em;
+  background-color: rgb(231, 228, 223);
+  box-shadow: -0.1em -0.1em -0.5em 0.2em;
+}
+
+.random-destination-item {
+
+  width: 100%;
+  font-size: 1.5em;
+  min-height: 5em;
+  border-radius: 2em;
+  background-color: rgb(255, 255, 255);
+  border: solid rgb(195, 248, 255) 0.01em;
+  /* box-shadow: 0 0 0.5em; */
+  box-shadow: 0.1em 0.1em 0em 0.1em rgb(217, 217, 217);
+  opacity: 0.8;
+  cursor: pointer;
 }
 
 #results-view-section .hotels-list {
@@ -35,20 +55,9 @@
   cursor: pointer;
 }
 
-.random-destination-item {
-  width: 100%;
-  /* padding-top: 1em; */
-  min-height: 2em;
-  border-radius: 0.5em;
-  background-color: rgb(227, 247, 250);
-  border: solid rgb(177, 186, 182) 0.01em;
-  box-shadow: 0 0 0.5em;
-  opacity: 0.8;
-  /* cursor: pointer; */
-}
-
-.random-destination-item {
-  cursor: pointer;
+.random-destination-container:hover, .random-destination-container:focus {
+  border-right: solid 0.1em rgb(57, 57, 57);
+  box-shadow: 0em 0em 0em 0.1em;
 }
 
 .random-destination-item:hover,  .random-destination-item:focus, .random-destination-item:active {
@@ -65,23 +74,38 @@
   display: none;
 }
 
+#flights-list-header {
+  margin-top: 1em;
+}
+
 #flights-list {
   display: block;
 }
+
 
 #flights-list button {
   width: 80%
 }
 
 .flight-details-selection-item {
+  font-size: 1em;
   width: 50%;
   margin: 1em auto;
   border-radius: 0.75em;
   border: solid rgb(214, 208, 209) 0.15em;
+  cursor: pointer;
 }
 
-.flight-details-selection-item:active {
-  transform: translateY(0.2em);
+.flight-details-selection-item h3 {
+  margin: 0.1em;
+}
+
+.main-column {
+  font-weight: 800;
+}
+
+.sub-main-column {
+  font-weight: 600;
 }
 
 .flight-details-selection-item input {
@@ -90,9 +114,11 @@
 
 .flight-details-selection-item:hover,  .flight-details-selection-item:focus, .flight-details-selection-item:active {
   box-shadow: 0 0.1em 0px;
-  background-color: rgb(162, 247, 250);
   outline-width: 0.1em;
-  transform: translateY(-0.05em);
+  transform: translateY(0.1em);
   opacity: 1;
-  color: white;
+}
+
+.flight-details-selection-item:active {
+  transform: translateY(0.3em);
 }

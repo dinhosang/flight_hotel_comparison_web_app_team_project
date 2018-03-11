@@ -3,7 +3,7 @@
   border-radius: 0.15em;
   height: 20%;
   min-width: 30em;
-  min-height: 10vh;
+  /* min-height: 10vh; */
   color: rgb(111, 105, 105);
 }
 
@@ -20,26 +20,22 @@
 
 #outer-input-container {
   height: 70%;
-  width: 70%;
+  width: 65%;
   margin: auto;
-  min-height: 8vh;
   font-size: 150%;
   padding: 0 1% 0 1%;
 }
 
 #outer-input-container input {
-  width: 100%;
-}
-
-#outer-input-container select {
-  width: 55%;
+  font-size: 0.6em;
 }
 
 #form-input-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
-  min-height: 4vh;
+  align-content: center;
+  min-height: 5vh;
   width: 100%
 }
 
@@ -47,6 +43,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
+  align-content: center;
   min-height: 4vh;
 }
 
@@ -107,8 +104,8 @@
 }
 
 #submit-random-search {
-  width: 6em;
-  height: 2em;
+  width: 8em;
+  height: 2.5em;
   border: 1px solid rgb(162, 247, 250);
   border-radius: 1em;
 
@@ -134,92 +131,68 @@
 }
 
 #direct-flight-container {
-  max-width: 26%;
-  min-width: 7em;
-  margin-right: 0.5em;
-  margin-top: 0.3em;
-}
-
-#direct-flight-container label {
-  margin-top: 0.1em;
+  flex-grow: 1;
 }
 
 #currency-container {
   display: flex;
-  min-width: 4.5em;
-  max-width: 21em;
-  margin-right: 0.5em;
-  margin-top: 0.3em;
+  min-width: 5em;
+  flex-grow: 1;
 }
 
 #currency-container input {
-  width: 5em;
-  height: 1em;
-}
-
-#currency-container div {
-  margin-left: 1em;
-}
-
-#currency-container p {
-  font-size: 0.3em;
+  width: 100%;
 }
 
 #currency-container div {
   display: block;
+  margin-left: 0.3em;
+}
+
+#currency-container p {
+  font-size: 0.6em;
 }
 
 #max-price-container {
-  max-height: 1em;
-  min-width: 10em;
-  max-width: 12%;
-  margin-right: 0.3em;
-  margin-top: 0.3em;
-}
-
-#max-price-container label {
-  min-width: 4.5em;
-  max-width: 10%;
+  min-width: 5em;
+  flex-grow: 1;
 }
 
 #max-price-container input {
   margin-left: 0.3em;
-  min-width: 5em;
-  max-width: 10%;
-  height: 1em;
+  width: 40%;
+}
+
+#passengers-fields {
+  display: flex;
+  flex-grow: 1;
 }
 
 #number-of-adults {
-  margin-right: 0.3em;
-  margin-top: 0.3em;
-  min-width: 8em;
-  max-width: 10%;
+  min-width: 5em;
+  flex-grow: 1;
 }
 
-#number-of-adults input {
-  width: 30%;
+#number-of-adults select {
+  margin-left: 0.3em;
 }
 
 #number-of-children {
-  margin-right: 0.5em;
-  margin-top: 0.3em;
-  min-width: 8em;
-  max-width: 10%;
+  min-width: 5em;
+  flex-grow: 1;
 }
 
-#number-of-children input {
-  width: 30%;
+#number-of-children select {
+  margin-left: 0.3em;
 }
 
 #number-of-infants {
-  margin-right: 0.5em;
-  margin-top: 0.3em;
-  min-width: 8em;
-  max-width: 10%;
+  min-width: 5em;
+  flex-grow: 1;
 }
 
-#number-of-infants input {
-  width: 30%;
+#number-of-infants select {
+  margin-left: 0.3em;
 }
 
 #hotels-map {

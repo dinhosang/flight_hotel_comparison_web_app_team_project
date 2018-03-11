@@ -8,20 +8,16 @@
 
 html {
   height: 100%;
-  width: 100%;
 }
 
 body {
   min-height: 100%;
-  min-width: 100%;
   font-family: 'Lato', sans-serif;
-  /* border-right: ridge rgb(157, 198, 246) 0.25em;
-  border-left: ridge rgb(157, 198, 246) 0.25em;
-  border-bottom: ridge rgb(157, 198, 246) 0.25em; */
 }
 
 #banner {
   height: 15%;
+  width: 100%;
   color: rgb(255, 255, 255);
   border-bottom: solid rgb(157, 198, 246) 0.01em;
 
@@ -60,29 +56,29 @@ body {
   width: 15%;
   min-width: 6em;
 
-  margin-right: 0.2%;
-  margin-left: 0.2%;
+  margin-right: 0.05%;
+  margin-left: 0.05%;
 
   border-top: solid 1px;
   border-color: rgb(68, 73, 72);
-  border-bottom: ridge rgb(157, 198, 246) 0.25em;
+  border-bottom: ridge rgb(157, 198, 246) 0.35em;
   background-color: rgb(255, 254, 254);
 }
 
 #search-tabs .left-search-tab-div {
   width: 5%;
-  border-bottom: ridge rgb(157, 198, 246) 0.25em;
+  border-bottom: ridge rgb(157, 198, 246) 0.35em;
 }
 
 #search-tabs .right-search-tab-div {
   width: 65%;
-  border-bottom: ridge rgb(157, 198, 246) 0.25em;
+  border-bottom: ridge rgb(157, 198, 246) 0.35em;
 }
 
 #search-tabs .selected-tab {
-  border-top: ridge rgb(157, 198, 246) 0.25em;
-  border-right: ridge rgb(157, 198, 246) 0.25em;
-  border-left: ridge rgb(157, 198, 246) 0.25em;
+  border-top: ridge rgb(157, 198, 246) 0.35em;
+  border-right: ridge rgb(157, 198, 246) 0.35em;
+  border-left: ridge rgb(157, 198, 246) 0.35em;
   border-bottom: none;
   box-shadow: 0 0.1px 0 0;
   margin-right: 0;
@@ -94,19 +90,21 @@ body {
 }
 
 main {
-  height: 83%;
+  max-height: 83%;
   min-height: 88vh;
 
-  width: 100%;
+  width: 99.5%;
+  margin: auto;
 
-  border-right: ridge rgb(157, 198, 246) 0.25em;
-  border-left: ridge rgb(157, 198, 246) 0.25em;
+  border-right: ridge rgb(157, 198, 246) 0.35em;
+  border-left: ridge rgb(157, 198, 246) 0.35em;
+  border-bottom: ridge rgb(157, 198, 246) 0.35em;
 }
 
 footer {
   height: 2%;
   min-height: 2vh;
+  width: 99.5%;
+  margin: auto;
   text-align: center;
-  border-right: ridge rgb(157, 198, 246) 0.25em;
-  border-left: ridge rgb(157, 198, 246) 0.25em;
 }

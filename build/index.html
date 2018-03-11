@@ -78,18 +78,43 @@
               <label for="max-price-input">Max Price: </label>
               <input type="number" id="max-price-input"  min="0">
             </div>
-            <div id="number-of-adults">
-              <label for="number-of-adults-input"># of Adults</label>
-              <input type="number" id="number-of-adults-input"  min="0">
-            </div>
-            <div id="number-of-children">
-              <label for="number-of-children-input">Children</label>
-              <input type="number" id="number-of-children-input"  min="0">
-            </div>
-            <div id="number-of-infants">
-              <label for="number-of-infants-input">Infants</label>
-              <input type="number" id="number-of-infants-input"  min="0">
-            </div>
+            <section id="passengers-fields">
+              <div id="number-of-adults">
+                <label for="number-of-adults-input">Number of Adults:</label>
+                <select id="number-of-adults-input">
+                  <option value="1" selected>1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                </select>
+              </div>
+              <div id="number-of-children">
+                <label for="number-of-children-input">Children:</label>
+                <select id="number-of-children-input">
+                  <option value="0" selected>0</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                </select>
+              </div>
+              <div id="number-of-infants">
+                <label for="number-of-infants-input">Infants:</label>
+                <select id="number-of-infants-input">
+                  <option value="0" selected>0</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                </select>
+              </div>
+            </section>
             <button type="button" id="submit-random-search">
               Search
             </button>
