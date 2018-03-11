@@ -198,9 +198,6 @@ RandomHotelsList.prototype.addHotelTile = function (hotel) {
 
   }
 
-
-
-
   const callback = function() {
     this.onHotelClick(hotel)
   }
