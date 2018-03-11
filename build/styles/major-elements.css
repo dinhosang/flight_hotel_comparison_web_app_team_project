@@ -86,7 +86,8 @@ body {
 }
 
 #search-tabs .selected-tab:hover {
-  background-color: rgb(224, 230, 232)
+  background-color: rgb(224, 230, 232);
+  /* background-color: rgb(206, 207, 208); */
 }
 
 main {
@@ -95,7 +96,7 @@ main {
 
   width: 99.5%;
   margin: auto;
-
+  overflow-x: scroll;
   border-right: ridge rgb(157, 198, 246) 0.35em;
   border-left: ridge rgb(157, 198, 246) 0.35em;
   border-bottom: ridge rgb(157, 198, 246) 0.35em;

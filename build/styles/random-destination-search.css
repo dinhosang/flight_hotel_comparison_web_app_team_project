@@ -8,7 +8,8 @@
 }
 
 #random-destination-search:hover {
-  background-color: rgb(224, 230, 232)
+  background-color: rgb(224, 230, 232);
+  /* background-color: rgb(206, 207, 208); */
 }
 
 #random-destination-form-title {
@@ -114,7 +115,7 @@
   box-shadow: 0 0 0.9em;
   opacity: 0.8;
 
-  margin-top: 0.5em;
+  margin-bottom: 1em;
 }
 
 #submit-random-search:hover,  #submit-random-search:focus, #submit-random-search:active {
