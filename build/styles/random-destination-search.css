@@ -1,107 +1,125 @@
 #random-destination-search {
-  border: inset rgb(157, 198, 246) 0.1em;
-  border-radius: 0.15em;
-  padding: 1em;
+  border-bottom: inset rgb(157, 198, 246) 0.1rem;
+  border-radius: 0.15rem;
   height: 20%;
-  min-height: 3em;
+  min-width: 30rem;
+  /* min-height: 10vh; */
   color: rgb(111, 105, 105);
 }
 
 #random-destination-search:hover {
-  background-color: rgb(224, 230, 232)
+  background-color: rgb(224, 230, 232);
+  /* background-color: rgb(206, 207, 208); */
 }
 
 #random-destination-form-title {
   text-align: center;
-  min-height: 1.5em;
-  max-height: 50%;
+  padding: 1% 0.5% 1% 0.5%;
+  /* min-height: 2rem; */
+  height: 30%;
+}
+
+#outer-input-container {
+  height: 70%;
+  width: 65%;
+  margin: auto;
+  font-size: 150%;
+  padding: 0 1% 0 1%;
+}
+
+#outer-input-container input {
+  font-size: 0.6rem;
 }
 
 #form-input-container {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
-  min-height: 40%;
+  justify-content: space-evenly;
+  align-content: center;
+  min-height: 5vh;
+  width: 100%
 }
 
 #other-form-input-container {
   display: flex;
-  justify-content: center;
   flex-wrap: wrap;
-  min-height: 40%;
-  font-size: 0.85em;
+  justify-content: space-evenly;
+  align-content: center;
+  min-height: 4vh;
 }
 
 #origin-container {
-  margin-right: 1em;
-  margin-top: 0.3em;
   display: flex;
+  flex-grow: 1;
+  min-width: 5rem;
 }
 
 #origin-container div {
-  margin-left: 1.1em;
+  margin-left: 0.5rem;
+  width: 50%
 }
 
 #origin-container p {
-  font-size: 0.3em;
+  font-size: 0.6rem;
 }
 
 #depart-date-container {
-  margin-right: 1em;
-  margin-top: 0.3em;
-  min-width: 5%;
   display: flex;
+  flex-grow: 1;
+  min-width: 5rem;
 }
 
 #depart-date-container div {
+  margin-left: 0.5rem;
   display: block;
-  margin-left: 1em;
-  min-width: 8em;
-  max-width: 14%;
 }
 
 #depart-date-container p {
-  font-size: 0.3em;
+  font-size: 0.6rem;
 }
 
 #return-date-container {
-  margin-right: 1em;
-  margin-top: 0.3em;
-  min-width: 5%;
+  display: flex;
+  flex-grow: 1;
+  min-width: 5rem;
 }
 
-#return-date-container input {
-  margin-left: 1em;
-  min-width: 12em;
-  max-width: 50%;
+#return-date-container div {
+  margin-left: 0.5rem;
+  display: block;
+}
+
+#return-date-container p {
+  font-size: 0.6rem;
 }
 
 #cabin-class {
   display: block;
-  margin-top: 0.3em;
-  min-width: 5%;
+  flex-grow: 1;
+  min-width: 5rem;
 }
 
 #cabin-class select {
-  margin-left: 2em;
+  margin-left: 0.5rem;
+  font-size: 65%;
 }
 
 #submit-random-search {
-  width: 6em;
-  height: 2em;
+  width: 8rem;
+  height: 2.5rem;
   border: 1px solid rgb(162, 247, 250);
-  border-radius: 1em;
+  border-radius: 1rem;
 
   cursor: pointer;
   background-color: rgb(227, 247, 250);
-  box-shadow: 0 0 0.9em;
+  box-shadow: 0 0 0.9rem;
   opacity: 0.8;
 
-  margin-top: 0.5em;
+  margin-bottom: 1rem;
 }
 
 #submit-random-search:hover,  #submit-random-search:focus, #submit-random-search:active {
-  outline-width: 0.15em;
+  outline-width: 0.15rem;
   border: 1px solid rgb(227, 247, 250);
   background-color: rgb(162, 247, 250);
   opacity: 1;
@@ -109,97 +127,73 @@
 }
 
 #submit-random-search:active {
-  box-shadow: 0 0 0.3em;
-  transform: translateY(0.2em);
+  box-shadow: 0 0 0.3rem;
+  transform: translateY(0.2rem);
 }
 
 #direct-flight-container {
-  max-width: 26%;
-  min-width: 7em;
-  margin-right: 0.5em;
-  margin-top: 0.3em;
-}
-
-#direct-flight-container label {
-  margin-top: 0.1em;
+  flex-grow: 1;
 }
 
 #currency-container {
   display: flex;
-  min-width: 4.5em;
-  max-width: 21em;
-  margin-right: 0.5em;
-  margin-top: 0.3em;
+  min-width: 5rem;
+  flex-grow: 1;
 }
 
 #currency-container input {
-  width: 5em;
-  height: 1em;
-}
-
-#currency-container div {
-  margin-left: 1em;
-}
-
-#currency-container p {
-  font-size: 0.3em;
+  width: 100%;
 }
 
 #currency-container div {
   display: block;
+  margin-left: 0.3rem;
+}
+
+#currency-container p {
+  font-size: 0.6rem;
 }
 
 #max-price-container {
-  max-height: 1em;
-  min-width: 10em;
-  max-width: 12%;
-  margin-right: 0.3em;
-  margin-top: 0.3em;
-}
-
-#max-price-container label {
-  min-width: 4.5em;
-  max-width: 10%;
+  min-width: 5rem;
+  flex-grow: 1;
 }
 
 #max-price-container input {
-  margin-left: 0.3em;
-  min-width: 5em;
-  max-width: 10%;
-  height: 1em;
+  margin-left: 0.3rem;
+  width: 40%;
+}
+
+#passengers-fields {
+  display: flex;
+  flex-grow: 1;
 }
 
 #number-of-adults {
-  margin-right: 0.3em;
-  margin-top: 0.3em;
-  min-width: 8em;
-  max-width: 10%;
+  min-width: 5rem;
+  flex-grow: 1;
 }
 
-#number-of-adults input {
-  width: 30%;
+#number-of-adults select {
+  margin-left: 0.3rem;
 }
 
 #number-of-children {
-  margin-right: 0.5em;
-  margin-top: 0.3em;
-  min-width: 8em;
-  max-width: 10%;
+  min-width: 5rem;
+  flex-grow: 1;
 }
 
-#number-of-children input {
-  width: 30%;
+#number-of-children select {
+  margin-left: 0.3rem;
 }
 
 #number-of-infants {
-  margin-right: 0.5em;
-  margin-top: 0.3em;
-  min-width: 8em;
-  max-width: 10%;
+  min-width: 5rem;
+  flex-grow: 1;
 }
 
-#number-of-infants input {
-  width: 30%;
+#number-of-infants select {
+  margin-left: 0.3rem;
 }
 
 #hotels-map {

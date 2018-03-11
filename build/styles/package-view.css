@@ -1,6 +1,6 @@
 #package-view {
-  border-top: solid rgb(157, 198, 246) 0.01em;
-  padding: 1em;
+  border-top: solid rgb(157, 198, 246) 0.01rem;
+  padding: 1rem;
 }
 
 #package-view-title {
@@ -21,12 +21,12 @@
 }
 
 #package-save-form {
-  padding: 1em;
+  padding: 1rem;
   text-align: center;
 }
 
 #package-view button[name="package-cancel-submit"] {
-  margin: 1em 46%;
+  margin: 1rem 46%;
 }
 
 #hotel-map {

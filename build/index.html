@@ -10,18 +10,19 @@
     <link rel="stylesheet" href="/styles/random-destination-search.css">
     <link rel="stylesheet" href="/styles/results-view.css">
     <link rel="stylesheet" href="/styles/package-view.css">
+    <link rel="stylesheet" href="/styles/font-size.css">
   </head>
   <body>
     <header id="banner">
       <h1 id="banner-title">Flightr</h1>
+      <nav id="search-tabs">
+        <div class="left-search-tab-div"></div>
+        <button class="selected-tab">Search Flights / Hotels</button>
+        <button>Saved Packages</button>
+        <div class="right-search-tab-div"></div>
+      </nav>
     </header>
     <main>
-      <div id="search-tabs">
-        <ul id="search-tab-links">
-          <li class="tab">Search Flights / Hotels</li>
-          <li class="tab">Saved Packages</li>
-        </ul>
-      </div>
       <form id="random-destination-search" action="index.html" method="post">
         <h2 id="random-destination-form-title">Take a trip somewhere new:</h2>
         <div id="outer-input-container">
@@ -41,11 +42,13 @@
                 <input type="date" id="depart-date-input-for-random-search">
                 <p>Required</p>
               </div>
-
             </div>
             <div id="return-date-container">
-                <label for="return-date-input-for-random-search">Return Date:</label>
+              <label for="return-date-input-for-random-search">Return Date:</label>
+              <div class="">
                 <input type="date" id="return-date-input-for-random-search">
+                <p>Required</p>
+              </div>
             </div>
             <div id="cabin-class">
               <label for="cabin-class-select">Seat Class: </label>
@@ -75,18 +78,43 @@
               <label for="max-price-input">Max Price: </label>
               <input type="number" id="max-price-input"  min="0">
             </div>
-            <div id="number-of-adults">
-              <label for="number-of-adults-input"># of Adults</label>
-              <input type="number" id="number-of-adults-input"  min="0">
-            </div>
-            <div id="number-of-children">
-              <label for="number-of-children-input">Children</label>
-              <input type="number" id="number-of-children-input"  min="0">
-            </div>
-            <div id="number-of-infants">
-              <label for="number-of-infants-input">Infants</label>
-              <input type="number" id="number-of-infants-input"  min="0">
-            </div>
+            <section id="passengers-fields">
+              <div id="number-of-adults">
+                <label for="number-of-adults-input">Number of Adults:</label>
+                <select id="number-of-adults-input">
+                  <option value="1" selected>1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                </select>
+              </div>
+              <div id="number-of-children">
+                <label for="number-of-children-input">Children:</label>
+                <select id="number-of-children-input">
+                  <option value="0" selected>0</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                </select>
+              </div>
+              <div id="number-of-infants">
+                <label for="number-of-infants-input">Infants:</label>
+                <select id="number-of-infants-input">
+                  <option value="0" selected>0</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                </select>
+              </div>
+            </section>
             <button type="button" id="submit-random-search">
               Search
             </button>
@@ -102,6 +130,5 @@
         <p>Powered by Amadeus</p>
       </a>
     </footer>
-
   </body>
 </html>

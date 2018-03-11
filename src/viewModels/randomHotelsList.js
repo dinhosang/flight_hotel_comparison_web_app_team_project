@@ -193,8 +193,13 @@ RandomHotelsList.prototype.addHotelTile = function (hotel) {
   }
 
   if(this.onHotelClick !== undefined) {
+<<<<<<< HEAD
     hotelTable.tabindex="0";
     hotelTable.addEventListener('click', callback.bind(this))
+=======
+    hotelUl.tabIndex="0";
+    hotelUl.addEventListener('click', callback.bind(this))
+>>>>>>> develop
   }
 
   this.hotelsList.appendChild(hotelTable);
