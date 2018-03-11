@@ -1,4 +1,5 @@
 const currencyEnum        = require('../helpers/enums/currencyListEnum');
+const MapWrapper    = require('../helpers/mapWrapper.js');
 
 const RandomHotelsList = function(options) {
   this.hotels             = options.hotelObjectsFromAPIQuery;
@@ -6,6 +7,10 @@ const RandomHotelsList = function(options) {
   this.hotelsList         = null;
   this.cityName           = options.city;
   this.countryCode        = options.country;
+  this.airportLat         = options.airportLatitude;
+  this.airportLong        = options.airportLongitude;
+  this.mapElement         = null;
+  this.hotelsMap          = null;
 
   if(options.populatePackageViewCallback !== undefined) {
     this.onHotelClick     = options.populatePackageViewCallback;
@@ -79,12 +84,17 @@ RandomHotelsList.prototype.populateHotelsList = function () {
 }
 
 RandomHotelsList.prototype.prepareMap = function() {
-  const MapWrapper  = require('../helpers/mapWrapper.js');
-  const coords      = {lat: this.hotels[0].location.latitude, lng: this.hotels[0].location.longitude}
+  const previousMap = document.getElementById('results-view-hotels-map')
+  if(previousMap !== null) {
+    this.parentHtmlElement.removeChild(previousMap);
+  }
+
+  const coords        = {lat: this.airportLat, lng: this.airportLong}
 
   this.mapElement     = document.createElement('article');
   this.mapElement.id  = 'results-view-hotels-map'
-  this.hotelsMap      = new MapWrapper(this.mapElement, coords, 13);
+  this.hotelsMap      = new MapWrapper(this.mapElement, coords, 11);
+  this.hotelsMap.addAirportMarker(coords);
   this.parentHtmlElement.appendChild(this.mapElement);
 
 }
@@ -233,7 +243,6 @@ RandomHotelsList.prototype.addHotelTile = function (hotel) {
     hotelTile.addEventListener('click', callback.bind(this))
 
     const coords = {lat: hotel.location.latitude, lng: hotel.location.longitude}
-    // const map = document.getElementById('hotels-map');
     this.hotelsMap.addMarker(coords, callback.bind(this));
   }
 

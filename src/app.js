@@ -79,7 +79,8 @@ const listFlights = function(informationForListingFlights) {
       const dataForListingFlights = {
         currency: responseFromDataBase.search.currency,
         flights: responseFromDataBase.search.results,
-        callback: listHotels
+        // callback: listHotels
+        callback: getAirportLocationDataForListingHotels
       }
       destinationListView.populateFlights(dataForListingFlights);
     } else {
@@ -93,7 +94,8 @@ const listFlights = function(informationForListingFlights) {
         const dataForListingFlights = {
           currency: responseFromAmadeus.currency,
           flights: responseFromAmadeus.results,
-          callback: listHotels
+          // callback: listHotels
+          callback: getAirportLocationDataForListingHotels
         }
 
         destinationListView.populateFlights(dataForListingFlights);
@@ -110,6 +112,26 @@ const listFlights = function(informationForListingFlights) {
   }
 
   requestToDatabase.get(callbackForDatabaseRequest);
+}
+
+const getAirportLocationDataForListingHotels = function(informationForMakingHotelSearch){
+  const flightDetails = informationForMakingHotelSearch.flightDetails;
+  const outboundJourneyForChosenFlight  = flightDetails.itineraries[0].outbound.flights;
+  const numberOfStopsOnOutbound         = outboundJourneyForChosenFlight.length;
+  const finalStopOnOutbound             = outboundJourneyForChosenFlight[numberOfStopsOnOutbound - 1];
+  const airportCode = finalStopOnOutbound.destination.airport;
+
+  const locationUrl = `https://api.sandbox.amadeus.com/v1.2/location/${airportCode}?apikey=JR5L2v6ZFbY03LBd1oztSFfgIA8KsnnW&code=CDG`
+  const request     = new Request(locationUrl)
+
+  const callbackForListingHotels = function(response) {
+    informationForMakingHotelSearch["airportLat"]   = response.airports[0].location.latitude;
+    informationForMakingHotelSearch["airportLong"]  = response.airports[0].location.longitude;
+
+    listHotels(informationForMakingHotelSearch);
+  }
+
+  request.get(callbackForListingHotels);
 }
 
 const listHotels = function(informationForMakingHotelSearch){
@@ -144,7 +166,9 @@ const listHotels = function(informationForMakingHotelSearch){
       parentElementToAttachHotels: document.getElementById('results-view-section'),
       populatePackageViewCallback: onHotelClickPopulatePackageView,
       city: cityName,
-      country: countryCode
+      country: countryCode,
+      airportLatitude: informationForMakingHotelSearch.airportLat,
+      airportLongitude: informationForMakingHotelSearch.airportLong
     }
     resultsView.createHotelsListView(informationForPopulatingHotels);
   }
