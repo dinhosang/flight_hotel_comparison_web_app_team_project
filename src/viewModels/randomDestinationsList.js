@@ -118,6 +118,7 @@ RandomDestinationsList.prototype.clearLists = function () {
 
   const hotelsLists       = document.getElementsByClassName('hotels-list');
   const packageView       = document.querySelector('main #package-view')
+  const previousMap       = document.getElementById('results-view-hotels-map')
 
   if(hotelsLists.length === 2) {
     this.resultsViewSection.removeChild(hotelsLists[0])
@@ -125,6 +126,10 @@ RandomDestinationsList.prototype.clearLists = function () {
     main.removeChild(packageView)
   } else if (hotelsLists.length === 1){
     this.resultsViewSection.removeChild(hotelsLists[0])
+  }
+
+  if(previousMap !== null) {
+    this.resultsViewSection.removeChild(previousMap);
   }
 
   this.activeDestination.removeChild(flightsListHeader);
