@@ -94,14 +94,14 @@ RandomHotelsList.prototype.addHotelTile = function (hotel) {
   nameRow.appendChild(nameCell1);
   nameRow.appendChild(nameCell2);
 
-  const priceRow = document.createElement('tr');
+  const priceRow       = document.createElement('tr');
   priceRow.classList.add('hotel-price');
-  const amount  = hotel.total_price.amount;
-  const currency    = hotel.total_price.currency;
-  const priceCell1 = document.createElement('td');
+  const amount         = hotel.total_price.amount;
+  const currency       = hotel.total_price.currency;
+  const priceCell1     = document.createElement('td');
   priceCell1.innerText = "Price:";
   priceCell1.classList.add('sub-main-column');
-  const priceCell2 = document.createElement('td');
+  const priceCell2     = document.createElement('td');
   priceCell2.innerText = `${amount} ${currency}`;
   priceCell2.classList.add('info-column');
   priceRow.appendChild(priceCell1);
@@ -117,7 +117,7 @@ RandomHotelsList.prototype.addHotelTile = function (hotel) {
   addressRowTitleCell.classList.add('hotel-address-title');
   addressRowTitleCell.classList.add('sub-main-column');
   addressRow.appendChild(addressRowTitleCell);
-  const addressRowTitle = document.createElement('h3');
+  const addressRowTitle     = document.createElement('h3');
   addressRowTitle.innerText = 'Address:';
   addressRowTitleCell.appendChild(addressRowTitle);
 
@@ -141,41 +141,8 @@ RandomHotelsList.prototype.addHotelTile = function (hotel) {
   const countryRow     = document.createElement('tr');
   const country        = document.createElement('td');
   country.classList.add('info-column');
-  country.innerText = address.country;
+  country.innerText    = address.country;
   countryRow.appendChild(country);
-
-
-  // Room information
-  const roomRow = document.createElement('tr');
-  roomRow.classList.add('hotel-rooms');
-  const room    = hotel.rooms[0];
-
-  const roomRowTitleCell = document.createElement('td');
-  roomRowTitleCell.setAttribute('rowspan', "3");
-  roomRowTitleCell.classList.add('hotel-room-title');
-  roomRowTitleCell.classList.add('sub-main-column');
-  roomRow.appendChild(roomRowTitleCell);
-  const roomRowTitle = document.createElement('h3');
-  roomRowTitle.innerText = 'Room:';
-  roomRowTitleCell.appendChild(roomRowTitle);
-
-  const roomType     = document.createElement('td');
-  roomType.classList.add('info-column');
-  roomType.innerText = room.room_type_info.room_type;
-  roomRow.appendChild(roomType);
-
-  const bedTypeRow  = document.createElement('tr');
-  const bedType     = document.createElement('td');
-  bedType.classList.add('info-column');
-  bedType.innerText = room.room_type_info.bed_type;
-  bedTypeRow.appendChild(bedType);
-
-  const bedNumberRow  = document.createElement('tr');
-  const bedNumber     = document.createElement('td');
-  bedNumber.classList.add('info-column');
-  bedNumber.innerText = room.room_type_info.number_of_beds;
-  bedNumberRow.appendChild(bedNumber);
-
 
   hotelTable.appendChild(nameRow);
   hotelTable.appendChild(priceRow);
@@ -183,64 +150,103 @@ RandomHotelsList.prototype.addHotelTile = function (hotel) {
   hotelTable.appendChild(cityRow);
   hotelTable.appendChild(postalCodeRow);
   hotelTable.appendChild(countryRow);
-  hotelTable.appendChild(roomRow);
-  hotelTable.appendChild(bedTypeRow);
-  hotelTable.appendChild(bedNumberRow);
 
+  // Room information
+  // first checking if there is any room information
+  const room    = hotel.rooms[0];
+  if (room.room_type_info.room_type !== undefined
+    || room.room_type_info.bed_type !== undefined
+    || room.room_type_info.number_of_beds !== undefined) {
+
+    const roomRow = document.createElement('tr');
+    roomRow.classList.add('hotel-rooms');
+
+    const roomRowTitleCell = document.createElement('td');
+    roomRowTitleCell.setAttribute('rowspan', "3");
+    roomRowTitleCell.classList.add('hotel-room-title');
+    roomRowTitleCell.classList.add('sub-main-column');
+    roomRow.appendChild(roomRowTitleCell);
+    const roomRowTitle = document.createElement('h3');
+    roomRowTitle.innerText = 'Room:';
+    roomRowTitleCell.appendChild(roomRowTitle);
+
+    if (room.room_type_info.room_type !== undefined) {
+      const roomType     = document.createElement('td');
+      roomType.classList.add('info-column');
+      roomType.innerText = room.room_type_info.room_type;
+      roomRow.appendChild(roomType);
+      hotelTable.appendChild(roomRow);
+    }
+
+    if (room.room_type_info.bed_type !== undefined) {
+      const bedTypeRow  = document.createElement('tr');
+      const bedType     = document.createElement('td');
+      bedType.classList.add('info-column');
+      bedType.innerText = room.room_type_info.bed_type;
+      bedTypeRow.appendChild(bedType);
+      hotelTable.appendChild(bedTypeRow);
+    }
+
+    if (room.room_type_info.number_of_beds !== undefined) {
+      const bedNumberRow  = document.createElement('tr');
+      const bedNumber     = document.createElement('td');
+      bedNumber.classList.add('info-column');
+      bedNumber.innerText = room.room_type_info.number_of_beds;
+      bedNumberRow.appendChild(bedNumber);
+      hotelTable.appendChild(bedNumberRow);
+    }
+
+  }
 
   const callback = function() {
     this.onHotelClick(hotel)
   }
+  if(this.onHotelClick !== undefined) {
+    // contact details
+    const contactsRow = document.createElement('tr');
+    contactsRow.classList.add('hotel-contacts');
+
+    const contactsRowTitleCell = document.createElement('td');
+    const contactsRowTitle = document.createElement('h3');
+    contactsRowTitle.classList.add('hotel-contacts-title');
+    contactsRowTitle.innerText = 'Contact Details:';
+    contactsRowTitleCell.appendChild(contactsRowTitle);
+    contactsRow.appendChild(contactsRowTitleCell);
+    hotelTable.appendChild(contactsRow);
+
+    const contacts = hotel.contacts;
+    contacts.forEach(contact => {
+      const options = {contact: contact, parent: hotelTable}
+      this.populateContactTile(options);
+    });
+
+    // amenities
+    // awards
+  }
 
   if(this.onHotelClick !== undefined) {
-<<<<<<< HEAD
     hotelTable.tabindex="0";
     hotelTable.addEventListener('click', callback.bind(this))
-=======
-    hotelUl.tabIndex="0";
-    hotelUl.addEventListener('click', callback.bind(this))
->>>>>>> develop
   }
 
   this.hotelsList.appendChild(hotelTable);
 }
 
-// RandomHotelsList.prototype.createContactsUl = function (contactsArray) {
-//   const contactsUl = document.createElement('ul');
-//   contactsUl.classList.add('hotel-contacts');
-//   const contacts = contactsArray;
-//
-//   const contactsUlTitle = document.createElement('h3');
-//   contactsUlTitle.classList.add('hotel-contacts-title');
-//   contactsUlTitle.innerText = 'Contact Details:';
-//
-//   contactsUl.appendChild(contactsUlTitle);
-//
-//   contactsArray.forEach(contact => {
-//     const options = {contact: contact, parent: contactsUl}
-//     this.populateContactTile(options);
-//   });
-//
-//   return contactsUl;
-// }
+RandomHotelsList.prototype.populateContactTile = function (options) {
+  const parentView  = options.parent;
+  const contact     = options.contact;
 
-// RandomHotelsList.prototype.populateContactTile = function (options) {
-//   const contactTile = document.createElement('ul');
-//   contactTile.classList.add('hotel-contacts-tile')
-//   const parentView  = options.parent;
-//   const contact     = options.contact;
-//
-//   const contactTypeLi     = document.createElement('li');
-//   contactTypeLi.innerText = `Type: ${contact.type}`;
-//
-//   const contactDetailLi     = document.createElement('li');
-//   contactDetailLi.innerText = `Detail: ${contact.detail}`;
-//
-//   contactTile.appendChild(contactTypeLi);
-//   contactTile.appendChild(contactDetailLi);
-//
-//   parentView.appendChild(contactTile);
-// }
+  const contactRow          = document.createElement('tr');
+  const contactTypeCell     = document.createElement('td');
+  contactTypeCell.innerText = `${contact.type}`;
+  contactRow.appendChild(contactTypeCell);
+
+  const contactDetailCell     = document.createElement('li');
+  contactDetailCell.innerText = `${contact.detail}`;
+  contactRow.appendChild(contactDetailCell);
+
+  parentView.appendChild(contactRow);
+}
 
 
 module.exports = RandomHotelsList;
