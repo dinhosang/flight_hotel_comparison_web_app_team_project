@@ -61,7 +61,7 @@ const listFlights = function(informationForListingFlights) {
       behavior: 'smooth'
     });
   }
-  
+
   const urlDetailsToBuild = {
     baseUrl: `${SEARCH_URL.LOW_FARE}${key}`,
     parameterArray: dataForUrl
@@ -120,6 +120,8 @@ const listHotels = function(informationForMakingHotelSearch){
   // the amadeus API
   const flightDetails = informationForMakingHotelSearch.flightDetails;
   const currencyCode  = informationForMakingHotelSearch.currency;
+  const cityName      = informationForMakingHotelSearch.city;
+  const countryCode   = informationForMakingHotelSearch.country;
   // function called getUrlFromFlightDetails can be found below
   const url = getUrlFromFlightDetails(flightDetails, currencyCode)
 
@@ -140,7 +142,9 @@ const listHotels = function(informationForMakingHotelSearch){
     const informationForPopulatingHotels = {
       hotelObjectsFromAPIQuery: responseFromAPIRequest.results,
       parentElementToAttachHotels: document.getElementById('results-view-section'),
-      populatePackageViewCallback: onHotelClickPopulatePackageView
+      populatePackageViewCallback: onHotelClickPopulatePackageView,
+      city: cityName,
+      country: countryCode
     }
     resultsView.createHotelsListView(informationForPopulatingHotels);
   }
@@ -170,6 +174,10 @@ const getUrlFromFlightDetails = function(flightObjectFromAPI, currencyCode) {
   parameterArrayForHotelSearch.push(`check_in=${checkInDate}`);
   parameterArrayForHotelSearch.push(`check_out=${checkOutDate}`);
   parameterArrayForHotelSearch.push(`currency=${currencyCode}`);
+  parameterArrayForHotelSearch.push('lang=EN');
+  parameterArrayForHotelSearch.push('radius=50')
+  parameterArrayForHotelSearch.push('number_of_results=80');
+
 
   const dataForBuildingHotelSearchUrl = {
     baseUrl: `${SEARCH_URL.HOTEL_AIRPORT}${key}`,

@@ -353,7 +353,9 @@ RandomDestinationsList.prototype.addFlight = function(details) {
   const options = {
     view: this.parentObjectInstance,
     flightDetails: flight,
-    currency: currencyCode
+    currency: currencyCode,
+    city: cityName,
+    country: countryCode
   }
 
   flightTile.addEventListener('click', function(){

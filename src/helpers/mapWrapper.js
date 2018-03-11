@@ -5,11 +5,12 @@ const MapWrapper = function (container, coords, zoom) {
   });
 }
 
-MapWrapper.prototype.addMarker = function(coords) {
+MapWrapper.prototype.addMarker = function(coords, callback) {
   const marker = new google.maps.Marker({
     position: coords,
     map: this.googleMap
   });
+  marker.addListener('click', callback)
 }
 
 module.exports = MapWrapper;
