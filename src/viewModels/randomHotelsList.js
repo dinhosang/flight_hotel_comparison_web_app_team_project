@@ -11,6 +11,7 @@ const RandomHotelsList = function(options) {
   this.airportLong        = options.airportLongitude;
   this.mapElement         = null;
   this.hotelsMap          = null;
+  this.isInPackageView    = options.packageView;
 
   if(options.populatePackageViewCallback !== undefined) {
     this.onHotelClick     = options.populatePackageViewCallback;
@@ -68,7 +69,7 @@ RandomHotelsList.prototype.addHeading = function () {
       heading.innerText = 'No Open Hotels Found';
     }
   } else {
-    heading.innerText = 'Chosen Hotel';
+    return;
   }
 
   this.hotelsList.appendChild(heading);
@@ -106,8 +107,13 @@ RandomHotelsList.prototype.prepareMap = function() {
 
 RandomHotelsList.prototype.addHotelTile = function (hotel) {
 
-  // const hotelTile       = document.createElement('article');
-  const hotelTile       = document.createElement('button');
+  let hotelTile;
+  if(this.isInPackageView !== undefined && this.isInPackageView === true) {
+    hotelTile = document.createElement('article');
+  } else {
+    hotelTile = document.createElement('button');
+  }
+
   hotelTile.classList.add('destination-hotel-item');
 
   const hotelTileHead   = document.createElement('h3');
@@ -137,7 +143,7 @@ RandomHotelsList.prototype.addHotelTile = function (hotel) {
   addressRow.appendChild(addressRowTitleCell);
 
   const addressRowTitle     = document.createElement('h3');
-  addressRowTitle.innerText = 'Address:';
+  addressRowTitle.innerText = 'Address -';
   addressRowTitleCell.appendChild(addressRowTitle);
 
   const streetHeader      = document.createElement('td');
@@ -208,7 +214,7 @@ RandomHotelsList.prototype.addHotelTile = function (hotel) {
     roomRowTitleCell.classList.add('main-column');
     roomRow.appendChild(roomRowTitleCell);
     const roomRowTitle = document.createElement('h3');
-    roomRowTitle.innerText = 'Room';
+    roomRowTitle.innerText = 'Room -';
     roomRowTitleCell.appendChild(roomRowTitle);
 
     if (room.room_type_info.room_type !== undefined) {
@@ -265,6 +271,7 @@ RandomHotelsList.prototype.addHotelTile = function (hotel) {
     contactsRow.classList.add('hotel-contacts');
 
     const contactsRowTitleCell = document.createElement('td');
+    contactsRowTitleCell.setAttribute('colspan', 3);
     const contactsRowTitle = document.createElement('h3');
     contactsRowTitle.classList.add('hotel-contacts-title');
     contactsRowTitle.innerText = 'Contact Details:';
@@ -274,7 +281,7 @@ RandomHotelsList.prototype.addHotelTile = function (hotel) {
 
     const contacts = hotel.contacts;
     contacts.forEach(contact => {
-      const options = {contact: contact, parent: hotelTable}
+      const options = {contact: contact, contactTitle: contactsRowTitleCell, parent: hotelTable}
       this.populateContactTile(options);
     });
 
@@ -304,6 +311,13 @@ RandomHotelsList.prototype.addHotelTile = function (hotel) {
 }
 
 RandomHotelsList.prototype.populateContactTile = function (options) {
+
+  const roomTypeHeader      = document.createElement('td');
+  roomTypeHeader.classList.add('sub-main-column');
+  roomTypeHeader.innerText  = 'Type:';
+
+
+
   const parentView  = options.parent;
   const contact     = options.contact;
 

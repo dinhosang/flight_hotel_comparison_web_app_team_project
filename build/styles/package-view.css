@@ -1,23 +1,49 @@
 #package-view {
   border-top: solid rgb(157, 198, 246) 0.01rem;
-  /* margin-top: 10rem; */
+  width: 80%;
+  margin: auto;
   padding: 1rem;
 }
 
 .package-view-title {
   text-align: center;
+  margin-bottom: 5%;
 }
 
 .package-details {
   display: flex;
-  /* justify-content: space-between; */
+  justify-content: space-between;
   /* justify-content: space-around; */
 }
 
-#package-details-flight {
+#package-view .package-details .hotels-list .destination-hotel-item table .hotel-contacts {
+  border-top: solid 0.2rem;
+  /* text-align: left; */
+  margin-bottom: 1rem;
 }
 
-#package-details .hotels-list {
+#package-view .package-details .hotels-list .destination-hotel-item h3 {
+  text-align: center;
+}
+
+#package-view .package-details .hotels-list .destination-hotel-item table {
+  margin: auto;
+}
+
+#package-view .package-details-flight {
+  width: 30%;
+}
+
+#package-view .package-details-flight h3 {
+  text-align:center;
+}
+
+#package-view .package-details-flight table {
+  margin: auto;
+}
+
+#package-view .package-details .hotels-list {
+  width: 35%;
 }
 
 #package-save-form {
@@ -29,6 +55,6 @@
   margin: 1rem 46%;
 }
 
-#hotel-map {
-  width: 300px;
+#package-view .package-hotel-map {
+  width: 30%;
 }

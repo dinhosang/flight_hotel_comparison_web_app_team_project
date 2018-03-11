@@ -42,9 +42,7 @@ PackageView.prototype.createPackageView = function(){
 
   this.populateFlightView(packageDetails);
   this.populateHotelView(packageDetails);
-
-  this.calculateTotalPrice(packageDetails);
-  this.addMap(packageView)
+  this.addMap(packageDetails)
   this.createPackageForm(packageForm);
   this.createCancelButton(this.parent, packageView);
 }
@@ -66,7 +64,7 @@ PackageView.prototype.addTitleToPackage = function(packageView){
 
 PackageView.prototype.populateFlightView = function(packageDetails){
   const flightDetails = document.createElement('article');
-  flightDetails.id    = 'package-details-flight';
+  flightDetails.classList.add('package-details-flight');
 
   const outboundFlightsArray  = this.flight.itineraries[0].outbound.flights;
   const arrayLength           = outboundFlightsArray.length;
@@ -306,14 +304,11 @@ PackageView.prototype.populateFlightView = function(packageDetails){
 PackageView.prototype.populateHotelView = function(packageDetails){
   const options = {
     hotelObjectsFromAPIQuery: [this.hotel],
-    parentElementToAttachHotels: packageDetails
+    parentElementToAttachHotels: packageDetails,
+    packageView: true
   }
 
   new RandomHotelsList(options);
-
-  const title     = document.querySelector('#package-view .package-details .hotels-list h2');
-  title.innerText = "Hotel";
-
 }
 
 PackageView.prototype.calculateTotalPrice = function(){
@@ -327,7 +322,7 @@ PackageView.prototype.calculateTotalPrice = function(){
 
 PackageView.prototype.addMap = function (parentElement) {
   const mapDiv  = document.createElement('div');
-  mapDiv.id     = 'hotel-map';
+  mapDiv.classList.add('package-hotel-map');
 
   const coords  = {lat: this.hotel.location.latitude,
                   lng: this.hotel.location.longitude};
