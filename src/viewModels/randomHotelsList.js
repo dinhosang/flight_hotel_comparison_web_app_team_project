@@ -93,15 +93,21 @@ RandomHotelsList.prototype.prepareMap = function() {
 
   this.mapElement     = document.createElement('article');
   this.mapElement.id  = 'results-view-hotels-map'
-  this.hotelsMap      = new MapWrapper(this.mapElement, coords, 11);
-  this.hotelsMap.addAirportMarker(coords);
-  this.parentHtmlElement.appendChild(this.mapElement);
+  this.hotelsMap      = new MapWrapper(this.mapElement, coords, 10);
 
+  const hotelListTitle = document.querySelector('#results-view-section .hotels-list .hotels-list-title')
+  hotelListTitle.addEventListener('mouseover', function() {
+    this.hotelsMap.googleMap.panTo({lat: this.airportLat, lng: this.airportLong});
+  }.bind(this))
+
+  this.hotelsMap.addAirportMarker(coords, hotelListTitle);
+  this.parentHtmlElement.appendChild(this.mapElement);
 }
 
 RandomHotelsList.prototype.addHotelTile = function (hotel) {
 
-  const hotelTile       = document.createElement('article');
+  // const hotelTile       = document.createElement('article');
+  const hotelTile       = document.createElement('button');
   hotelTile.classList.add('destination-hotel-item');
 
   const hotelTileHead   = document.createElement('h3');
@@ -119,45 +125,68 @@ RandomHotelsList.prototype.addHotelTile = function (hotel) {
 
 
   const hotelTable = document.createElement('table');
+
   // Address information
   const addressRow = document.createElement('tr');
   addressRow.classList.add('hotel-address');
   const address    = hotel.address;
-
   const addressRowTitleCell = document.createElement('td');
   addressRowTitleCell.setAttribute('rowspan', "4");
   addressRowTitleCell.classList.add('hotel-address-title');
-  addressRowTitleCell.classList.add('sub-main-column');
+  addressRowTitleCell.classList.add('main-column');
   addressRow.appendChild(addressRowTitleCell);
+
   const addressRowTitle     = document.createElement('h3');
   addressRowTitle.innerText = 'Address:';
   addressRowTitleCell.appendChild(addressRowTitle);
 
-  const line1          = document.createElement('td');
+  const streetHeader      = document.createElement('td');
+  streetHeader.classList.add('sub-main-column');
+  streetHeader.innerText  = "Street:"
+  addressRow.appendChild(streetHeader);
+
+  const line1         = document.createElement('td');
   line1.classList.add('info-column');
-  line1.innerText      = address.line1;
+  line1.innerText     = address.line1;
   addressRow.appendChild(line1);
 
-  const cityRow        = document.createElement('tr');
-  const city           = document.createElement('td');
+
+  const cityRow         = document.createElement('tr');
+  const cityHeader      = document.createElement('td');
+  cityHeader.classList.add('sub-main-column');
+  cityHeader.innerText  = 'City:';
+  cityRow.appendChild(cityHeader);
+
+  const city            = document.createElement('td');
   city.classList.add('info-column');
-  city.innerText       = address.city;
+  city.innerText        = address.city;
   cityRow.appendChild(city);
 
-  const postalCodeRow  = document.createElement('tr');
-  const postalCode     = document.createElement('td');
+
+  const postalCodeRow     = document.createElement('tr');
+  const postalHeader      = document.createElement('td');
+  postalHeader.classList.add('sub-main-column');
+  postalHeader.innerText  = 'Post Code:';
+  postalCodeRow.appendChild(postalHeader);
+
+  const postalCode        = document.createElement('td');
   postalCode.classList.add('info-column');
-  postalCode.innerText = address.postal_code;
+  postalCode.innerText    = address.postal_code;
   postalCodeRow.appendChild(postalCode);
 
-  const countryRow     = document.createElement('tr');
-  const country        = document.createElement('td');
+
+  const countryRow        = document.createElement('tr');
+  const countryHeader     = document.createElement('td');
+  countryHeader.classList.add('sub-main-column');
+  countryHeader.innerText = 'Country:';
+  countryRow.appendChild(countryHeader);
+
+  const country           = document.createElement('td');
   country.classList.add('info-column');
-  country.innerText    = address.country;
+  country.innerText       = address.country;
   countryRow.appendChild(country);
 
-  // hotelTable.appendChild(nameRow);
-  // hotelTable.appendChild(priceRow);
+
   hotelTable.appendChild(addressRow);
   hotelTable.appendChild(cityRow);
   hotelTable.appendChild(postalCodeRow);
@@ -176,34 +205,51 @@ RandomHotelsList.prototype.addHotelTile = function (hotel) {
     const roomRowTitleCell = document.createElement('td');
     roomRowTitleCell.setAttribute('rowspan', "3");
     roomRowTitleCell.classList.add('hotel-room-title');
-    roomRowTitleCell.classList.add('sub-main-column');
+    roomRowTitleCell.classList.add('main-column');
     roomRow.appendChild(roomRowTitleCell);
     const roomRowTitle = document.createElement('h3');
-    roomRowTitle.innerText = 'Room:';
+    roomRowTitle.innerText = 'Room';
     roomRowTitleCell.appendChild(roomRowTitle);
 
     if (room.room_type_info.room_type !== undefined) {
+      const roomTypeHeader      = document.createElement('td');
+      roomTypeHeader.classList.add('sub-main-column');
+      roomTypeHeader.innerText  = 'Type:';
+
       const roomType     = document.createElement('td');
       roomType.classList.add('info-column');
       roomType.innerText = room.room_type_info.room_type;
+      roomRow.appendChild(roomTypeHeader);
       roomRow.appendChild(roomType);
       hotelTable.appendChild(roomRow);
     }
 
     if (room.room_type_info.bed_type !== undefined) {
       const bedTypeRow  = document.createElement('tr');
+
+      const bedTypeHeader     = document.createElement('td');
+      bedTypeHeader.classList.add('sub-main-column');
+      bedTypeHeader.innerText = 'Bed Type:';
+
       const bedType     = document.createElement('td');
       bedType.classList.add('info-column');
       bedType.innerText = room.room_type_info.bed_type;
+      bedTypeRow.appendChild(bedTypeHeader);
       bedTypeRow.appendChild(bedType);
       hotelTable.appendChild(bedTypeRow);
     }
 
     if (room.room_type_info.number_of_beds !== undefined) {
       const bedNumberRow  = document.createElement('tr');
+
+      const bedNumberHeader     = document.createElement('td');
+      bedNumberHeader.classList.add('sub-main-column');
+      bedNumberHeader.innerText = 'Bed Count:';
+
       const bedNumber     = document.createElement('td');
       bedNumber.classList.add('info-column');
       bedNumber.innerText = room.room_type_info.number_of_beds;
+      bedNumberRow.appendChild(bedNumberHeader);
       bedNumberRow.appendChild(bedNumber);
       hotelTable.appendChild(bedNumberRow);
     }
@@ -243,7 +289,15 @@ RandomHotelsList.prototype.addHotelTile = function (hotel) {
     hotelTile.addEventListener('click', callback.bind(this))
 
     const coords = {lat: hotel.location.latitude, lng: hotel.location.longitude}
-    this.hotelsMap.addMarker(coords, callback.bind(this));
+    const marker = this.hotelsMap.addMarker(coords, callback.bind(this), hotelTile);
+
+    hotelTile.addEventListener('mouseover', function() {
+      this.hotelsMap.googleMap.panTo({lat: hotel.location.latitude, lng: hotel.location.longitude});
+    }.bind(this))
+
+    hotelTile.addEventListener('mouseover', () => {
+      this.hotelsMap.bounceMarker(marker);
+    })
   }
 
   this.hotelsList.appendChild(hotelTile);

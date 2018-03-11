@@ -43,33 +43,6 @@
   cursor: pointer;
 }
 
-#results-view-section .hotels-list {
-  padding: 0.1rem;
-  width: 20%;
-  border-right: solid rgb(173, 173, 173) 0.1rem;
-  height: 73vh;
-  overflow: scroll;
-  text-align: center;
-}
-
-#results-view-hotels-map {
-  width: 60%;
-  height: 73vh;
-}
-
-#results-view-section .hotels-list h2 {
-  text-align: center;
-}
-
-#results-view-section .hotels-list .destination-hotel-item {
-  margin: auto;
-  margin-top: 2rem;
-  cursor: pointer;
-  width: 90%;
-  height: 50%;
-  box-shadow: 0.1rem 0.1rem 0.1rem 0.1rem;
-}
-
 .random-destination-container:hover, .random-destination-container:focus {
   border-right: solid 0.1rem rgb(57, 57, 57);
   box-shadow: 0rem 0rem 0rem 0.1rem;
@@ -132,6 +105,84 @@ table {
 
 .sub-main-column {
   font-weight: 600;
+}
+
+#results-view-section .hotels-list {
+  padding: 0.1rem;
+  width: 20%;
+  border-right: solid rgb(173, 173, 173) 0.1rem;
+  height: 73vh;
+  overflow: scroll;
+  text-align: center;
+}
+
+#results-view-section .hotels-list:hover {
+  background-color: rgb(224, 230, 232);
+}
+
+#results-view-hotels-map {
+  width: 60%;
+  height: 73vh;
+}
+
+#results-view-section .hotels-list h2 {
+  text-align: center;
+}
+
+#results-view-section .hotels-list .destination-hotel-item {
+  margin: auto;
+  margin-top: 2rem;
+  text-align: center;
+  cursor: pointer;
+  width: 90%;
+  min-height: 30%;
+  box-shadow: 0.1rem 0.1rem 0.1rem 0.1rem;
+
+  border-radius: 1.5rem;
+  opacity: 0.8;
+}
+
+.destination-hotel-item {
+  background-color: rgb(255, 254, 254);
+}
+
+#results-view-section .hotels-list .destination-hotel-item:hover {
+  outline-width: 0.1rem;
+  box-shadow: 0.1rem 0rem 0.1rem;
+  opacity: 1;
+}
+#results-view-section .hotels-list .destination-hotel-item:active {
+  outline-width: 0.1rem;
+  box-shadow: 0.1rem 0rem 0.1rem;
+  opacity: 1;
+}
+#results-view-section .hotels-list .destination-hotel-item:focus {
+  outline-width: 0.1rem;
+  box-shadow: 0.1rem 0rem 0.1rem;
+  opacity: 1;
+}
+
+#results-view-section .hotels-list #map-focused {
+  box-shadow: 0.2rem 0rem 0.2rem;
+  opacity:1;
+  border: solid rgb(195, 248, 255) 0.3rem;
+}
+
+#results-view-section .hotels-list .destination-hotel-item table {
+  margin: auto;
+  margin-top: 5%;
+}
+
+.hotel-address {
+  border-top: solid 0.2rem;
+}
+
+.hotel-rooms {
+  border-top: solid 0.2rem;
+}
+
+.hotel-contacts {
+  border-top: solid 0.2rem;
 }
 
 .flight-details-selection-item input {
