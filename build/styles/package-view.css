@@ -1,17 +1,17 @@
 #package-view {
   border-top: solid rgb(157, 198, 246) 0.01rem;
+  /* margin-top: 10rem; */
   padding: 1rem;
 }
 
-#package-view-title {
+.package-view-title {
   text-align: center;
-  text-decoration: underline;
 }
 
-#package-details {
+.package-details {
   display: flex;
-  justify-content: space-between;
-  justify-content: space-around;
+  /* justify-content: space-between; */
+  /* justify-content: space-around; */
 }
 
 #package-details-flight {

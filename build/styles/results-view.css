@@ -2,6 +2,7 @@
   padding: 0 0.1%;
   display: flex;
   overflow: scroll;
+  border-bottom: solid rgb(157, 198, 246) 0.01rem;
 }
 
 #destination-list {

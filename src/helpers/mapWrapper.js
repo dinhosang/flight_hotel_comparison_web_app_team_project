@@ -38,7 +38,6 @@ MapWrapper.prototype.addMarker = function(coords, populatePackageView, hotelTile
       this.activeTile.removeAttribute('id');
       this.activeTile = hotelTile;
       this.activeTile.setAttribute('id', 'map-focused');
-      console.log(this.activeTile);
     } else if (this.activeTile === null){
       this.activeTile = hotelTile;
       this.activeTile.setAttribute('id', 'map-focused');
