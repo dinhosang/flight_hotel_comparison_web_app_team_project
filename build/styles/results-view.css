@@ -1,13 +1,13 @@
 #results-view-section {
-  /* padding: 0.5rem 0.05rem; */
+  padding: 0 0.1%;
   display: flex;
   overflow: scroll;
 }
 
 #destination-list {
-  height: 69vh;
+  height: 73vh;
   border-right: solid rgb(173, 173, 173) 0.1rem;
-  width: 30%;
+  width: 20%;
   min-width: 30rem;
   overflow: scroll;
   text-align: center;
@@ -45,16 +45,16 @@
 
 #results-view-section .hotels-list {
   padding: 0.1rem;
-  width: 30%;
-  /* max-height: 60vh; */
-  /* max-height: 69vh; */
-  height: 69vh;
+  width: 20%;
+  border-right: solid rgb(173, 173, 173) 0.1rem;
+  height: 73vh;
   overflow: scroll;
   text-align: center;
 }
 
 #results-view-hotels-map {
-  width: 70%;
+  width: 60%;
+  height: 73vh;
 }
 
 #results-view-section .hotels-list h2 {
