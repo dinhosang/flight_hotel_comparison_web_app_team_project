@@ -269,7 +269,6 @@ RandomDestinationsList.prototype.addFlight = function(details) {
   const inboundArrayLength    = inboundFlightsArray.length;
   const firstLegOfInbound     = inboundFlightsArray[0];
   const finalInboundFlight    = inboundFlightsArray[inboundArrayLength -1];
-  console.log(finalInboundFlight);
   const inboundRowOne       = document.createElement('tr');
   const inboundRowHead      = document.createElement('td');
   inboundRowHead.setAttribute('rowspan', '5');
