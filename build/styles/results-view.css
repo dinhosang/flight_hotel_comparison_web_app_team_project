@@ -25,6 +25,8 @@
   border-radius: 1.5rem;
   background-color: rgb(231, 228, 223);
   box-shadow: -0.1rem -0.1rem -0.5rem 0.2rem;
+  /* max-height: 70%;
+  overflow: scroll; */
 }
 
 .random-destination-item {
@@ -34,7 +36,7 @@
   min-height: 5rem;
   border-radius: 1.5rem;
   background-color: rgb(255, 255, 255);
-  border: solid rgb(195, 248, 255) 0.01rem;
+  border: solid rgb(195, 248, 255) 0.1rem;
   /* box-shadow: 0 0 0.5rem; */
   box-shadow: 0.1rem 0.1rem 0rem 0.1rem rgb(217, 217, 217);
   opacity: 0.8;
@@ -89,6 +91,8 @@
 
 #flights-list {
   display: block;
+  /* max-height: 70%;
+  overflow: scroll; */
 }
 
 
@@ -105,11 +109,20 @@
   cursor: pointer;
 }
 
+table {
+  text-align: center;
+}
+
 .flight-details-selection-item h3 {
   margin: 0.1rem;
 }
 
+.main-row {
+  border-top: solid 0.2rem;
+}
+
 .main-column {
+  text-align: center;
   font-weight: 800;
 }
 

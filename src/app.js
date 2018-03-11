@@ -55,7 +55,13 @@ const listFlights = function(informationForListingFlights) {
 
   const dataForUrl          = informationForListingFlights.searchRequirements;
   const destinationListView = informationForListingFlights.destinationsList;
-
+  const activeDestination   = informationForListingFlights.activeDestination;
+  if(activeDestination !== null) {
+    activeDestination.scrollIntoView({
+      behavior: 'smooth'
+    });
+  }
+  
   const urlDetailsToBuild = {
     baseUrl: `${SEARCH_URL.LOW_FARE}${key}`,
     parameterArray: dataForUrl

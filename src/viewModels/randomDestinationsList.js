@@ -85,12 +85,18 @@ RandomDestinationsList.prototype.prepareFlightsList = function (dataForPreparing
 
   const informationForListingFlights = {
     destinationsList: this,
+    activeDestination: this.activeDestination,
     searchRequirements: finalLowfareSearchParameters
   }
 
   this.activeDestination = dataForPreparingFlightsList.currentDestinationTile;
   // below invokes the list flight callback that was assigned in the constructor
   this.onDestinationClick(informationForListingFlights);
+  if(this.activeDestination !== null) {
+    this.activeDestination.scrollIntoView({
+      behavior: 'instant'
+    });
+  }
 }
 
 RandomDestinationsList.prototype.checkIfActiveDestination = function (destinationTile) {
@@ -197,6 +203,7 @@ RandomDestinationsList.prototype.addFlight = function(details) {
   const flightDetailsTable  = document.createElement('table');
 
   const outboundRowOne      = document.createElement('tr');
+  outboundRowOne.classList.add('main-row');
   const outboundRowHead     = document.createElement('td');
   outboundRowHead.setAttribute('rowspan', '5');
   outboundRowHead.classList.add('main-column');
@@ -269,15 +276,16 @@ RandomDestinationsList.prototype.addFlight = function(details) {
   const inboundArrayLength    = inboundFlightsArray.length;
   const firstLegOfInbound     = inboundFlightsArray[0];
   const finalInboundFlight    = inboundFlightsArray[inboundArrayLength -1];
-  const inboundRowOne       = document.createElement('tr');
-  const inboundRowHead      = document.createElement('td');
+  const inboundRowOne         = document.createElement('tr');
+  inboundRowOne.classList.add('main-row');
+  const inboundRowHead        = document.createElement('td');
   inboundRowHead.setAttribute('rowspan', '5');
   inboundRowHead.classList.add('main-column');
-  inboundRowHead.innerText  = 'Inbound';
-  const inboundDestination = document.createElement('td');
+  inboundRowHead.innerText    = 'Inbound';
+  const inboundDestination    = document.createElement('td');
   inboundDestination.classList.add('sub-main-column');
   inboundDestination.innerText      = 'Destination Airport:';
-  const inboundDestinationValue    = document.createElement('td');
+  const inboundDestinationValue     = document.createElement('td');
   inboundDestinationValue.classList.add('info-column');
   inboundDestinationValue.innerText = `${originAirportName}, ${originCityName}, ${originCountryCode}`;
   inboundRowOne.appendChild(inboundRowHead);
