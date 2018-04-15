@@ -121,7 +121,7 @@ const getAirportLocationDataForListingHotels = function(informationForMakingHote
   const finalStopOnOutbound             = outboundJourneyForChosenFlight[numberOfStopsOnOutbound - 1];
   const airportCode = finalStopOnOutbound.destination.airport;
 
-  const locationUrl = `https://api.sandbox.amadeus.com/v1.2/location/${airportCode}?apikey=JR5L2v6ZFbY03LBd1oztSFfgIA8KsnnW&code=CDG`
+  const locationUrl = `https://api.sandbox.amadeus.com/v1.2/location/${airportCode}?apikey=${key}`
   const request     = new Request(locationUrl)
 
   const callbackForListingHotels = function(response) {
