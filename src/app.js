@@ -22,15 +22,15 @@ const prepareResultsView = function(InnovationSearchDataFromFormView){
   listDestinations(resultsView, InnovationSearchDataFromFormView);
 }
 
-
 const listDestinations = function(resultsView, InnovationSearchDataFromFormView) {
 
   const dataForUrlForInspirationAPISearch  = InnovationSearchDataFromFormView.inspirationArray;
   const dataForUrlForLowfareAPISearch      = InnovationSearchDataFromFormView.lowfareArray;
 
+  const siteUriWithPath = `${SEARCH_URL.SITE_URI}${SEARCH_URL.SITE_PATH_FOR_API_REQUEST}`
+
   const urlDetailsToBuild = {
-    //appending URL and key
-    baseUrl: `${SEARCH_URL.INSPIRATION}${key}`,
+    baseUrl: `${siteUriWithPath}${SEARCH_URL.INSPIRATION}`,
     parameterArray: dataForUrlForInspirationAPISearch
   }
 
@@ -63,38 +63,36 @@ const listFlights = function(informationForListingFlights) {
   }
 
   const urlDetailsToBuild = {
-    baseUrl: `${SEARCH_URL.LOW_FARE}${key}`,
+    baseUrl: `${SEARCH_URL.SITE_URI}${SEARCH_URL.SAVED_LOW_FARE}${SEARCH_URL.LOW_FARE}`,
     parameterArray: dataForUrl
   }
 
   const urlBuild  = new UrlBuilder(urlDetailsToBuild);
   const searchUrl = urlBuild.finalUrl;
 
-  const encodedSearchUrl  = encodeURIComponent(searchUrl);
-  const databaseSearchUrl = `${SEARCH_URL.SAVED_LOW_FARE}${encodedSearchUrl}`;
-  const requestToDatabase = new Request(databaseSearchUrl);
+  const requestToDatabase = new Request(searchUrl);
 
   const callbackForDatabaseRequest = function(responseFromDataBase){
     if(responseFromDataBase.withinFiveMinutes) {
       const dataForListingFlights = {
         currency: responseFromDataBase.search.currency,
         flights: responseFromDataBase.search.results,
-        // callback: listHotels
         callback: getAirportLocationDataForListingHotels
       }
       destinationListView.populateFlights(dataForListingFlights);
     } else {
-      const searchUrl = responseFromDataBase.search;
-      const amadeusApiLowfareRequest = new Request(searchUrl);
+      const searchUrl   = responseFromDataBase.search;
+      const serverPath  = `${SEARCH_URL.SITE_URI}${SEARCH_URL.SITE_PATH_FOR_API_REQUEST}`;
+      const finalSearchUrl  = `${serverPath}${searchUrl}`;
+      const amadeusApiLowfareRequest = new Request(finalSearchUrl);
 
-      const databaseUrl = `${SEARCH_URL.SAVED_LOW_FARE}`;
+      const databaseUrl     = `${SEARCH_URL.SAVED_LOW_FARE}`;
       const saveResponseToDatabaseRequest = new Request(databaseUrl);
 
       const callbackForAmadeusRequest = function(responseFromAmadeus) {
         const dataForListingFlights = {
           currency: responseFromAmadeus.currency,
           flights: responseFromAmadeus.results,
-          // callback: listHotels
           callback: getAirportLocationDataForListingHotels
         }
 

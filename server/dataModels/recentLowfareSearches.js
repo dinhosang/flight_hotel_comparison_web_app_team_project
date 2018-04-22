@@ -49,6 +49,7 @@ RecentLowfareSearches.prototype.checkIfRecentSearch = function(lowfareSearchUrl,
         withinFiveMinutes: false,
         search: lowfareSearchUrl
       }
+      console.log(returnValue.search);
       functionToSendResponse(err, returnValue);
       this.removeSearch(lowfareSearchUrl);
     } else {

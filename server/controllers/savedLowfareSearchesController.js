@@ -6,10 +6,28 @@ const SavedLowfareSearches = require('../dataModels/recentLowfareSearches');
 // // file is run, it does have a connection by when a request is made though.
 // const searches = new SavedLowfareSearches();
 
+let amadeusKey
+if(!process.env.AMADEUS_KEY){
+  amadeusKey = require('../../src/keys/amadeus-comparison-api.js');
+} else {
+  amadeusKey = process.env.AMADEUS_KEY;
+}
 
-savedLowfareSearchesRouter.get('/:url', function(req, res) {
-  const searches = new SavedLowfareSearches();
-  const lowfareSearchUrl      = req.params.url;
+
+savedLowfareSearchesRouter.get('/', function(req, res) {
+  const searches      = new SavedLowfareSearches();
+  const lowfareSearchBaseUri  = req.query.searchUri;
+  let   lowfareSearchUrl      = `${lowfareSearchBaseUri}${amadeusKey}`;
+
+  const otherQueries  = Object.keys(req.query);
+  otherQueries.forEach(query => {
+    if(query !== 'searchUri'){
+      lowfareSearchUrl += `&${query}=${req.query[query]}`;
+    }
+  })
+  console.log(req.query);
+  console.log(`low-fare`, lowfareSearchUrl);
+
   const sendResponseToRequest = function(err, returnedDataFromDatabase) {
     if(err) {
       console.log(err);
