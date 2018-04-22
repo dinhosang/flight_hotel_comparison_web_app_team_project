@@ -25,8 +25,6 @@ savedLowfareSearchesRouter.get('/', function(req, res) {
       lowfareSearchUrl += `&${query}=${req.query[query]}`;
     }
   })
-  console.log(req.query);
-  console.log(`low-fare`, lowfareSearchUrl);
 
   const sendResponseToRequest = function(err, returnedDataFromDatabase) {
     if(err) {

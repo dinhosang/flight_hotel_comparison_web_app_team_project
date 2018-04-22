@@ -31,7 +31,6 @@ amadeusRouter.get('/', (req, clientRes) => {
     url: requestUriWithKey
   }
 
-  console.log(req.query);
   console.log(requestUriWithKey);
 
   const sendRequestToFrontEnd = (err, serverRes, body) => {

@@ -119,8 +119,10 @@ const getAirportLocationDataForListingHotels = function(informationForMakingHote
   const finalStopOnOutbound             = outboundJourneyForChosenFlight[numberOfStopsOnOutbound - 1];
   const airportCode = finalStopOnOutbound.destination.airport;
 
-  const locationUrl = `https://api.sandbox.amadeus.com/v1.2/location/${airportCode}?apikey=${key}`
-  const request     = new Request(locationUrl)
+  const locationUri = `https://api.sandbox.amadeus.com/v1.2/location/${airportCode}?apikey=`;
+  const sitePathUri = `${SEARCH_URL.SITE_URI}${SEARCH_URL.SITE_PATH_FOR_API_REQUEST}`;
+  const finalUri    = `${sitePathUri}${locationUri}`
+  const request     = new Request(finalUri)
 
   const callbackForListingHotels = function(response) {
     informationForMakingHotelSearch["airportLat"]   = response.airports[0].location.latitude;

@@ -42,14 +42,11 @@ RecentLowfareSearches.prototype.checkIfRecentSearch = function(lowfareSearchUrl,
       return;
     }
 
-    console.log("-------------", timeDifferenceInMinutes);
-
     if(timeDifferenceInMinutes >= 5) {
       const returnValue = {
         withinFiveMinutes: false,
         search: lowfareSearchUrl
       }
-      console.log(returnValue.search);
       functionToSendResponse(err, returnValue);
       this.removeSearch(lowfareSearchUrl);
     } else {

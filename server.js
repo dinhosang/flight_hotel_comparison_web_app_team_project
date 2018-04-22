@@ -17,8 +17,6 @@ server.use((req, res, next)=> {
   next();
 })
 
-console.log(siteUri);
-
 server.use('/database/savedLowfareSearches', require(`${__dirname}/server/controllers/savedLowfareSearchesController`));
 server.use('/database/accounts', require(`${__dirname}/server/controllers/userAccountController`));
 server.use('/api/amadeusRequest', require(`${__dirname}/server/controllers/amadeusRequestController`));
