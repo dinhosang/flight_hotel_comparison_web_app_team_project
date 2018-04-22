@@ -245,58 +245,6 @@ PackageView.prototype.populateFlightView = function(packageDetails){
 
   flightDetails.appendChild(flightDetailsTable);
 
-  // // // //
-  // const outbound      = document.createElement('li');
-  // outbound.innerText  = 'Outbound';
-  //
-  // const outboundDepartureDate       = document.createElement('li');
-  // const outboundDepartureDateFormat = new Date(this.flight.itineraries[0].outbound.flights[0].departs_at).toString();
-  // outboundDepartureDate.innerText   = `Departure Date: ${outboundDepartureDateFormat.toString().substring(0, outboundDepartureDateFormat.length -18)}`;
-  //
-  // const outboundDepartureAirport      = document.createElement('li');
-  // outboundDepartureAirport.innerText  = `Departure Airport: ${this.flight.itineraries[0].outbound.flights[0].origin.airport}`;
-  //
-  // const outboundArrivalDate       = document.createElement('li');
-  // const outboundArrivalDateFormat = new Date(this.flight.itineraries[0].outbound.flights[0].arrives_at).toString();
-  // outboundArrivalDate.innerText   = `Arrival Date: ${outboundArrivalDateFormat.toString().substring(0, outboundArrivalDateFormat.length - 18)}`;
-  //
-  // const outboundArrivalAirport      = document.createElement('li');
-  // outboundArrivalAirport.innerText  = `Arrival Airport: ${this.flight.itineraries[0].outbound.flights[0].destination.airport}`;
-  //
-  // flightDetails.appendChild(outbound)
-  // flightDetails.appendChild(outboundDepartureDate)
-  // flightDetails.appendChild(outboundDepartureAirport)
-  // flightDetails.appendChild(outboundArrivalDate)
-  // flightDetails.appendChild(outboundArrivalAirport)
-  //
-  // const inbound     = document.createElement('li');
-  // inbound.innerText = 'Inbound';
-  //
-  // const inboundDepartureDate        = document.createElement('li');
-  // const inboundDepartureDateFormat  = new Date(this.flight.itineraries[0].inbound.flights[0].departs_at).toString();
-  // inboundDepartureDate.innerText    = `Departure Date: ${inboundDepartureDateFormat.toString().substring(0, inboundDepartureDateFormat.length - 18)}`;
-  //
-  // const inboundDepartureAirport     = document.createElement('li');
-  // inboundDepartureAirport.innerText = `Departure Airport: ${this.flight.itineraries[0].inbound.flights[0].origin.airport}`;
-  //
-  // const inboundArrivalDate        = document.createElement('li');
-  // const inboundArrivalDateFormat  = new Date(this.flight.itineraries[0].inbound.flights[0].arrives_at).toString();
-  // inboundArrivalDate.innerText    = `Arrival Date: ${inboundDepartureDateFormat.toString().substring(0, inboundDepartureDateFormat.length - 18)}`;
-  //
-  // const inboundArrivalAirport     = document.createElement('li');
-  // inboundArrivalAirport.innerText = `Arrival Airport: ${this.flight.itineraries[0].inbound.flights[0].destination.airport}`;
-  //
-  // flightDetails.appendChild(inbound);
-  // flightDetails.appendChild(inboundDepartureDate);
-  // flightDetails.appendChild(inboundDepartureAirport);
-  // flightDetails.appendChild(inboundArrivalDate);
-  // flightDetails.appendChild(inboundArrivalAirport);
-  //
-  // const flightPrice = this.flight.fare.total_price;
-  // const price       = document.createElement('li');
-  // price.innerText   = `Flight price is: ${flightPrice}`;
-  // flightDetails.appendChild(price);
-
   packageDetails.appendChild(flightDetails);
 
 }
@@ -357,9 +305,6 @@ PackageView.prototype.createPackageForm = function(packageForm){
     const urlForSavingPackage = `${urlForAccount}${SearchUrlConstant.SAVE_PACKAGE}`;
     const savePackageToDatabaseRequest = new Request(urlForSavingPackage);
     savePackageToDatabaseRequest.put(packageDetailsHash);
-    // const array = [this.flight, this.hotel];
-    // const jsonString = JSON.stringify(array);
-    // localStorage.setItem('user', jsonString);
   }.bind(this)
 
   saveButton.addEventListener('click', onSaveButtonClicked);
