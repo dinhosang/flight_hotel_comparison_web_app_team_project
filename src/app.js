@@ -2,7 +2,6 @@
 const Form        = require('./viewModels/form');
 const ResultsView = require('./viewModels/resultsView');
 const Request     = require('./helpers/request.js');
-const key         = require('./keys/amadeus-comparison-api.js');
 const UrlBuilder  = require('./helpers/urlBuilder');
 const SEARCH_URL  = require('./helpers/enums/searchUrlEnum');
 const PackageView = require('./viewModels/packageView.js');
