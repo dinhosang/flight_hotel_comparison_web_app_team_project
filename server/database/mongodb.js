@@ -22,7 +22,7 @@ const MongoConnection = function() {
       } else {
         this.connection = client.db(`${process.env.MONGODB_DB_NAME}`);
       }
-      console.log(this.connection);
+      
       console.log('Connected to database')
       instance = this
     }.bind(this))
