@@ -9,6 +9,8 @@ if(!process.env.SITE_URI){
   siteUri = process.env.SITE_URI;
 }
 
+const serverPort = process.env.PORT || 3000;
+
 server.use(parser.json({limit: '50mb'}));
 server.use(express.static(`${__dirname}/build`));
 server.use(parser.urlencoded({extended: true}));
@@ -22,6 +24,9 @@ server.use('/database/accounts', require(`${__dirname}/server/controllers/userAc
 server.use('/api/amadeusRequest', require(`${__dirname}/server/controllers/amadeusRequestController`));
 
 
-server.listen(3000, function(){
-  console.log(`Server listening on port ${this.address().port}`);
+const activeServer = server.listen(serverPort, () => {
+  const host = activeServer.address().address
+  const port = activeServer.address().port
+
+  console.log(`Server listening at ${host}:${port}`);
 });
