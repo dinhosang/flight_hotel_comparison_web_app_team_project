@@ -9,10 +9,6 @@ if(!process.env.SITE_URI){
   siteUri = process.env.SITE_URI;
 }
 
-console.log(!process.env.SITE_URI);
-console.log(process.env.SITE_URI);
-console.log(siteUri);
-
 const serverPort = process.env.PORT || 3000;
 
 server.use(parser.json({limit: '50mb'}));

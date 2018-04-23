@@ -1,5 +1,5 @@
 const SEARCH_URL = {
-  SITE_URI: process.env.SITE_URI || "http://localhost:3000/",
+  SITE_URI: document.URL,
   SITE_PATH_FOR_API_REQUEST: "api/amadeusRequest?requestUri=",
   INSPIRATION: "https://api.sandbox.amadeus.com/v1.2/flights/inspiration-search?apikey=",
   LOW_FARE: "https://api.sandbox.amadeus.com/v1.2/flights/low-fare-search?apikey=",
