@@ -135,7 +135,6 @@ const getAirportLocationDataForListingHotels = function(informationForMakingHote
 }
 
 const listHotels = function(informationForMakingHotelSearch){
-  const request       = new Request('/api/random_search/hotels');
 
   const resultsView   = informationForMakingHotelSearch.view;
   // flight details is an object containing the details of a flight from
@@ -177,7 +176,6 @@ const listHotels = function(informationForMakingHotelSearch){
   hotelSearchRequest.get(functionForRequestToInvoke);
 }
 
-
 const getUrlFromFlightDetails = function(flightObjectFromAPI, currencyCode) {
 
   const returnJourneyForChosenFlight = flightObjectFromAPI.itineraries[0].inbound.flights;
@@ -202,9 +200,11 @@ const getUrlFromFlightDetails = function(flightObjectFromAPI, currencyCode) {
   parameterArrayForHotelSearch.push('radius=50')
   parameterArrayForHotelSearch.push('number_of_results=80');
 
+  const serverUrl = `${SEARCH_URL.SITE_URI}${SEARCH_URL.SITE_PATH_FOR_API_REQUEST}`;
+  const baseSearchUrl = `${serverUrl}${SEARCH_URL.HOTEL_AIRPORT}`;
 
   const dataForBuildingHotelSearchUrl = {
-    baseUrl: `${SEARCH_URL.HOTEL_AIRPORT}${key}`,
+    baseUrl: baseSearchUrl,
     parameterArray: parameterArrayForHotelSearch
   }
 
