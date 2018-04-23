@@ -8,6 +8,16 @@ const PackageView = require('./viewModels/packageView.js');
 const ScrollTo    = require('./helpers/scrollTo.js');
 
 const main = function() {
+  const googleMapScript = document.createElement('script');
+  const htmlHead = document.head;
+
+  if(document.URL !== 'http://localhost:3000/'){
+    googleMapScript.setAttribute('src', `https://maps.googleapis.com/maps/api/js?key=${process.env.GOOGLE_API_KEY}`);
+  } else {
+    googleMapScript.setAttribute('src', `https://maps.googleapis.com/maps/api/js`);
+  }
+
+  htmlHead.appendChild(googleMapScript)
   prepareFormView();
 }
 
