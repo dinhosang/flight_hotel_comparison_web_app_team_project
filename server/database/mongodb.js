@@ -17,10 +17,10 @@ const MongoConnection = function() {
         return
       }
 
-      if(!process.env.MONGODB_URI){
-        this.connection = client.db('flight_hotel_app')
+      if(!process.env.MONGODB_DB_NAME){
+        this.connection = client.db('flight_hotel_app');
       } else {
-        this.connection = client.db()
+        this.connection = client.db(`${process.env.MONGODB_DB_NAME}`);
       }
       console.log(this.connection);
       console.log('Connected to database')
