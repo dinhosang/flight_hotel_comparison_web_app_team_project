@@ -9,6 +9,10 @@ if(!process.env.SITE_URI){
   siteUri = process.env.SITE_URI;
 }
 
+console.log(!process.env.SITE_URI);
+console.log(process.env.SITE_URI);
+console.log(siteUri);
+
 const serverPort = process.env.PORT || 3000;
 
 server.use(parser.json({limit: '50mb'}));
@@ -25,7 +29,6 @@ server.use('/api/amadeusRequest', require(`${__dirname}/server/controllers/amade
 
 
 const activeServer = server.listen(serverPort, () => {
-  console.log(process.env.SITE_URI);
   const host = activeServer.address().address
   const port = activeServer.address().port
 
