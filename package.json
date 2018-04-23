@@ -5,9 +5,8 @@
   "main": "server.js",
   "scripts": {
     "test": "mocha ./specs",
-    "start": "nodemon server.js",
-    "webpack": "webpack -w",
-    "postinstall": "npm run webpack"
+    "start": "npm run webpack && nodemon server.js",
+    "webpack": "webpack -w"
   },
   "keywords": [],
   "author": "",
