@@ -87,8 +87,6 @@ RecentLowfareSearches.prototype.removeSearch = function (lowfareSearchUrl) {
     if(err) {
       console.log(err);
     }
-
-    console.log(result);
   })
 }
 

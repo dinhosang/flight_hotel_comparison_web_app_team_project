@@ -31,8 +31,6 @@ amadeusRouter.get('/', (req, clientRes) => {
     url: requestUriWithKey
   }
 
-  console.log(requestUriWithKey);
-
   const sendRequestToFrontEnd = (err, serverRes, body) => {
     if(err){
       console.log('Error with API request', err);
