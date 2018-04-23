@@ -12,7 +12,7 @@ const main = function() {
   const htmlHead = document.head;
 
   if(document.URL !== 'http://localhost:3000/'){
-    googleMapScript.setAttribute('src', `https://maps.googleapis.com/maps/api/js?key=${process.env.GOOGLE_API_KEY}`);
+    googleMapScript.setAttribute('src', `https://maps.googleapis.com/maps/api/js?key=AIzaSyD0lMOSXpbUDe5GgpPqCWlSBOpUp4amrdc`);
   } else {
     googleMapScript.setAttribute('src', `https://maps.googleapis.com/maps/api/js`);
   }
