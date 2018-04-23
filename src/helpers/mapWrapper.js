@@ -13,7 +13,7 @@ MapWrapper.prototype.addAirportMarker = function (coords, hotelsListTitle) {
   const marker = new google.maps.Marker({
     position: coords,
     map: this.googleMap,
-    icon: 'http://maps.google.com/mapfiles/kml/pal2/icon48.png'
+    icon: 'https://maps.google.com/mapfiles/kml/pal2/icon48.png'
   });
   this.airportMarker = marker;
   marker.setAnimation(google.maps.Animation.DROP);
