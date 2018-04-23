@@ -6,7 +6,7 @@ const SEARCH_URL = {
   HOTEL_AIRPORT: "https://api.sandbox.amadeus.com/v1.2/hotels/search-airport?apikey=",
   SAVED_LOW_FARE: "database/savedLowfareSearches?searchUri=",
   DB_ACCOUNTS: "database/accounts/",
-  SAVE_PACKAGE: "/packages/"
+  SAVE_PACKAGE: "packages/"
 }
 
 module.exports = SEARCH_URL;

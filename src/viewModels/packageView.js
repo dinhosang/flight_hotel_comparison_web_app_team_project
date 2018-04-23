@@ -301,8 +301,9 @@ PackageView.prototype.createPackageForm = function(packageForm){
     };
 
     const accountId           = 'user';
-    const urlForAccount       = `${SearchUrlConstant.DB_ACCOUNTS}${accountId}`
-    const urlForSavingPackage = `${urlForAccount}${SearchUrlConstant.SAVE_PACKAGE}`;
+    const urlForAccount       = `${SearchUrlConstant.DB_ACCOUNTS}${accountId}/`;
+    const urlForSite          = `${SearchUrlConstant.SITE_URI}${urlForAccount}`;
+    const urlForSavingPackage = `${urlForSite}${SearchUrlConstant.SAVE_PACKAGE}`;
     const savePackageToDatabaseRequest = new Request(urlForSavingPackage);
     savePackageToDatabaseRequest.put(packageDetailsHash);
   }.bind(this)
