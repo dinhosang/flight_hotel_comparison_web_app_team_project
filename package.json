@@ -7,7 +7,7 @@
     "test": "mocha ./specs",
     "start": "nodemon server.js",
     "webpack": "webpack -w",
-    "postinstall": "npm run webpack"
+    "heroku-postbuild": "npm run webpack"
   },
   "keywords": [],
   "author": "",
