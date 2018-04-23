@@ -5,7 +5,7 @@ config = {
     path: __dirname + "/build"
   },
   devtool: "source-map",
-  mode: "development"
+  mode: process.env.NODE_ENV || "development"
 }
 
 module.exports = config;
