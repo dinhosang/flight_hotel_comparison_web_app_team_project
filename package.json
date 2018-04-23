@@ -6,7 +6,8 @@
   "scripts": {
     "test": "mocha ./specs",
     "start": "nodemon server.js",
-    "webpack": "webpack -w"
+    "webpack": "webpack -w",
+    "postinstall": "npm run webpack"
   },
   "keywords": [],
   "author": "",
