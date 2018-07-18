@@ -20,14 +20,14 @@ amadeusRouter.get('/', (req, clientRes) => {
     requestUriWithKey   = `${requestBaseUri}${amadeusKey}`;
   }
 
-  console.log(requestUriWithKey, ": request uri with key");
-
   const otherQueries      = Object.keys(req.query)
   otherQueries.forEach(query => {
     if(query !== 'requestUri'){
       requestUriWithKey += `&${query}=${req.query[query]}`
     }
   })
+
+  console.log("requestUriWithKeyAndQueries: -----", requestUriWithKey);
 
   const requestOptions    = {
     url: requestUriWithKey
@@ -47,6 +47,8 @@ amadeusRouter.get('/', (req, clientRes) => {
 
     clientRes.send(body);
   }
+
+  console.log("logging request to front end ------", sendRequestToFrontEnd);
 
   request(requestOptions, sendRequestToFrontEnd)
 })
