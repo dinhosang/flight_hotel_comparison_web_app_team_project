@@ -37,22 +37,16 @@ amadeusRouter.get('/', (req, clientRes) => {
       clientRes.status(500);
       clientRes.send();
     }
-    console.log("--------------------------------------------------------");
-    console.log(" --- err ----------------------", err, );
+
     console.log("body ------------------------------------------", body);
-    console.log("statuscode -------------------------", serverRes.statusCode);
 
     if(serverRes.statusCode !== 200){
       clientRes.status(serverRes.statusCode);
       clientRes.send();
     }
 
-
-
     clientRes.send(body);
   }
-
-  console.log("logging request to front end ------", sendRequestToFrontEnd);
 
   request(requestOptions, sendRequestToFrontEnd)
 })
