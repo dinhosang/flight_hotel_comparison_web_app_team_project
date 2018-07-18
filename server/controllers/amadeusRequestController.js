@@ -12,9 +12,6 @@ if(!process.env.AMADEUS_KEY){
 
 amadeusRouter.get('/', (req, clientRes) => {
   const requestBaseUri  = req.query.requestUri;
-  console.log(amadeusKey)
-  console.log(requestBaseUri.includes(amadeusKey))
-  console.log(requestBaseUri);
 
   let requestUriWithKey;
   if(requestBaseUri.includes(amadeusKey)){
@@ -22,6 +19,8 @@ amadeusRouter.get('/', (req, clientRes) => {
   } else {
     requestUriWithKey   = `${requestBaseUri}${amadeusKey}`;
   }
+
+  console.log(requestUriWithKey, ": request uri with key");
 
   const otherQueries      = Object.keys(req.query)
   otherQueries.forEach(query => {
