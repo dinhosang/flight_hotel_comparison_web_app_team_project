@@ -27,8 +27,6 @@ amadeusRouter.get('/', (req, clientRes) => {
     }
   })
 
-  console.log("requestUriWithKeyAndQueries: -----", requestUriWithKey);
-
   const requestOptions    = {
     url: requestUriWithKey
   }
@@ -39,6 +37,10 @@ amadeusRouter.get('/', (req, clientRes) => {
       clientRes.status(500);
       clientRes.send();
     }
+
+    console.log(err);
+    console.log(serverRes);
+    console.log(body);
 
     if(serverRes.statusCode !== 200){
       clientRes.status(serverRes.statusCode);

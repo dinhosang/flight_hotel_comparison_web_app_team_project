@@ -29,6 +29,4 @@ const activeServer = server.listen(serverPort, () => {
   const port = activeServer.address().port
 
   console.log(`Server listening at ${host}:${port}`);
-  console.log(process.env);
-  console.log(process.env.AMADEUS_KEY);
 });
