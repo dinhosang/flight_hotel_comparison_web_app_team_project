@@ -38,8 +38,6 @@ amadeusRouter.get('/', (req, clientRes) => {
       clientRes.send();
     }
 
-    console.log("body ------------------------------------------", body);
-
     if(serverRes.statusCode !== 200){
       clientRes.status(serverRes.statusCode);
       clientRes.send();
